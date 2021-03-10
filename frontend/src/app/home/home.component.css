@@ -1,0 +1,67 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css);
+
+.hm-gradient {
+    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+.darken-grey-text {
+    color: #2E2E2E;
+}
+
+.colortexto{
+    color: white;
+    height: 450px;
+}
+
+.sombra{
+    box-shadow: 1px 1px 20px -5px black;
+}
+
+.justificado{
+    margin-top: 8%;
+    margin-right: 15%;
+    
+}
+
+
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.alinearbuscar{
+    margin-left: 20%;
+}
+
+.alinearbuscartexto{
+    margin-left: 5%;
+    width: 90%;
+    font-size: 20px;
+}
+
+.alinearbuscarboton{
+    margin: 2% 0% 2% 44% ;
+    font-size: 15px;
+}
+
+.alinearbotoncard{
+    margin: 1% 0% 2% 2% ;
+    font-size: 12px;
+}
+
+.justificado{
+    margin: 10% 0% 0% 0%;
+}
+
+.justificadocards{
+    margin-top: 3%;
+}
+
+.justicarcards2{
+    margin: 0% 0% 0% 20%;
+}

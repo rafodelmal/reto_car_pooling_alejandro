@@ -8,7 +8,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'carpool',
     pathMatch: 'full',
   }, {
     path: '',
@@ -20,11 +20,14 @@ const routes: Routes =[
   }]},
   {
     path: '**',
-    redirectTo: 'dashboard'
-  }
+    redirectTo: 'carpool'
+  },
 ];
 
 @NgModule({
+
+  
+
   imports: [
     CommonModule,
     BrowserModule,

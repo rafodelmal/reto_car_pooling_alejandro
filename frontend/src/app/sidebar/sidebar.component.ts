@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -7,15 +8,18 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
+
+
+
+
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'pe-7s-graph', class: '' },
-    { path: '/user', title: 'User Profile',  icon:'pe-7s-user', class: '' },
-    { path: '/table', title: 'Table List',  icon:'pe-7s-note2', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'pe-7s-news-paper', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'pe-7s-science', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'pe-7s-map-marker', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'pe-7s-bell', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
+    { path: '/Carpool', title: 'Carpool',  icon: 'pe-7s-car', class: '' },
+    { path: '/usuario', title: 'Usuario',  icon:'pe-7s-id', class: '' },
+    { path: '/tabla', title: 'Tabla',  icon:'pe-7s-note2', class: '' },
+    { path: '/mapas', title: 'Mapas',  icon:'pe-7s-map-2', class: '' },
+    { path: '/notificaciones', title: 'Notificaciones',  icon:'pe-7s-bell', class: '' },
+    { path: '/github', title: 'github',  icon:'pe-7s-share', class: '' },   
+   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
 ];
 
 @Component({

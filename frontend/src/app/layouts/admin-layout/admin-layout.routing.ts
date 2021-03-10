@@ -8,14 +8,37 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { CommonModule, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { LoginComponent } from 'app/login/login.component';
+import { NosotrosComponent } from 'app/nosotros/nosotros.component';
+
+@Component({
+    selector: 'redirect',
+    template:  ' <strong style="font-size: 40px; margin: 300px;"> Puedes seguir navegando, ¡el github abrirá en breve!.</strong>'
+  })
+  export class RedirectComponent implements OnInit {
+    constructor() { }
+  
+    ngOnInit() {
+
+        window.open('https://github.com/Alejo0508', '_blank');
+
+    }
+
+  }
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: HomeComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TablesComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'carpool',      component: HomeComponent },
+    { path: 'usuario',           component: UserComponent },
+    { path: 'tabla',          component: TablesComponent },
+   /* { path: 'tipografia',     component: TypographyComponent },
+    { path: 'iconos',          component: IconsComponent },*/
+    { path: 'mapas',           component: MapsComponent },
+    { path: 'notificacion',  component: NotificationsComponent },
+    { path: 'nosotros',  component: NosotrosComponent },
+    { path: 'github', component: RedirectComponent },
+
+
+   // { path: 'upgrade',        component: UpgradeComponent },
 ];
