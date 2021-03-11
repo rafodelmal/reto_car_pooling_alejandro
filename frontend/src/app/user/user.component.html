@@ -7,7 +7,7 @@
                         <h4 class="title">Editar perfil</h4>
                     </div>
                     <div class="content">
-                        <form>
+                        <form action="" method="" id="">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -81,14 +81,15 @@
 
                             </div>
 
+
                             
                             <div class="row">
                                 <div class="div">
                                     <h4 class="title titulocarpooler">¿Quieres ser Carpooling?</h4>
                                 </div>
                                 <div class="form-check col-md-2 " style="margin-left: 35%; margin-bottom: 4%; padding-top: 3%;">
-                                    <input class="form-check-input" type="checkbox" value="" id="carpooler" name="carpooler">
-                                    <label class="form-check-label" for="flexCheckDefault" style="margin-left: 5%;">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkCarpooler" name="checkCarpooler" checked onclick="document.getElementById('placa').disabled = !this.checked">
+                                    <label class="form-check-label" for="checkCarpooler" style="margin-left: 5%;">
                                         ¿Tienes Carro?
                                     </label>
                                   </div>
@@ -97,12 +98,12 @@
                                 <div class="col-md-3 ">
                                     <div class="form-group">
                                         <label>Placa</label>
-                                        <input type="text" class="form-control" placeholder="Placa" value="" id="placa" name="placa" maxlength="6">
+                                        <input type="text" class="form-control" placeholder="Placa" value="" id="placa" name="placa" maxlength="6" >
                                     </div>
                                 </div>
              
                             </div>
-                            <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonUsuario" name="botonUsuario">Actualizar</button>
+                            <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonUsuario" name="botonUsuario" (click)="showNotification('top','center')">Actualizar</button>
                             <div class="clearfix"></div>
                         </form>
 
