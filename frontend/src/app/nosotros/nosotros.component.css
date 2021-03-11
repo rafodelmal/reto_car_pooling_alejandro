@@ -67,7 +67,7 @@ body{
       opacity: 1;
     }
   }
-  .animate__fadeIn {
+  .animate fadeIn {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
   }

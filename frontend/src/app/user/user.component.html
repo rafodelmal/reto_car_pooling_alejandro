@@ -1,90 +1,109 @@
 <div class="main-content" >
-    <div class="container-fluid animated fadeIn">
+    <div class="container-fluid animated zoomIn">
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Edit Profile</h4>
+                        <h4 class="title">Editar perfil</h4>
                     </div>
                     <div class="content">
                         <form>
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Company (disabled)</label>
-                                        <input type="text" class="form-control" disabled placeholder="Company" value="Creative Code Inc.">
+                                        <label>Nombre</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Username</label>
-                                        <input type="text" class="form-control" placeholder="Username" value="michael23">
+                                        <label>Apellido</label>
+                                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" value="" >
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control" placeholder="Email">
+                                        <label>Telefono</label>                                       
+                                        <input type="text" class="form-control" placeholder="Telefono" value="" id="telefono" name="telefono" maxlength="10">
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Documento</label>
+                                    <input type="text" class="form-control" placeholder="Documento" value="" maxlength="10">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="Company" value="Mike">
+                                        <label for="exampleInputEmail1">Direccion de E-mail</label>
+                                        <input type="email" class="form-control" placeholder="E-mail" id="email" name="email">
                                     </div>
                                 </div>
+
+                            </div>
+
+
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Last Name</label>
-                                        <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                                        <label>Direccion de Origen</label>
+                                        <input type="text" class="form-control" placeholder="Direccion de Orige" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Direccion de Destino</label>
+                                        <input type="text" class="form-control" placeholder="Direccion de Destino" value="">
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
+                            <div class="row justificadohoras">
+                                <div class="col-md-5">
                                     <div class="form-group">
-                                        <label>Address</label>
-                                        <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                                        <label>Hora de salida de Origen</label>
+                                        <input type="text" class="form-control" placeholder="Hora de salida de Origen" value="">
                                     </div>
                                 </div>
+                                
+                                <div class="col-md-5 ">
+                                    <div class="form-group">
+                                        <label>Hora de salida de Destino</label>
+                                        <input type="text" class="form-control" placeholder="Hora de salida de Destino" value="">
+                                    </div>
+                                </div>
+             
+
                             </div>
 
+                            
                             <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>City</label>
-                                        <input type="text" class="form-control" placeholder="City" value="Mike">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Country</label>
-                                        <input type="text" class="form-control" placeholder="Country" value="Andrew">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Postal Code</label>
-                                        <input type="number" class="form-control" placeholder="ZIP Code">
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="form-check col-md-2 " style="margin-left: 35%; padding-top: 3%;">
+                                    <input class="form-check-input" type="checkbox" value="" id="carpooler" name="carpooler">
+                                    <label class="form-check-label" for="flexCheckDefault" style="margin-left: 5%;">
+                                        ¿Tienes Carro?
+                                    </label>
+                                  </div>
+             
+
+                                <div class="col-md-3 ">
                                     <div class="form-group">
-                                        <label>About Me</label>
-                                        <textarea rows="5" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+                                        <label>Placa</label>
+                                        <input type="text" class="form-control" placeholder="Placa" value="" id="placa" name="placa" maxlength="6">
                                     </div>
                                 </div>
+             
                             </div>
-                            <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
+                            <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonUsuario" name="botonUsuario">Update Profile</button>
                             <div class="clearfix"></div>
                         </form>
+
                     </div>
                 </div>
             </div>

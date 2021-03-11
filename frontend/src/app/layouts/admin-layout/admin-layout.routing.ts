@@ -15,7 +15,7 @@ import { NosotrosComponent } from 'app/nosotros/nosotros.component';
 
 @Component({
     selector: 'redirect',
-    template:  ' <strong style="font-size: 40px; margin: 300px;"> Puedes seguir navegando, ¡el github abrirá en breve!.</strong>'
+    template:  ' <strong style="font-size: 40px; margin: 300px; color: #1976d2;"> Puedes seguir navegando, ¡el github abrirá en breve!...</strong>'
   })
   export class RedirectComponent implements OnInit {
     constructor() { }
@@ -31,7 +31,7 @@ import { NosotrosComponent } from 'app/nosotros/nosotros.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'carpool',      component: HomeComponent },
     { path: 'usuario',           component: UserComponent },
-    { path: 'tabla',          component: TablesComponent },
+    { path: 'reservas',          component: TablesComponent },
    /* { path: 'tipografia',     component: TypographyComponent },
     { path: 'iconos',          component: IconsComponent },*/
     { path: 'mapas',           component: MapsComponent },

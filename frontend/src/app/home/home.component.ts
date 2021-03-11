@@ -3,11 +3,15 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
 
+declare var $:any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+
 export class HomeComponent implements OnInit {
     public emailChartType: ChartType;
     public emailChartData: any;
@@ -24,6 +28,7 @@ export class HomeComponent implements OnInit {
     public activityChartOptions: any;
     public activityChartResponsive: any[];
     public activityChartLegendItems: LegendItem[];
+
   constructor() { }
 
   ngOnInit() {
@@ -108,5 +113,22 @@ export class HomeComponent implements OnInit {
 
 
     }
+
+    showNotification(from, align){
+      const type = ['','info'];
+
+      var color = Math.floor((Math.random() * 4) + 1);
+      $.notify({
+          icon: "pe-7s-map-marker",
+          message: "Reserva realizada con exito."
+      },{
+          type: type[color],
+          timer: 1000,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+  }
 
 }
