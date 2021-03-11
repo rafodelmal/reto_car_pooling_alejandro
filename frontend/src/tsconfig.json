@@ -12,7 +12,6 @@
     "sourceMap": true,
     "target": "es5",
     "allowJs":true,
-    "enableIvy": false,
     "typeRoots": [
       "../node_modules/@types"
     ]
