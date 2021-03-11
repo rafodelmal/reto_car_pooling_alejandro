@@ -9,8 +9,7 @@ on:
       - .github/workflows/azure-static-web-apps-victorious-river-01680a70f.yml
     
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  build_and_deploy:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
@@ -23,6 +22,7 @@ jobs:
         run: |
           # Build and test the project, then
           # deploy to Azure Web App.
+          cd frontend
           npm install
           npm run build --if-present
           npm run test --if-present
