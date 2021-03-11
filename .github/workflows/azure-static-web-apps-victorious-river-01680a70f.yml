@@ -14,21 +14,7 @@ jobs:
     name: Build and Deploy
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - name: npm install and build
-        run: |
-          # Build and test the project, then
-          # deploy to Azure Web App.
-          cd frontend
-          npm install
-          npm run build --if-present
-        
       - name: Build And Deploy
-        id: builddeploy
-        
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_RIVER_01680A70F }}
