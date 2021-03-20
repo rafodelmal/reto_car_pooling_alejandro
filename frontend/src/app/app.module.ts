@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
+import { CalculadoraComponent } from './calculadora/calculadora.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
     AdminLayoutComponent,
     LoginComponent,
     NosotrosComponent,
+    CalculadoraComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

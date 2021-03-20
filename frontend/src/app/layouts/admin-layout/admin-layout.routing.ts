@@ -12,6 +12,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from 'app/login/login.component';
 import { NosotrosComponent } from 'app/nosotros/nosotros.component';
+import { CalculadoraComponent } from 'app/calculadora/calculadora.component';
 
 @Component({
     selector: 'redirect',
@@ -38,6 +39,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notificacion',  component: NotificationsComponent },
     { path: 'nosotros',  component: NosotrosComponent },
     { path: 'github', component: RedirectComponent },
+    { path: 'calculadora', component: CalculadoraComponent },
 
 
    // { path: 'upgrade',        component: UpgradeComponent },

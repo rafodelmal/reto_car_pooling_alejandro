@@ -15,22 +15,6 @@ export class UserComponent implements OnInit {
   }
 
 
-  showNotification(from, align){
-    const type = ['primary'];
-
-    var color = Math.floor((Math.random() * 4) + 1);
-    $.notify({
-        icon: "pe-7s-map-marker",
-        message: "Datos actualizados correctamente."
-    },{
-        type: type[color],
-        timer: 1000,
-        placement: {
-            from: from,
-            align: align
-        }
-    });
-}
 
 
 }
