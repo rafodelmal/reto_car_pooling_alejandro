@@ -1,44 +1,30 @@
- /*'use strict';
-const   config = require('config-yml'),
-        server = require('./server/index');
-
-server.listen(config.port);
-console.log('Servidor escuchando en puerto ' + config.port);
-
-server.on('error', err => {
-    console.error(err);
-}); */
 
 const cors = require('cors'); 
 const express = require('express');
 const app = express();app.use(cors());
-const port = 3000
+const morgan = require('morgan');
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.set('port', process.env.PORT || 3000);
 
-app.get('/user', (req, res) => {
-    res.send('¡Calculadora!')
-})
+//middleware
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
+//variables globales
+app.use((req, res, next) => {
+   
+    next();
+});
 
-app.get('/sumar', (req, res) => {
+// rutas
+app.use(require('./routes/index.js'));
+app.use(require('./routes/authentication.js'));
+app.use(require('./routes/links.js'));
 
-    let operador1 = req.query.operadoruno;
-    let operador2 = req.query.operadordos;
+// public
 
-   operador2 = parseInt(operador2)
-   operador1 = parseInt(operador1)
-    
-    let suma = (operador1 + operador2);
-
-
-    res.send(suma+'');
-})
-
-
-app.listen(port, () => {
-    console.log(`Estoy escuchando por el puerto${port}`)
-})
+app.listen(app.get('port'), () => {
+    console.log('servidor en el puerto', app.get('port'));
+});
 

@@ -42,7 +42,6 @@ export class CalculadoraComponent implements OnInit {
 
     this.service.getsuma(numerouno, numerodos).subscribe(data=>
      this.resultado=data);
-
   }
 
 

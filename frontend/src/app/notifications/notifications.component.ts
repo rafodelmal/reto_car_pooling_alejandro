@@ -13,6 +13,7 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
   }
+  
   showNotification(from, align){
       const type = ['','info','success','warning','danger'];
 
