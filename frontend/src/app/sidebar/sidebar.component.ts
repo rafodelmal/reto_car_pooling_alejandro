@@ -14,13 +14,14 @@ declare interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/carpool', title: 'Carpool', icon: 'pe-7s-car', class: '' },
-  { path: '/reservas', title: 'Reservas', icon: 'pe-7s-note2', class: '' },
   { path: '/usuario', title: 'Usuario', icon: 'pe-7s-id', class: '' },
+  { path: '/reservas', title: 'Reservas', icon: 'pe-7s-note2', class: '' },
   { path: '/mapas', title: 'Mapas', icon: 'pe-7s-map-2', class: '' },
   // { path: '/notificacion', title: 'Notificaciones',  icon:'pe-7s-bell', class: '' },
   { path: '/github', title: 'github', icon: 'pe-7s-share', class: '' },
-  { path: '/calculadora', title: 'Calculadora', icon: 'pe-7s-share', class: '' },
+  //{ path: '/calculadora', title: 'Calculadora', icon: 'pe-7s-share', class: '' },
   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
+  { path: '/iconos', title: 'iconos', icon: 'pe-7s-map-2', class: '' },
 ];
 
 @Component({

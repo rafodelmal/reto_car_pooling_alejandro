@@ -7,7 +7,7 @@ const conexion = require('../database');
 const { Error } = require('mongoose');
 const { compare } = require('bcryptjs');
 
-conexion.query('select username, password from tbl_app_users ', function (error, results, fields) {
+conexion.query('select nombre, clave, email from usuario ', function (error, results, fields) {
 
 
     if (error)
@@ -22,11 +22,11 @@ conexion.query('select username, password from tbl_app_users ', function (error,
 
 routers.get('/login', async (req, res) => {
 
-    const usuario = req.query.usuario;
+    const email = req.query.email;
     const clave = req.query.clave;
 
-    if(usuario && clave){
-        conexion.query('SELECT * FROM tbl_app_users  WHERE username = "' + usuario + '" and password = "'+clave+'"' , async (error, results, fields) => {
+    if(email && clave){
+        conexion.query('SELECT * FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
 
             let login = true;
 
@@ -47,11 +47,11 @@ routers.get('/login', async (req, res) => {
 
 routers.get('/registrar', async (req, res) => {
 
-    const usuario = req.query.usuario;
+    const email = req.query.email;
     const clave = req.query.clave;
 
 
-    conexion.query('INSERT INTO tbl_app_users SET ?', { username: usuario, password: clave }, async (error, results) => {
+    conexion.query('INSERT INTO usuario SET ?', { email: email, clave: clave }, async (error, results) => {
         if (error) {
             throw error
         } else {
@@ -59,7 +59,7 @@ routers.get('/registrar', async (req, res) => {
         }
     })
 
-    res.send(usuario + ' ' + clave);
+    res.send(email + ' ' + clave);
 
 })
 
@@ -67,7 +67,7 @@ routers.get('/eliminar', async (req, res) => {
 
     const usuario = req.query.usuario;
 
-    conexion.query('DELETE FROM tbl_app_users WHERE username = "' + usuario + '"');
+    conexion.query('DELETE FROM usuario WHERE email = "' + email + '"');
     let eliminado = 'eliminado';
     res.send(eliminado);
 

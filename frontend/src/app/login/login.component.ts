@@ -14,10 +14,9 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class LoginComponent implements OnInit {
 
-  usuario: string;
+  email: string;
   clave: string;
   usuarioReturn: any;
-
 
   constructor( private service: LoginService) { }
 
@@ -27,18 +26,17 @@ export class LoginComponent implements OnInit {
 
   login(){
 
-    let usuario1 = this.usuario;
+    let email1 = this.email;
     let clave1 = this.clave;
 
-    console.log(usuario1);
+    console.log(email1);
     console.log(clave1);
 
-    this.service.getlogin(usuario1, clave1).subscribe(data=>
+    this.service.getlogin(email1, clave1).subscribe(data=>
       this.usuarioReturn=data);
 
 
   }
-
 
 
 }

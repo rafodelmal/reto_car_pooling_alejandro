@@ -38,7 +38,7 @@
           </div>
           <div class="modal-body">
             
-            <p class="fadeIn first"><img src="../../assets/img/animat-essential/checkmark/animat-checkmark-color.gif" alt="" width="80" height="80"> Bienvenido {{usuario}}</p>
+            <p class="fadeIn first"><img src="../../assets/img/animat-essential/checkmark/animat-checkmark-color.gif" alt="" width="80" height="80"> Bienvenido {{email}}</p>
 
           </div>
           <div class="modal-footer fadeIn second">
@@ -67,7 +67,7 @@
     <!-- Login Form -->
     <form action="/src/app/shared/services/login.service.ts" method="POST">
 
-      <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="Usuario" [(ngModel)]="usuario"
+      <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="E-mail" [(ngModel)]="email"
         required>
       <input type="Password" style="margin-top: 3%;" id="clave" class="fadeIn third " name="clave" placeholder="Clave" [(ngModel)]="clave"
         required>

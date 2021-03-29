@@ -6,7 +6,7 @@ var conexion = mysql.createConnection({
     port: '3310',
     user: 'root',
     password: 'root',
-    database: 'aplicaciondb',
+    database: 'carpool',
 });
 
 
