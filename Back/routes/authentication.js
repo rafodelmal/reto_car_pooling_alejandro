@@ -7,7 +7,8 @@ const conexion = require('../database');
 const { Error } = require('mongoose');
 const { compare } = require('bcryptjs');
 
-conexion.query('select nombre, clave, email from usuario ', function (error, results, fields) {
+
+conexion.query('select * from usuario ', function (error, results, fields) {
 
 
     if (error)
@@ -20,6 +21,27 @@ conexion.query('select nombre, clave, email from usuario ', function (error, res
 })
 
 
+routers.get('/listar', async (req, res) => {
+
+
+
+        conexion.query('SELECT * FROM usuario' , async (error, results, fields) => {
+            
+            if (error)
+            throw error;
+    
+        results.forEach(results => {
+            console.log(results);
+    
+        });
+
+        res.send(results)
+
+        })    
+})
+
+
+// hacer login ////
 routers.get('/login', async (req, res) => {
 
     const email = req.query.email;
@@ -35,7 +57,7 @@ routers.get('/login', async (req, res) => {
                 login = false;
                 res.send(login+'');
             }else{
-                res.send(login+'');
+                res.send(login);
             }
 
         })
@@ -45,11 +67,66 @@ routers.get('/login', async (req, res) => {
 })
 
 
-routers.get('/registrar', async (req, res) => {
+
+// actualizar usuario /////
+
+routers.get('/actualizarUsuario', async (req, res) => {
+
+    const email = req.query.email;
+    const nombre = req.query.nombre;
+    const apellido = req.query.apellido;
+    const telefono = req.query.telefono;
+    const documento = req.query.documento;
+
+    const datos = [{email,
+         nombre,
+         apellido,
+         telefono, 
+         documento}];
+
+
+    conexion.query('UPDATE usuario SET email = "' + email + '", nombre = "' + nombre +'", apellido =" ' +apellido+ '", telefono =" ' +telefono+ '" , documento =" ' +documento+ '"  WHERE email = "' + email + '"'   , async (error, results) => {
+        if (error) {
+            throw error
+        } else {
+            console.log('Actualizacion exitosa')
+            console.log(datos);
+        }
+        
+    })
+    res.send(datos);
+})
+
+
+
+
+///  ver informaciond e usurio ////
+routers.get('/infoUsuario', async (req, res) => {
 
     const email = req.query.email;
     const clave = req.query.clave;
 
+    conexion.query('SELECT email, nombre, apellido, documento, telefono FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
+        
+        if (error)
+        throw error;
+
+    results.forEach(results => {
+        console.log(results);
+    });
+
+    res.send(results)
+
+    })    
+})
+
+
+
+// registrar usuario ///
+routers.get('/registrar', async (req, res) => {
+
+    const email = req.query.email;
+    const clave = req.query.clave;
 
     conexion.query('INSERT INTO usuario SET ?', { email: email, clave: clave }, async (error, results) => {
         if (error) {
@@ -63,15 +140,20 @@ routers.get('/registrar', async (req, res) => {
 
 })
 
+
+// elliminar usuario ///
 routers.get('/eliminar', async (req, res) => {
 
-    const usuario = req.query.usuario;
+    const email = req.query.email;
 
     conexion.query('DELETE FROM usuario WHERE email = "' + email + '"');
     let eliminado = 'eliminado';
     res.send(eliminado);
 
 })
+
+
+
 
 
 module.exports = routers;

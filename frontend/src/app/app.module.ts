@@ -13,6 +13,9 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './login/login.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
+import { UserComponent } from './user/user.component';
+import { DireccionesComponent } from './direcciones/direcciones.component';
+
 
 @NgModule({
   imports: [
@@ -23,7 +26,8 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   declarations: [
     AppComponent,
@@ -31,6 +35,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
     LoginComponent,
     NosotrosComponent,
     CalculadoraComponent,
+    DireccionesComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

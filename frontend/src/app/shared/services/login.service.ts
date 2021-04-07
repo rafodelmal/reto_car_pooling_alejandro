@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
+import { EmailValidator } from '@angular/forms';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -10,6 +11,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
+email2: any;
+clave2: any;
 
   getlogin<T>(email1, clave1): Observable<T> {
 

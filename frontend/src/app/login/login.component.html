@@ -4,6 +4,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
+
+
+<!-- 
 <div class="container margenalerta ">
 
 
@@ -16,7 +19,7 @@
         <p class="alert-body">
           Usuario y Clave invalidos.
         </p>
-      </div> <!-- End Alert 2 -->
+      </div>
     </div>
   </div>
 
@@ -25,7 +28,7 @@
 
 
 
-    <!-- Modal -->
+    Modal 
 <div class="container">
   <div class="row">
     <div class="modal fadeInDown " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"
@@ -48,7 +51,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
@@ -69,10 +72,15 @@
 
       <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="E-mail" [(ngModel)]="email"
         required>
-      <input type="Password" style="margin-top: 3%;" id="clave" class="fadeIn third " name="clave" placeholder="Clave" [(ngModel)]="clave"
-        required>
-      <input type="submit" style="margin-top: 3%;"  class="fadeIn fourth  " value="Iniciar sesión" (click)="login()" data-toggle="modal" data-target="#myModal" >
+        <div class="password" style="margin-top: 5%;">
+          <input [type]="show ? 'text' : 'password'" style="margin-top: 3%;" id="clave" class="fadeIn third col-md-9" style="margin-left: 7%; padding-right: 0%; margin-right: 0%;" name="clave" placeholder="Clave" [(ngModel)]="clave"
+          required>
+         <span><img src="../../assets/img/animat-camp/sign-post/animat-sign-post-color.gif"
+          alt="" width="50" height="50" class="d-inline-block align-top fadeIn six" style=" margin-top: 3%; margin-right: 5%; margin-left: 0%;" (click)="mostrarCLave()"></span> 
+      </div>
 
+        
+      <input type="submit" style="margin-top: 3%;"  class="fadeIn five  " value="Iniciar sesión" (click)="login()">
     </form>
 
 

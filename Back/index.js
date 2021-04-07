@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();app.use(cors());
 const morgan = require('morgan');
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT_SERVER || 3000);
 
 //middleware
 app.use(morgan('dev'));
@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(require('./routes/index.js'));
 app.use(require('./routes/authentication.js'));
 app.use(require('./routes/links.js'));
-
+//app.use(require('./routes/user.repository.js'));
 // public
 
 app.listen(app.get('port'), () => {

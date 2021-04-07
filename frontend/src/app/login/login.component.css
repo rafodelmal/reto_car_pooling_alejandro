@@ -295,6 +295,18 @@ html {
     -moz-animation-delay: 1s;
     animation-delay: 1s;
   }
+
+  .fadeIn.five {
+    -webkit-animation-delay: 1.2s;
+    -moz-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+  }
+
+  .fadeIn.six {
+    -webkit-animation-delay: 3s;
+    -moz-animation-delay: 3s;
+    animation-delay: 3s;
+  }
   
   /* Simple CSS3 Fade-in Animation */
   .underlineHover:after {
@@ -464,4 +476,7 @@ html {
     -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.50);
     transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.50);
 }
+
+
+
 
