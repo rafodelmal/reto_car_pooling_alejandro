@@ -4,26 +4,95 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
+
+
+<!-- 
+<div class="container margenalerta ">
+
+
+  <div class="row" *ngIf="usuarioReturn === false">
+    <div class="col-sm-6">
+      <div class="alert alert-primary alert-dismissable alerta fadeInDown" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"
+            style="color: back;">×</span></button>
+        <p class="alert-title">Error al iniciar sesion.</p>
+        <p class="alert-body">
+          Usuario y Clave invalidos.
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+    Modal 
+<div class="container">
+  <div class="row">
+    <div class="modal fadeInDown " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"
+      style="margin-top: 10%;" *ngIf="usuarioReturn === true" >
+      <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 50%;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                class="sr-only">Close</span></button>
+          </div>
+          <div class="modal-body">
+            
+            <p class="fadeIn first"><img src="../../assets/img/animat-essential/checkmark/animat-checkmark-color.gif" alt="" width="80" height="80"> Bienvenido {{email}}</p>
+
+          </div>
+          <div class="modal-footer fadeIn second">
+            <a href="#/carpool" class="btn btn-primary button" style="color: whitesmoke; margin-right: 40%; height: 50%; width: 20%; font-size: 150%;">Entrar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
 <div class="wrapper fadeInDown ">
   <div id="formContent">
     <!-- Tabs Titles -->
 
     <!-- Icon -->
-    <div class="fadeIn first margenform">
-     <img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGcgZmlsbD0iIzU3YTRmZiI+PGc+PHBhdGggZD0ibTMyIDM1MmgzMnYyNGgtMzJ6Ii8+PHBhdGggZD0ibTEzOS43NyA0MDhoLTcxLjU0YTQ3Ljk4NCA0Ny45ODQgMCAwIDEgNzEuNTQgMHoiLz48cGF0aCBkPSJtMzQ0IDI0OCAyNCA2NGgtMjA4di02NHoiLz48cGF0aCBkPSJtNDQzLjc3IDQwOGgtNzEuNTRhNDcuOTg0IDQ3Ljk4NCAwIDAgMSA3MS41NCAweiIvPjxwYXRoIGQ9Im00NDggMzUyaDMydjI0aC0zMnoiLz48cGF0aCBkPSJtNDk2IDQxNnYxNmE4IDggMCAwIDEgLTggOGgtNjRhMTYgMTYgMCAwIDAgLTMyIDBoLTI0MGwtNS42Ni0yMi42My0yLjM0LTkuMzdoMzQ0YTggOCAwIDAgMSA4IDh6Ii8+PHBhdGggZD0ibTE0Ni4zNCA0MTcuMzdhNDguMDU0IDQ4LjA1NCAwIDAgMCAtODQuNjgtLjAxdi4wMWE0OCA0OCAwIDEgMCA4NC42OCAwem0tNDIuMzQgMzguNjNhMTYgMTYgMCAxIDEgMTYtMTYgMTYgMTYgMCAwIDEgLTE2IDE2eiIvPjxwYXRoIGQ9Im00NDMuNzcgNDA4YTQ3Ljk5NCA0Ny45OTQgMCAxIDAgMTIuMjMgMzIgNDcuODQyIDQ3Ljg0MiAwIDAgMCAtMTIuMjMtMzJ6bS0zNS43NyA0OGExNiAxNiAwIDEgMSAxNi0xNiAxNiAxNiAwIDAgMSAtMTYgMTZ6Ii8+PHBhdGggZD0ibTY0IDQwOC0yLjM0IDkuMzZ2LjAxbC01LjY2IDIyLjYzaC0zMmE4IDggMCAwIDEgLTgtOHYtMTZhOCA4IDAgMCAxIDgtOHoiLz48cGF0aCBkPSJtMzY4IDMxMmgtMjA4di02NGgxODR6Ii8+PHBhdGggZD0ibTMyIDM1MmgzMnYyNGgtMzJ6Ii8+PHBhdGggZD0ibTQ0OCAzNTJoMzJ2MjRoLTMyeiIvPjwvZz48Zz48Y2lyY2xlIGN4PSIyNTYiIGN5PSIxMTIiIHI9IjgiLz48cGF0aCBkPSJtMjQwIDk0LjExMWEyNCAyNCAwIDAgMSAzMiAweiIvPjxwYXRoIGQ9Im0yMjQgNzYuMjIyYTQ4IDQ4IDAgMCAxIDY0IDB6Ii8+PC9nPjxjaXJjbGUgY3g9IjI1NiIgY3k9Ijg4IiByPSI2NCIvPjwvZz48ZyBmaWxsPSIjMDA0ZmFjIj48cGF0aCBkPSJtMTA0IDQxNmEyNCAyNCAwIDEgMCAyNCAyNCAyNC4wMjggMjQuMDI4IDAgMCAwIC0yNC0yNHptMCAzMmE4IDggMCAxIDEgOC04IDguMDA5IDguMDA5IDAgMCAxIC04IDh6Ii8+PHBhdGggZD0ibTQwOCA0MTZhMjQgMjQgMCAxIDAgMjQgMjQgMjQuMDI4IDI0LjAyOCAwIDAgMCAtMjQtMjR6bTAgMzJhOCA4IDAgMSAxIDgtOCA4LjAwOSA4LjAwOSAwIDAgMSAtOCA4eiIvPjxwYXRoIGQ9Im00ODggNDAwdi00OGE0OC4wNTEgNDguMDUxIDAgMCAwIC00OC00OGgtNjYuNDZsLTIyLTU4LjY4YTQzLjA1MiA0My4wNTIgMCAwIDAgLTQwLjg0LTI5LjMyaC0xNTAuN2E0My4wNDQgNDMuMDQ0IDAgMCAwIC00MC43MiAyOC45N2wtMjguMzIgNTkuMDNoLTE4Ljk2YTQ4LjA1MSA0OC4wNTEgMCAwIDAgLTQ4IDQ4djQ4YTE2LjAyMSAxNi4wMjEgMCAwIDAgLTE2IDE2djE2YTE2LjAyMSAxNi4wMjEgMCAwIDAgMTYgMTZoMjQuNThhNTUuOTE0IDU1LjkxNCAwIDAgMCAxNi4yOCAzMmgtNDguODZhOCA4IDAgMCAwIDAgMTZoNDQ4YTggOCAwIDAgMCAwLTE2aC0xNi44NmE1NS45MTQgNTUuOTE0IDAgMCAwIDE2LjI4LTMyaDI0LjU4YTE2LjAyMSAxNi4wMjEgMCAwIDAgMTYtMTZ2LTE2YTE2LjAyMSAxNi4wMjEgMCAwIDAgLTE2LTE2em0tMTMxLjU0LTk2aC0xMDAuNDZ2LTQ4aDgyLjQ2em0tMzE2LjQ2IDU2aDE2djhoLTE2em04LjU4IDcyaC0yNC41OHYtMTZoMjkuNDFhNTUuNSA1NS41IDAgMCAwIC00LjgzIDE2em01NS40MiA0OGE0MCA0MCAwIDEgMSA0MC00MCA0MC4wNCA0MC4wNCAwIDAgMSAtNDAgNDB6bTM5LjE0IDBhNTUuOTE0IDU1LjkxNCAwIDAgMCAxNi4yOC0zMmgxOTMuMTZhNTUuOTE0IDU1LjkxNCAwIDAgMCAxNi4yOCAzMnptMTEuNDUtNjRoMjAyLjgyYTU1LjUgNTUuNSAwIDAgMCAtNC44MyAxNmgtMTkzLjE2YTU1LjUgNTUuNSAwIDAgMCAtNC44My0xNnptMjUzLjQxIDY0YTQwIDQwIDAgMSAxIDQwLTQwIDQwLjA0IDQwLjA0IDAgMCAxIC00MCA0MHptMzkuMTktNzkuOTVhNTUuODcxIDU1Ljg3MSAwIDAgMCAtNzguMzctLjAxIDcuMzgzIDcuMzgzIDAgMCAwIC0uODItLjA0aC0yMjRhNy4zODMgNy4zODMgMCAwIDAgLS44Mi4wNCA1NS44NzEgNTUuODcxIDAgMCAwIC03OC4zNy4wMSA3LjMzNyA3LjMzNyAwIDAgMCAtLjgxLS4wNWgtMjR2LTE2aDI0YTggOCAwIDAgMCA4LTh2LTI0YTggOCAwIDAgMCAtOC04aC0yMi45OWEzMi4wNTggMzIuMDU4IDAgMCAxIDMwLjk5LTI0aDI0YTggOCAwIDAgMCA3LjIxLTQuNTRsMzAuNzEtNjRhNy41IDcuNSAwIDAgMCAuMzctLjkzIDI3LjA3OSAyNy4wNzkgMCAwIDEgMjUuNzEtMTguNTNoMTUwLjdhMjcuMDI3IDI3LjAyNyAwIDAgMSAxOS4yMiA4aC0xNjkuOTJhOCA4IDAgMCAwIC04IDh2NjRhOCA4IDAgMCAwIDggOGgyODBhMzIuMDU4IDMyLjA1OCAwIDAgMSAzMC45OSAyNGgtMjIuOTlhOCA4IDAgMCAwIC04IDh2MjRhOCA4IDAgMCAwIDggOGgyNHYxNmgtMjRhNy4zMzcgNy4zMzcgMCAwIDAgLS44MS4wNXptLTIwNy4xOS0xNDQuMDV2NDhoLTcydi00OHptMjMyIDEwNHY4aC0xNnYtOHptMTYgNzJoLTI0LjU4YTU1LjUgNTUuNSAwIDAgMCAtNC44My0xNmgyOS40MXoiLz48cGF0aCBkPSJtMjU2IDM0NGg0MGE4IDggMCAwIDAgMC0xNmgtNDBhOCA4IDAgMCAwIDAgMTZ6Ii8+PHBhdGggZD0ibTQ5NiA0ODBoLThhOCA4IDAgMCAwIDAgMTZoOGE4IDggMCAwIDAgMC0xNnoiLz48Y2lyY2xlIGN4PSIyNTYiIGN5PSIxMTIiIHI9IjgiLz48cGF0aCBkPSJtMjc3LjMzNiA4OC4xNWEzMiAzMiAwIDAgMCAtNDIuNjcyIDAgOCA4IDAgMSAwIDEwLjY3MiAxMS45MjIgMTYgMTYgMCAwIDEgMjEuMzI4IDAgOCA4IDAgMCAwIDEwLjY3Mi0xMS45MjJ6Ii8+PHBhdGggZD0ibTIyOS4zMzUgODIuMTg0YTQwIDQwIDAgMCAxIDUzLjMzIDAgOCA4IDAgMCAwIDEwLjY3LTExLjkyMiA1NiA1NiAwIDAgMCAtNzQuNjcgMCA4IDggMCAxIDAgMTAuNjcgMTEuOTIyeiIvPjxwYXRoIGQ9Im0yNTYgMTYwYTcyIDcyIDAgMSAwIC03Mi03MiA3Mi4wODEgNzIuMDgxIDAgMCAwIDcyIDcyem0wLTEyOGE1NiA1NiAwIDEgMSAtNTYgNTYgNTYuMDYzIDU2LjA2MyAwIDAgMSA1Ni01NnoiLz48cGF0aCBkPSJtMzUyIDk2aDQ4djE4NGE4IDggMCAwIDAgMTYgMHYtMTkyYTggOCAwIDAgMCAtOC04aC01NmE4IDggMCAwIDAgMCAxNnoiLz48L2c+PC9nPjwvc3ZnPg==" alt="" width="100" height="95" class="d-inline-block align-top"> 
+    <div class="fadeIn first margenform ">
+      <img src="../../assets/img/animat-camp/road-trip/animat-road-trip-color.gif"
+        alt="" width="160" height="155" class="d-inline-block align-top">
     </div>
+
+
 
     <!-- Login Form -->
-    <form>
-      <input type="email" id="correoInicio" class="fadeIn second" name="correoInicio" placeholder="Correo">
-      <input type="Password" id="clave" class="fadeIn third" name="clave" placeholder="Clave">
-      <input type="submit" class="fadeIn fourth" value="Iniciar sesión">
+    <form action="/src/app/shared/services/login.service.ts" method="POST">
+
+      <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="E-mail" [(ngModel)]="email"
+        required>
+        <div class="password" style="margin-top: 5%;">
+          <input [type]="show ? 'text' : 'password'" style="margin-top: 3%;" id="clave" class="fadeIn third col-md-9" style="margin-left: 7%; padding-right: 0%; margin-right: 0%;" name="clave" placeholder="Clave" [(ngModel)]="clave"
+          required>
+         <span><img src="../../assets/img/animat-camp/sign-post/animat-sign-post-color.gif"
+          alt="" width="50" height="50" class="d-inline-block align-top fadeIn six" style=" margin-top: 3%; margin-right: 5%; margin-left: 0%;" (click)="mostrarCLave()"></span> 
+      </div>
+
+        
+      <input type="submit" style="margin-top: 3%;"  class="fadeIn five  " value="Iniciar sesión" (click)="login()">
     </form>
 
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">¿Olvidaste la clave?</a>
+
+    <!--<div id="formFooter">
+      <label class="alejandro" for="resultado" href="#/carpool">{{usuarioReturn}}</label>
     </div>
+          src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PGcgZmlsbD0iIzU3YTRmZiI+PGc+PHBhdGggZD0ibTMyIDM1MmgzMnYyNGgtMzJ6Ii8+PHBhdGggZD0ibTEzOS43NyA0MDhoLTcxLjU0YTQ3Ljk4NCA0Ny45ODQgMCAwIDEgNzEuNTQgMHoiLz48cGF0aCBkPSJtMzQ0IDI0OCAyNCA2NGgtMjA4di02NHoiLz48cGF0aCBkPSJtNDQzLjc3IDQwOGgtNzEuNTRhNDcuOTg0IDQ3Ljk4NCAwIDAgMSA3MS41NCAweiIvPjxwYXRoIGQ9Im00NDggMzUyaDMydjI0aC0zMnoiLz48cGF0aCBkPSJtNDk2IDQxNnYxNmE4IDggMCAwIDEgLTggOGgtNjRhMTYgMTYgMCAwIDAgLTMyIDBoLTI0MGwtNS42Ni0yMi42My0yLjM0LTkuMzdoMzQ0YTggOCAwIDAgMSA4IDh6Ii8+PHBhdGggZD0ibTE0Ni4zNCA0MTcuMzdhNDguMDU0IDQ4LjA1NCAwIDAgMCAtODQuNjgtLjAxdi4wMWE0OCA0OCAwIDEgMCA4NC42OCAwem0tNDIuMzQgMzguNjNhMTYgMTYgMCAxIDEgMTYtMTYgMTYgMTYgMCAwIDEgLTE2IDE2eiIvPjxwYXRoIGQ9Im00NDMuNzcgNDA4YTQ3Ljk5NCA0Ny45OTQgMCAxIDAgMTIuMjMgMzIgNDcuODQyIDQ3Ljg0MiAwIDAgMCAtMTIuMjMtMzJ6bS0zNS43NyA0OGExNiAxNiAwIDEgMSAxNi0xNiAxNiAxNiAwIDAgMSAtMTYgMTZ6Ii8+PHBhdGggZD0ibTY0IDQwOC0yLjM0IDkuMzZ2LjAxbC01LjY2IDIyLjYzaC0zMmE4IDggMCAwIDEgLTgtOHYtMTZhOCA4IDAgMCAxIDgtOHoiLz48cGF0aCBkPSJtMzY4IDMxMmgtMjA4di02NGgxODR6Ii8+PHBhdGggZD0ibTMyIDM1MmgzMnYyNGgtMzJ6Ii8+PHBhdGggZD0ibTQ0OCAzNTJoMzJ2MjRoLTMyeiIvPjwvZz48Zz48Y2lyY2xlIGN4PSIyNTYiIGN5PSIxMTIiIHI9IjgiLz48cGF0aCBkPSJtMjQwIDk0LjExMWEyNCAyNCAwIDAgMSAzMiAweiIvPjxwYXRoIGQ9Im0yMjQgNzYuMjIyYTQ4IDQ4IDAgMCAxIDY0IDB6Ii8+PC9nPjxjaXJjbGUgY3g9IjI1NiIgY3k9Ijg4IiByPSI2NCIvPjwvZz48ZyBmaWxsPSIjMDA0ZmFjIj48cGF0aCBkPSJtMTA0IDQxNmEyNCAyNCAwIDEgMCAyNCAyNCAyNC4wMjggMjQuMDI4IDAgMCAwIC0yNC0yNHptMCAzMmE4IDggMCAxIDEgOC04IDguMDA5IDguMDA5IDAgMCAxIC04IDh6Ii8+PHBhdGggZD0ibTQwOCA0MTZhMjQgMjQgMCAxIDAgMjQgMjQgMjQuMDI4IDI0LjAyOCAwIDAgMCAtMjQtMjR6bTAgMzJhOCA4IDAgMSAxIDgtOCA4LjAwOSA4LjAwOSAwIDAgMSAtOCA4eiIvPjxwYXRoIGQ9Im00ODggNDAwdi00OGE0OC4wNTEgNDguMDUxIDAgMCAwIC00OC00OGgtNjYuNDZsLTIyLTU4LjY4YTQzLjA1MiA0My4wNTIgMCAwIDAgLTQwLjg0LTI5LjMyaC0xNTAuN2E0My4wNDQgNDMuMDQ0IDAgMCAwIC00MC43MiAyOC45N2wtMjguMzIgNTkuMDNoLTE4Ljk2YTQ4LjA1MSA0OC4wNTEgMCAwIDAgLTQ4IDQ4djQ4YTE2LjAyMSAxNi4wMjEgMCAwIDAgLTE2IDE2djE2YTE2LjAyMSAxNi4wMjEgMCAwIDAgMTYgMTZoMjQuNThhNTUuOTE0IDU1LjkxNCAwIDAgMCAxNi4yOCAzMmgtNDguODZhOCA4IDAgMCAwIDAgMTZoNDQ4YTggOCAwIDAgMCAwLTE2aC0xNi44NmE1NS45MTQgNTUuOTE0IDAgMCAwIDE2LjI4LTMyaDI0LjU4YTE2LjAyMSAxNi4wMjEgMCAwIDAgMTYtMTZ2LTE2YTE2LjAyMSAxNi4wMjEgMCAwIDAgLTE2LTE2em0tMTMxLjU0LTk2aC0xMDAuNDZ2LTQ4aDgyLjQ2em0tMzE2LjQ2IDU2aDE2djhoLTE2em04LjU4IDcyaC0yNC41OHYtMTZoMjkuNDFhNTUuNSA1NS41IDAgMCAwIC00LjgzIDE2em01NS40MiA0OGE0MCA0MCAwIDEgMSA0MC00MCA0MC4wNCA0MC4wNCAwIDAgMSAtNDAgNDB6bTM5LjE0IDBhNTUuOTE0IDU1LjkxNCAwIDAgMCAxNi4yOC0zMmgxOTMuMTZhNTUuOTE0IDU1LjkxNCAwIDAgMCAxNi4yOCAzMnptMTEuNDUtNjRoMjAyLjgyYTU1LjUgNTUuNSAwIDAgMCAtNC44MyAxNmgtMTkzLjE2YTU1LjUgNTUuNSAwIDAgMCAtNC44My0xNnptMjUzLjQxIDY0YTQwIDQwIDAgMSAxIDQwLTQwIDQwLjA0IDQwLjA0IDAgMCAxIC00MCA0MHptMzkuMTktNzkuOTVhNTUuODcxIDU1Ljg3MSAwIDAgMCAtNzguMzctLjAxIDcuMzgzIDcuMzgzIDAgMCAwIC0uODItLjA0aC0yMjRhNy4zODMgNy4zODMgMCAwIDAgLS44Mi4wNCA1NS44NzEgNTUuODcxIDAgMCAwIC03OC4zNy4wMSA3LjMzNyA3LjMzNyAwIDAgMCAtLjgxLS4wNWgtMjR2LTE2aDI0YTggOCAwIDAgMCA4LTh2LTI0YTggOCAwIDAgMCAtOC04aC0yMi45OWEzMi4wNTggMzIuMDU4IDAgMCAxIDMwLjk5LTI0aDI0YTggOCAwIDAgMCA3LjIxLTQuNTRsMzAuNzEtNjRhNy41IDcuNSAwIDAgMCAuMzctLjkzIDI3LjA3OSAyNy4wNzkgMCAwIDEgMjUuNzEtMTguNTNoMTUwLjdhMjcuMDI3IDI3LjAyNyAwIDAgMSAxOS4yMiA4aC0xNjkuOTJhOCA4IDAgMCAwIC04IDh2NjRhOCA4IDAgMCAwIDggOGgyODBhMzIuMDU4IDMyLjA1OCAwIDAgMSAzMC45OSAyNGgtMjIuOTlhOCA4IDAgMCAwIC04IDh2MjRhOCA4IDAgMCAwIDggOGgyNHYxNmgtMjRhNy4zMzcgNy4zMzcgMCAwIDAgLS44MS4wNXptLTIwNy4xOS0xNDQuMDV2NDhoLTcydi00OHptMjMyIDEwNHY4aC0xNnYtOHptMTYgNzJoLTI0LjU4YTU1LjUgNTUuNSAwIDAgMCAtNC44My0xNmgyOS40MXoiLz48cGF0aCBkPSJtMjU2IDM0NGg0MGE4IDggMCAwIDAgMC0xNmgtNDBhOCA4IDAgMCAwIDAgMTZ6Ii8+PHBhdGggZD0ibTQ5NiA0ODBoLThhOCA4IDAgMCAwIDAgMTZoOGE4IDggMCAwIDAgMC0xNnoiLz48Y2lyY2xlIGN4PSIyNTYiIGN5PSIxMTIiIHI9IjgiLz48cGF0aCBkPSJtMjc3LjMzNiA4OC4xNWEzMiAzMiAwIDAgMCAtNDIuNjcyIDAgOCA4IDAgMSAwIDEwLjY3MiAxMS45MjIgMTYgMTYgMCAwIDEgMjEuMzI4IDAgOCA4IDAgMCAwIDEwLjY3Mi0xMS45MjJ6Ii8+PHBhdGggZD0ibTIyOS4zMzUgODIuMTg0YTQwIDQwIDAgMCAxIDUzLjMzIDAgOCA4IDAgMCAwIDEwLjY3LTExLjkyMiA1NiA1NiAwIDAgMCAtNzQuNjcgMCA4IDggMCAxIDAgMTAuNjcgMTEuOTIyeiIvPjxwYXRoIGQ9Im0yNTYgMTYwYTcyIDcyIDAgMSAwIC03Mi03MiA3Mi4wODEgNzIuMDgxIDAgMCAwIDcyIDcyem0wLTEyOGE1NiA1NiAwIDEgMSAtNTYgNTYgNTYuMDYzIDU2LjA2MyAwIDAgMSA1Ni01NnoiLz48cGF0aCBkPSJtMzUyIDk2aDQ4djE4NGE4IDggMCAwIDAgMTYgMHYtMTkyYTggOCAwIDAgMCAtOC04aC01NmE4IDggMCAwIDAgMCAxNnoiLz48L2c+PC9nPjwvc3ZnPg=="
+
+  
+  -->
 
   </div>
+
+
 </div>

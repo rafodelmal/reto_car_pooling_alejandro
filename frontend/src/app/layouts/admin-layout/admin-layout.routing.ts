@@ -12,6 +12,8 @@ import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from 'app/login/login.component';
 import { NosotrosComponent } from 'app/nosotros/nosotros.component';
+import { CalculadoraComponent } from 'app/calculadora/calculadora.component';
+import { DireccionesComponent } from '../../direcciones/direcciones.component';
 
 @Component({
     selector: 'redirect',
@@ -32,12 +34,14 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'carpool',      component: HomeComponent },
     { path: 'usuario',           component: UserComponent },
     { path: 'reservas',          component: TablesComponent },
-   /* { path: 'tipografia',     component: TypographyComponent },
-    { path: 'iconos',          component: IconsComponent },*/
+   //{ path: 'tipografia',     component: TypographyComponent },
+    { path: 'iconos',          component: IconsComponent },
     { path: 'mapas',           component: MapsComponent },
     { path: 'notificacion',  component: NotificationsComponent },
     { path: 'nosotros',  component: NosotrosComponent },
     { path: 'github', component: RedirectComponent },
+    { path: 'calculadora', component: CalculadoraComponent },
+    { path: 'direcciones', component: DireccionesComponent },
 
 
    // { path: 'upgrade',        component: UpgradeComponent },

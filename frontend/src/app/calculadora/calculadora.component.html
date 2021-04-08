@@ -1,0 +1,48 @@
+<div class="container">
+
+    <h1>Calculadora</h1>
+
+    <form action="">
+
+        <div class="form-group">
+
+
+            <div class="row">
+
+                <label class="alejandro" for="sumandoUno">Sumando 1</label>
+                
+                <input type="number" class="form-control" placeholder="Sumando 1" id="sumandoUno" name="sumandoUno" [(ngModel)]="sumandoUno">
+
+            </div>
+        
+        </div>
+
+        <div class="form-group">
+
+            <div class="row">
+
+                <label class="alejandro" for="sumandoDos">Sumando 2</label>
+
+                <input type="number" class="form-control" placeholder="Sumando 2" id="sumandoDos" name="sumandoDos" [(ngModel)]="sumandoDos">
+
+            </div>
+
+
+        </div>
+
+            
+
+            <div class="row">
+                <button type="submit" class="btn btn-info" (click)="sumar()">Sumar</button>
+                <button type="reset" class="btn btn-success" (click)="desactivaresultado()">Borrar</button>
+            </div>
+
+        </form>
+
+            <div class="row"  *ngIf="mostrarResultado">
+
+                <label class="alejandro" for="resultado" >Resultado: {{resultado}}</label>
+
+            </div>
+
+</div>
