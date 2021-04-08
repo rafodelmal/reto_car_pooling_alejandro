@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
     }
 
     showNotification(from, align){
-      const type = ['','info'];
+      const type = ['primary'];
 
       var color = Math.floor((Math.random() * 4) + 1);
       $.notify({

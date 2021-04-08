@@ -12,6 +12,10 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
+import { CalculadoraComponent } from './calculadora/calculadora.component';
+import { UserComponent } from './user/user.component';
+import { DireccionesComponent } from './direcciones/direcciones.component';
+
 
 @NgModule({
   imports: [
@@ -22,13 +26,16 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
     NosotrosComponent,
+    CalculadoraComponent,
+    DireccionesComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
