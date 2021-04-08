@@ -48,6 +48,7 @@ routers.get('/login', async (req, res) => {
     const clave = req.query.clave;
 
     if(email && clave){
+
         conexion.query('SELECT * FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
 
             let login = true;
@@ -103,10 +104,9 @@ routers.get('/actualizarUsuario', async (req, res) => {
 ///  ver informaciond e usurio ////
 routers.get('/infoUsuario', async (req, res) => {
 
-    const email = req.query.email;
-    const clave = req.query.clave;
+    const email = req.query.email;-
 
-    conexion.query('SELECT email, nombre, apellido, documento, telefono FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
+    conexion.query('SELECT email, nombre, apellido, documento, telefono FROM usuario WHERE email = "' + email + '"' , async (error, results, fields) => {
         
         if (error)
         throw error;
