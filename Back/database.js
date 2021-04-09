@@ -7,7 +7,7 @@ const mysql = require('mysql');
     user: 'root',
     password: 'root',
     database: 'carpool',
-}); */
+});  este local host es el de la bd  */
 
 var conexion = mysql.createConnection({
     host: 'bupagywnyekls8xlbdky-mysql.services.clever-cloud.com',
