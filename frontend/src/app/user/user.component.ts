@@ -3,6 +3,7 @@ import { ActualizarUsuarioService } from '../shared/services/actualizar-usuario.
 import { empty, from } from 'rxjs';
 import { Router } from '@angular/router';
 import { InfoUsuarioService } from '../shared/services/info-usuario.service';
+import { LoginService } from 'app/shared/services/login.service';
 import { DatosUsuario } from 'app/login/login.component';
 
 declare var $:any;
@@ -43,18 +44,17 @@ export class UserComponent implements OnInit {
    placa: any;
    tienePlaca: any; */
 
-   
+
+
 
   constructor(private service: ActualizarUsuarioService, private router: Router, private serviceinfo: InfoUsuarioService) { }
 
 
-
   ngOnInit(): void {
 
-    this.infousuario();
+   
 
 
-    
   }
 
 
