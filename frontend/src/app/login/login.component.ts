@@ -7,7 +7,6 @@ import { combineAll } from 'rxjs-compat/operator/combineAll';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 
-
 declare var $:any;
 
 @Component({
@@ -42,6 +41,7 @@ export class LoginComponent implements OnInit {
     this.service.getlogin(email1, clave1).subscribe(data=>{
       respuesta=data;
 
+      console.log(respuesta)
 
       if (respuesta == true){
 
@@ -53,8 +53,6 @@ export class LoginComponent implements OnInit {
 
         this.usuarioReturn = respuesta;
 
-
-        
         let from = 'top' , align = 'center';
 
         const type = ['primary','info','success','warning','danger'];
