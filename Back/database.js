@@ -16,14 +16,19 @@ var conexion = mysql.createConnection({
     database: 'bupagywnyekls8xlbdky',
 });
 
+
 conexion.connect(function (error) {
     if (error) {
-        nbv
         throw error;
     } else {
         console.log('conexion exitosa')
     }
+
 });
+
+
+
+
 
 module.exports = conexion;
 

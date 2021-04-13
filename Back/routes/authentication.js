@@ -47,18 +47,18 @@ routers.get('/login', async (req, res) => {
     const email = req.query.email;
     const clave = req.query.clave;
 
+    
+
     if(email && clave){
 
-        conexion.query('SELECT * FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
+       conexion.query('SELECT * FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
 
-            let login = true;
-
+            
             if (results.length == 0)
             {
-                login = false;
-                res.send(login+'');
+                res.send(results);
             }else{
-                res.send(login);
+                res.send(results);
             }
 
         })

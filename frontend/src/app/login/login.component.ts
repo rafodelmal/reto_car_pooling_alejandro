@@ -44,21 +44,40 @@ export class LoginComponent implements OnInit {
     let email1 = this.email;
     let clave1 = this.clave;
     let respuesta;
+    let respuestaemail = 0;
 
     this.service.getlogin(email1, clave1).subscribe(data=>{
       respuesta=data;
 
-      console.log(respuesta)
 
-      if (respuesta == true){
+      respuesta.forEach(datos => {
+
+        if (email1 == datos.email){
 
 
-        this.usuarioReturn = email1;
+          respuestaemail = 1
 
-      }
-      else{
+        }
+ 
+      });
+  
+  
+      if (respuestaemail == 1){
+
+
+        console.log("verdadero");
 
         this.usuarioReturn = respuesta;
+
+        console.log(this.usuarioReturn);
+
+         if (respuesta){
+            this.router.navigate(['/carpool'])
+          } 
+
+      }else{
+
+        console.log("falso");
 
         let from = 'top' , align = 'center';
 
@@ -75,26 +94,25 @@ export class LoginComponent implements OnInit {
             from: from,
             align: align
           }
+
         });
+
       }
+ 
+        
+  
+      });
 
 
-      console.log(this.usuarioReturn);
+    }
 
-     if (respuesta){
-        this.router.navigate(['/carpool'])
-      }
-      
-
-    });
-
-  }
 
 
   mostrarCLave(){
     this.show = !this.show;
 
   }
+  
 
 }
 
