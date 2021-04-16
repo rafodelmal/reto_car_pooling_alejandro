@@ -18,6 +18,7 @@ export class ActualizarUsuarioService {
 
     return this.http.get('http://localhost:3000/actualizarUsuario?nombre='+nombre1+'&documento='+documento1+'&email='+email1+'&apellido='+apellido1+'&telefono='+telefono1).pipe(map((response) => response as T));
 
+
   }
 
 

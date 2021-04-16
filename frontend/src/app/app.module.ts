@@ -13,6 +13,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './login/login.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
     CalculadoraComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+ 
 })
 export class AppModule { }
 

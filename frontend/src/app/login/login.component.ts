@@ -1,13 +1,16 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { from } from 'rxjs';
-import {LoginService } from 'app/shared/services/login.service'
+import { LoginService } from 'app/shared/services/login.service'
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
 import { combineAll } from 'rxjs-compat/operator/combineAll';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import { UserComponent } from 'app/user/user.component';
+import { User } from './user';
 
-declare var $:any;
+
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -21,11 +24,11 @@ export class LoginComponent implements OnInit {
   usuarioReturn: any;
   show: boolean;
 
-  constructor( private service: LoginService, private router: Router ) { 
+  constructor(private service: LoginService, private router: Router) {
 
     this.show = false;
 
-    
+
 
 
   }
@@ -33,36 +36,31 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
 
-    
+
 
 
   }
 
 
-  login(){
+
+  login() {
 
     let email1 = this.email;
     let clave1 = this.clave;
     let respuesta;
     let respuestaemail = 0;
 
-    this.service.getlogin(email1, clave1).subscribe(data=>{
-      respuesta=data;
+    var user: User;
+
+    this.service.getlogin(email1, clave1).subscribe(data => {
+      respuesta = data[0];
+
+      user = data[0];
+
+      respuestaemail = user.email == email1 ? 1 : 0;
 
 
-      respuesta.forEach(datos => {
-
-        if (email1 == datos.email){
-
-
-          respuestaemail = 1
-
-        }
- 
-      });
-  
-  
-      if (respuestaemail == 1){
+      if (respuestaemail == 1) {
 
 
         console.log("verdadero");
@@ -71,17 +69,17 @@ export class LoginComponent implements OnInit {
 
         console.log(this.usuarioReturn);
 
-         if (respuesta){
-            this.router.navigate(['/carpool'])
-          } 
+        if (respuesta) {
+          this.router.navigate(['/carpool'])
+        }
 
-      }else{
+      } else {
 
         console.log("falso");
 
-        let from = 'top' , align = 'center';
+        let from = 'top', align = 'center';
 
-        const type = ['primary','info','success','warning','danger'];
+        const type = ['primary', 'info', 'success', 'warning', 'danger'];
 
         var color = Math.floor(4);
         $.notify({
@@ -98,21 +96,21 @@ export class LoginComponent implements OnInit {
         });
 
       }
- 
-        
-  
-      });
-
-
-    }
 
 
 
-  mostrarCLave(){
+    });
+
+
+  }
+
+
+
+  mostrarCLave() {
     this.show = !this.show;
 
   }
-  
+
 
 }
 

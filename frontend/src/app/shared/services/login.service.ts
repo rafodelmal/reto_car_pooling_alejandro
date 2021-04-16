@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
-import { from, Observable } from 'rxjs';
+import { from, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,13 +11,22 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-email2: any;
-clave2: any;
+@Output() datos: any;
+
+email: any;
+clave: any;
+
 
   getlogin<T>(email1, clave1): Observable<T> {
 
+
+    this.email = email1
+    this.clave = clave1
+
     return this.http.get('http://localhost:3000/login?email='+email1+'&clave='+clave1).pipe(map((response) => response as T));
+
 
   }
 
 }
+

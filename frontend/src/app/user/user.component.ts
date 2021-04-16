@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { InfoUsuarioService } from '../shared/services/info-usuario.service';
 import { LoginService } from 'app/shared/services/login.service';
 import { DatosUsuario } from 'app/login/login.component';
+import { User } from '../login/user';
 
 declare var $:any;
 
@@ -26,16 +27,6 @@ export class UserComponent implements OnInit {
   email: any;
 
   resultadoBusqueda: any;
-
-  resultado = {
-
-    nombre2: null,
-    apellido2: null,
-    email2: null,
-    telefono2: null,
-    documento2: null
-
-  }
   
   /* dirOrigen: any;
    dirDestino: any;
@@ -47,12 +38,34 @@ export class UserComponent implements OnInit {
 
 
 
-  constructor(private service: ActualizarUsuarioService, private router: Router, private serviceinfo: InfoUsuarioService) { }
+  constructor(private service: ActualizarUsuarioService, private router: Router, private datosLogin: LoginService) { }
 
 
   ngOnInit(): void {
 
-   
+    let emailLogin, claveLogin
+
+    emailLogin = this.datosLogin.email
+    claveLogin = this.datosLogin.clave
+
+    let respuesta;
+
+    var user: User;
+
+    this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
+      respuesta=data;
+
+      user = data[0];
+
+      console.log(user)
+
+      this.nombre = user.nombre
+      this.apellido = user.apellido;
+      this.telefono = user.telefono;
+      this.documento = user.documento;
+      this.email = user.email;
+
+    })
 
 
   }
@@ -168,25 +181,6 @@ export class UserComponent implements OnInit {
 
    }
 
-
-   
-  infousuario() {
-
-    let nombre1 = this.nombre;
-    let apellido1 = this.apellido;
-    let documento1 = this.documento;
-    let telefono1 = this.telefono;
-    let email1 = this.email;
-    let clave;
-
-    this.serviceinfo.getInfoUsuario(email1, nombre1).subscribe(data => {
-      this.nombre = data;
-
-      console.log(this.nombre);
-
-    });
-
-  }
 
 
 }
