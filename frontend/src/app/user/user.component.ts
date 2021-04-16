@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActualizarUsuarioService } from '../shared/services/actualizar-usuario.service';
 import { empty, from } from 'rxjs';
 import { Router } from '@angular/router';
-import { InfoUsuarioService } from '../shared/services/info-usuario.service';
 import { LoginService } from 'app/shared/services/login.service';
 import { DatosUsuario } from 'app/login/login.component';
 import { User } from '../login/user';

@@ -19,7 +19,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/direcciones', title: 'Direcciones', icon: 'pe-7s-id', class: '' },
   { path: '/reservas', title: 'Reservas', icon: 'pe-7s-note2', class: '' },
   { path: '/mapas', title: 'Mapas', icon: 'pe-7s-map-2', class: '' },
-  { path: '/github', title: 'github', icon: 'pe-7s-share', class: '' },
+  { path: '/github', title: 'Github', icon: 'pe-7s-share', class: '' },
   { path: '/iconos', title: 'iconos', icon: 'pe-7s-map-2', class: '' },
   //{ path: '/calculadora', title: 'Calculadora', icon: 'pe-7s-share', class: '' },
   // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },

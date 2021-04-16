@@ -1,10 +1,13 @@
 export interface User {
 
+
+
+
+
     "idUsuario": number;
     "nombre": string;
     "apellido":  string;
     "telefono": number;
-    "email": string;
     "placaCarro": null,
     "dirOrigen": string;
     "dirDestino": string;
@@ -12,6 +15,7 @@ export interface User {
     "horaSalidaDestino": string;
     "documento": number;
     "carpooler": number;
-    "clave": string;
+    "email": any;
+    "clave": any;
 
 }

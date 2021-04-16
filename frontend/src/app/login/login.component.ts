@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { from } from 'rxjs';
+import { from, empty } from 'rxjs';
 import { LoginService } from 'app/shared/services/login.service'
 import { data } from 'jquery';
 import { Observable } from 'rxjs';
@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
 import { UserComponent } from 'app/user/user.component';
 import { User } from './user';
+import { runInThisContext } from 'vm';
+import { isEmpty } from 'rxjs/operators';
 
 
 declare var $: any;
@@ -19,8 +21,8 @@ declare var $: any;
 })
 export class LoginComponent implements OnInit {
 
-  email: string;
-  clave: string;
+  email: any;
+  clave: any;
   usuarioReturn: any;
   show: boolean;
 
@@ -36,9 +38,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
 
-
-
-
   }
 
 
@@ -52,24 +51,39 @@ export class LoginComponent implements OnInit {
 
     var user: User;
 
+    console.log("valor del input email: ",email1)
+
+
     this.service.getlogin(email1, clave1).subscribe(data => {
-      respuesta = data[0];
+      respuesta = data;
 
-      user = data[0];
+    user = data[0];
 
-      respuestaemail = user.email == email1 ? 1 : 0;
 
+    respuesta.forEach(datos => {
+
+        if (email1 == datos.email){
+
+
+          respuestaemail = 1
+
+        }
+ 
+      });
+  
+
+  
 
       if (respuestaemail == 1) {
 
 
+        console.log(email1)
+        console.log(this.email)
+
         console.log("verdadero");
 
-        this.usuarioReturn = respuesta;
 
-        console.log(this.usuarioReturn);
-
-        if (respuesta) {
+       if (respuesta) {
           this.router.navigate(['/carpool'])
         }
 

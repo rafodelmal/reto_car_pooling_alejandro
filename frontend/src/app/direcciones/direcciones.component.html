@@ -63,7 +63,7 @@
                                 <div class="form-check form-check-inline col-md-1" style="margin-left: 42%;">
 
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="radiocarppol" value="0" onclick="document.getElementById('placa').disabled = false" [(ngModel)]="tienePlaca" >
+                                        id="radiocarppol" [value]="1" onclick="document.getElementById('placa').disabled = false" [(ngModel)]="tienePlaca" >
 
                                     <label class="form-check-label" for="inlineRadio1" style="margin-left: 15%; padding-top: 0%;">Si</label>
 
@@ -71,7 +71,7 @@
 
                                 <div class="form-check form-check-inline col-md-1">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="radiocarppol" value="1"  onclick="document.getElementById('placa').disabled = true" [(ngModel)]="tienePlaca" >
+                                        id="radiocarppol" [value]="0"  onclick="document.getElementById('placa').disabled = true" [(ngModel)]="tienePlaca" >
 
                                     <label class="form-check-label" for="inlineRadio2" style="margin-left: 5%; padding-top: 0%;" >No</label>
 
@@ -90,8 +90,8 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonUsuario"
-                                name="botonUsuario" (click)="actualizarDireccion()">Modificar</button>
+                            <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonDireccion"
+                                name="botonDireccion" (click)="actualizarDireccion('top','center')">Modificar</button>
                             <div class="clearfix"></div>
                         </form>
 

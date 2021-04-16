@@ -99,12 +99,45 @@ routers.get('/actualizarUsuario', async (req, res) => {
 })
 
 
+// actualizar usuario /////
+
+routers.get('/actualizarDireccion', async (req, res) => {
+
+    const email = req.query.email;
+    const dirOrigen = req.query.dirOrigen;
+    const dirDestino = req.query.dirDestino;
+    const horaSalidaOrigen = req.query.horaSalidaOrigen;
+    const horaSalidaDestino = req.query.horaSalidaDestino;
+    const placaCarro = req.query.placaCarro;
+    const carpooler = req.query.carpooler;
+
+    const datos = [{dirOrigen,
+        email,
+        dirDestino,
+        horaSalidaOrigen,
+        horaSalidaDestino, 
+        placaCarro,
+        carpooler}];
+
+
+    conexion.query('UPDATE usuario SET dirOrigen = "' + dirOrigen + '", dirDestino = "' + dirDestino +'", horaSalidaOrigen =" ' +horaSalidaOrigen+ '", horaSalidaDestino =" ' +horaSalidaDestino+ '" , placaCarro =" ' +placaCarro+ '" , carpooler =" ' +carpooler+ '"  WHERE email = "' + email + '"'   , async (error, results) => {
+        if (error) {
+            throw error
+        } else {
+            console.log('Actualizacion exitosa')
+            console.log(datos);
+        }
+        
+    })
+    res.send(datos);
+})
+
 
 
 ///  ver informaciond e usurio ////
 routers.get('/infoUsuario', async (req, res) => {
 
-    const email = req.query.email;-
+    const email = req.query.email;
 
     conexion.query('SELECT email, nombre, apellido, documento, telefono FROM usuario WHERE email = "' + email + '"' , async (error, results, fields) => {
         

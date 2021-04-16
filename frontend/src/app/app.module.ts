@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { UserComponent } from './user/user.component';
+import { DireccionesComponent } from './direcciones/direcciones.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { UserComponent } from './user/user.component';
     LoginComponent,
     NosotrosComponent,
     CalculadoraComponent,
+    DireccionesComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
