@@ -24,17 +24,10 @@ export class UserComponent implements OnInit {
   telefono: any;
   documento: any;
   email: any;
+  foto: any;
 
   resultadoBusqueda: any;
   
-  /* dirOrigen: any;
-   dirDestino: any;
-   horaSalidaOrigen: any;
-   horaSalidaDestino: any;
-   placa: any;
-   tienePlaca: any; */
-
-
 
 
   constructor(private service: ActualizarUsuarioService, private router: Router, private datosLogin: LoginService) { }
@@ -63,6 +56,10 @@ export class UserComponent implements OnInit {
       this.telefono = user.telefono;
       this.documento = user.documento;
       this.email = user.email;
+      this.foto = user.foto;
+
+
+      console.log(user.foto)
 
     })
 
