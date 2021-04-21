@@ -122,7 +122,7 @@ export class UserComponent implements OnInit {
         })
   
       }else{
-   let variabex
+        
         Swal.fire({
           position: 'top',
           icon: 'success',
