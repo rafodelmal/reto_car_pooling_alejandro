@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'app/shared/services/login.service';
 import { DatosUsuario } from 'app/login/login.component';
 import { User } from '../login/user';
+import Swal from 'sweetalert2';
 
 declare var $:any;
 
@@ -96,83 +97,52 @@ export class UserComponent implements OnInit {
     let x = this.emailbase;
     
 
-    /* let dirOrigen1 = this.dirOrigen;
-    let dirDestino1 = this.dirDestino;
-    let horaSalidaDestino1 = this.horaSalidaDestino;
-    let horaSalidaOrigen1 = this.horaSalidaOrigen;
-    let placa1;
-    let tienePlaca1; */
-
-
-    // condicional apra enviar la placa a la Bd si es o no carpooler
-    /* if (this.tienePlaca === '1'){
-        placa1 = ' ';
-     }else{
-       placa1 = this.placa;
-     }
-   
-     // condicional para preguntar si sera carpooler
-     if (this.tienePlaca === '0' ){
-   
-       tienePlaca1 = 'si';
-   
-     }else if (this.tienePlaca === '1'){
-   
-       tienePlaca1 = 'no';
-   
-     }
-      */
     console.log(x)
     console.log(nombre1 + ' ' + apellido1 + ' ' + documento1 + ' ' + telefono1 + ' ' + email1)
 
     
+    
+    let respuesta;
 
-    if (nombre1 == null || apellido1 == null || documento1 == null || telefono1 == null || email1 == null){
+    this.service.postUsuario(email1, nombre1, apellido1, documento1, telefono1).subscribe(data=> {
 
+      respuesta=data;
 
-      const type = ['info','success','warning','danger'];
+      console.log("respuesta",respuesta);
 
-        var color = Math.floor(3);
-        $.notify({
-          icon: "pe-7s-close",
-          message: "No fue posible actualizar los datos"
-        }, {
-          type: type[color],
-          timer: 1000,
-          placement: {
-            from: from,
-            align: align
-          }
-        });
+      if (data===0){
 
-    }else{
-
-
-      this.service.postUsuario(email1, nombre1, apellido1, documento1, telefono1).subscribe(data=>
-        this.resultadoBusqueda=data);
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          title: '¡No fue posuble actualiar tus datos!',
+          text: 'por favor verifica todos los campos.',
+          showConfirmButton: false,
+          timer: 1700
+        })
   
-        console.log(this.resultadoBusqueda);
+      }else{
   
-          const type = ['info','success','warning','danger'];
-  
-          var color = Math.floor(0);
-          $.notify({
-            icon: "pe-7s-check",
-            message: "Datos actualizados correctamente."
-          }, {
-            type: type[color],
-            timer: 1000,
-            placement: {
-              from: from,
-              align: align
-            }
-          });
-  
-  
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Datos actualizacos con exito.',
+          showConfirmButton: false,
+          timer: 1300
+        })
+          
           this.router.navigate(['/carpool'])
-
-
+  
       }
+
+
+
+      
+
+    })
+
+
+    
 
 
    }

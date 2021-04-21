@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { LoginService } from 'app/shared/services/login.service';
 import { User } from '../login/user';
 import { ActualizarDireccionService } from '../shared/services/actualizar-direccion.service';
+import { CommonModule, DatePipe, formatDate } from '@angular/common';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-direcciones',
@@ -21,8 +22,11 @@ export class DireccionesComponent implements OnInit {
   placa: any;
   tienePlaca: any = 1;
 
+  resultadoBusqueda: any;
 
-  constructor(private service: ActualizarDireccionService ,private router: Router, private datosLogin: LoginService) { }
+
+  constructor(private service: ActualizarDireccionService, private router: Router, private datosLogin: LoginService) { }
+
 
   ngOnInit(): void {
 
@@ -37,7 +41,7 @@ export class DireccionesComponent implements OnInit {
     var user: User;
 
     this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
-      respuesta=data;
+      respuesta = data;
 
       user = data[0];
 
@@ -46,17 +50,20 @@ export class DireccionesComponent implements OnInit {
       this.dirOrigen = user.dirOrigen;
       this.dirDestino = user.dirDestino;
       this.horaSalidaDestino = user.horaSalidaDestino;
+
       this.horaSalidaOrigen = user.horaSalidaOrigen;
+
+    
       
-      
-      if (user.carpooler == 1){
+
+      if (user.carpooler === 1) {
 
         this.placa = user.placaCarro;
 
-      }else{
+      } else {
 
-        
-        this.tienePlaca =  0 ;
+
+        this.tienePlaca = 0;
         this.placa = ' ';
 
       }
@@ -69,28 +76,8 @@ export class DireccionesComponent implements OnInit {
 
 
 
- actualizarDireccion(){
+  actualizarDireccion(from, align) {
 
-
-  let emailLogin, claveLogin
-
-  emailLogin = this.datosLogin.email
-  claveLogin = this.datosLogin.clave
-
-  let respuesta;
-
-  var user: User;
-
-  this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
-    respuesta=data;
-
-    user = data[0];
-
-    console.log(user)
-
-
-    
-    let emailUser = user.email
 
     let dirOrigen1 = this.dirOrigen;
     let dirDestino1 = this.dirDestino;
@@ -98,27 +85,108 @@ export class DireccionesComponent implements OnInit {
     let horaSalidaOrigen1 = this.horaSalidaOrigen;
     let placa1;
     let tienePlaca1 = this.tienePlaca;
-  
-  
-    // condicional para enviar la placa a la Bd si es o no carpooler
-   if (this.tienePlaca === '0'){
-       placa1 = ' ';
-    }else{
-      placa1 = this.placa;
-    }
-  
 
-    
-    
-  
-   console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + emailUser )
-  
-
-  })
+         // condicional para enviar la placa a la Bd si es o no carpooler
+         if (this.tienePlaca === 0) {
+          placa1 = 'sin registro';
+        } else {
+          placa1 = this.placa;
+        }
 
 
 
-  
-  } 
+   //////////////////////     
+    let emailLogin, claveLogin
+
+    emailLogin = this.datosLogin.email
+    claveLogin = this.datosLogin.clave
+
+    let respuesta;
+
+    var user: User;
+
+    this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
+      respuesta = data;
+
+      user = data[0];
+
+      let email = user.email
+    /////////////////////////
+ 
+ 
+
+
+
+
+      if ((dirDestino1 == ' ' ) || (dirOrigen1 == ' ') || (horaSalidaDestino1 == ' ') || (horaSalidaOrigen1 == ' ')) {
+
+
+
+        const type = ['info', 'success', 'warning', 'danger'];
+
+        var color = Math.floor(3);
+        $.notify({
+          icon: "pe-7s-close",
+          message: "No fue posible actualizar los datos, ingrese todos los campos."
+        }, {
+          type: type[color],
+          timer: 1000,
+          placement: {
+            from: from,
+            align: align
+          }
+        });
+
+
+      } else {
+
+
+      
+        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, email).subscribe(datos=>
+          this.resultadoBusqueda=datos);
+
+          console.log(this.resultadoBusqueda);
+
+          console.log("holra del htm", this.horaSalidaOrigen)
+
+        const type = ['info', 'success', 'warning', 'danger'];
+
+        var color = Math.floor(0);
+        $.notify({
+          icon: "pe-7s-check",
+          message: "Datos actualizados correctamente."
+        }, {
+          type: type[color],
+          timer: 1000,
+          placement: {
+            from: from,
+            align: align
+          }
+        });
+
+
+      //  this.router.navigate(['/carpool'])
+
+
+        console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + email)
+
+
+
+
+      }
+
+
+    })
+
+
+  }
+
+
+
+
+
+
+
+
 
 }

@@ -1,8 +1,6 @@
+import { Time } from "@angular/common";
+
 export interface User {
-
-
-
-
 
     "idUsuario": number;
     "nombre": string;

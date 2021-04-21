@@ -1,5 +1,5 @@
-<div class="main-content" >
-    <div class="container-fluid animated zoomIn" >
+<div class="main-content">
+    <div class="container-fluid animated zoomIn">
         <div class="row">
             <div class="col-md-12">
 
@@ -7,7 +7,7 @@
                     <div class="header">
                         <h4 class="title">Modifica tus direcciones y tu rol</h4>
                     </div>
-                   
+
                     <div class="content">
 
                         <form action="" method="" id="">
@@ -17,17 +17,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Direccion de Origen</label>
-                                        <input type="text" class="form-control" placeholder="Direccion de Orige"
-                                        id="dirOrigen" name="dirOrigen"
-                                            value="" [(ngModel)]="dirOrigen">
+                                        <input type="text" class="form-control" placeholder="Direccion de Origen"
+                                            id="dirOrigen" name="dirOrigen" [(ngModel)]="dirOrigen">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Direccion de Destino</label>
-                                        <input type="text" class="form-control" placeholder="Direccion de Destino"
-                                            value="" id="dirDestino" name="dirDestino" [(ngModel)]="dirDestino">
+                                        <input type="text" class="form-control" maxlength="5" placeholder="Direccion de Destino"
+                                            id="dirDestino" name="dirDestino" [(ngModel)]="dirDestino" required>
                                     </div>
                                 </div>
                             </div>
@@ -36,16 +35,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Hora de salida de Origen</label>
-                                        <input type="text" class="form-control" placeholder="Hora de salida de Origen"
-                                            value="" id="horaSalidaOrigen" name="horaSalidaOrigen" [(ngModel)]="horaSalidaOrigen">
+                                        <input type="time" ps-input-time format="hh:mm"  class="form-control" placeholder="Hora de salida de Origen"
+                                            id="horaSalidaOrigen" name="horaSalidaOrigen"
+                                            [(ngModel)]="horaSalidaOrigen">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Hora de salida de Destino</label>
-                                        <input type="text" class="form-control" placeholder="Hora de salida de Destino"
-                                            value="" id="horaSalidaDestino" name="horaSalidaDestino" [(ngModel)]="horaSalidaDestino">
+                                        <input type="time" ps-input-time format="hh:mm"  class="form-control" placeholder="Hora de salida de Destino"
+                                            id="horaSalidaDestino" name="horaSalidaDestino"
+                                            [(ngModel)]="horaSalidaDestino">
                                     </div>
                                 </div>
 
@@ -56,24 +57,29 @@
                             <div class="row">
 
                                 <div class="div">
-                                    <h4 class="title titulocarpooler" style="padding-bottom: 0%;">¿Quieres ser Carpooling?</h4>
+                                    <h4 class="title titulocarpooler" style="padding-bottom: 0%;">¿Quieres ser
+                                        Carpooling?</h4>
                                 </div>
 
 
                                 <div class="form-check form-check-inline col-md-1" style="margin-left: 42%;">
 
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="radiocarppol" [value]="1" onclick="document.getElementById('placa').disabled = false" [(ngModel)]="tienePlaca" >
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" [value]="1"
+                                        onclick="document.getElementById('placa').disabled = false"
+                                        [(ngModel)]="tienePlaca">
 
-                                    <label class="form-check-label" for="inlineRadio1" style="margin-left: 15%; padding-top: 0%;">Si</label>
+                                    <label class="form-check-label" for="inlineRadio1"
+                                        style="margin-left: 15%; padding-top: 0%;">Si</label>
 
                                 </div>
 
                                 <div class="form-check form-check-inline col-md-1">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="radiocarppol" [value]="0"  onclick="document.getElementById('placa').disabled = true" [(ngModel)]="tienePlaca" >
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" [value]="0"
+                                        onclick="document.getElementById('placa').disabled = true"
+                                        [(ngModel)]="tienePlaca">
 
-                                    <label class="form-check-label" for="inlineRadio2" style="margin-left: 5%; padding-top: 0%;" >No</label>
+                                    <label class="form-check-label" for="inlineRadio2"
+                                        style="margin-left: 5%; padding-top: 0%;">No</label>
 
                                 </div>
 
@@ -84,8 +90,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group" style="margin-left: 30%; width: 40%;">
                                         <label>Placa</label>
-                                        <input type="text" class="form-control" placeholder="Placa" style="margin-bottom: 5%;" value="" id="placa"
-                                            name="placa" maxlength="6" [(ngModel)]="placa">
+                                        <input type="text" class="form-control" placeholder="Placa"
+                                            style="margin-bottom: 5%;" id="placa" name="placa" maxlength="6"
+                                            [(ngModel)]="placa">
                                     </div>
                                 </div>
                             </div>
@@ -93,13 +100,15 @@
                             <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonDireccion"
                                 name="botonDireccion" (click)="actualizarDireccion('top','center')">Modificar</button>
                             <div class="clearfix"></div>
+
+                                
                         </form>
 
                     </div>
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 

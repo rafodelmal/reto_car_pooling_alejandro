@@ -51,12 +51,13 @@ routers.get('/login', async (req, res) => {
 
     if(email && clave){
 
-       conexion.query('SELECT * FROM usuario WHERE email = "' + email + '" and clave = "'+clave+'"' , async (error, results, fields) => {
+       conexion.query('SELECT * FROM usuario WHERE email ="'+email+'" and clave ="'+clave+'"' , async (error, results, fields) => {
 
             
             if (results.length == 0)
             {
-                res.send(results);
+                let x = "0"
+                res.send(x);
             }else{
                 res.send(results);
             }
@@ -85,17 +86,23 @@ routers.get('/actualizarUsuario', async (req, res) => {
          telefono, 
          documento}];
 
+         let respuesta;
 
-    conexion.query('UPDATE usuario SET email = "' + email + '", nombre = "' + nombre +'", apellido =" ' +apellido+ '", telefono =" ' +telefono+ '" , documento =" ' +documento+ '"  WHERE email = "' + email + '"'   , async (error, results) => {
-        if (error) {
-            throw error
+    conexion.query('UPDATE usuario SET email ="'+email+'", nombre="'+nombre+'", apellido="'+apellido+'", telefono="'+telefono+'" , documento="'+documento+'"  WHERE email ="'+email+'"', async (error, results) => {
+
+        if (email===''||nombre===''||apellido===''||telefono===''||documento==='') {
+            respuesta = "0"
+            res.send(respuesta);  
+            console.log(respuesta)
         } else {
             console.log('Actualizacion exitosa')
-            console.log(datos);
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
         }
-        
     })
-    res.send(datos);
+
+   // res.send(respuesta);        
 })
 
 
@@ -120,7 +127,7 @@ routers.get('/actualizarDireccion', async (req, res) => {
         carpooler}];
 
 
-    conexion.query('UPDATE usuario SET dirOrigen = "' + dirOrigen + '", dirDestino = "' + dirDestino +'", horaSalidaOrigen =" ' +horaSalidaOrigen+ '", horaSalidaDestino =" ' +horaSalidaDestino+ '" , placaCarro =" ' +placaCarro+ '" , carpooler =" ' +carpooler+ '"  WHERE email = "' + email + '"'   , async (error, results) => {
+    conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'"  WHERE email= "'+email+'"'   , async (error, results) => {
         if (error) {
             throw error
         } else {
@@ -130,16 +137,59 @@ routers.get('/actualizarDireccion', async (req, res) => {
         
     })
     res.send(datos);
+
+
+    //, carpooler =" ' +carpooler+ '" 
 })
 
 
+routers.put('/prueba/:email', (req, res) => {
+    collection.findOneAndUpdate(
+        { email: req.params.email },
+        {
+            $set: {
+                dirOrigen: req.body.dirOrigen
+            }
+        },
+        {
+            upsert: true
+        }
+    ).then(result => { res.json('Updated') })
+        .catch(error => console.error(error))
+});
 
-///  ver informaciond e usurio ////
-routers.get('/infoUsuario', async (req, res) => {
+/* routers.put('/prueba', async (req, res) => {
 
     const email = req.query.email;
+    const dirOrigen = req.query.dirOrigen;
 
-    conexion.query('SELECT email, nombre, apellido, documento, telefono FROM usuario WHERE email = "' + email + '"' , async (error, results, fields) => {
+    const datos = [{dirOrigen,
+        email}];
+
+        console.log(dirOrigen);
+
+    conexion.query('UPDATE usuario SET dirOrigen ="'+dirOrigen+'"  WHERE email ="'+email+'"', async (error, results) => {
+        if (error) {
+            throw error
+        } else {
+            console.log('Actualizacion exitosa')
+            console.log(datos);
+        }
+        
+    })
+    res.send(datos);
+
+
+    //, carpooler =" ' +carpooler+ '" 
+}) */
+
+
+///  ver informaciond e usurio ////
+routers.get('/infoReservas', async (req, res) => {
+
+    const carpooler = req.query.carpooler;
+
+    conexion.query('SELECT nombre,documento, telefono, total FROM `inforeserva` INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 WHERE  usuario.carpooler="'+carpooler+'"' , async (error, results, fields) => {
         
         if (error)
         throw error;

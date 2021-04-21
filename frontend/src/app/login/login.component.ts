@@ -10,6 +10,7 @@ import { UserComponent } from 'app/user/user.component';
 import { User } from './user';
 import { runInThisContext } from 'vm';
 import { isEmpty } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 
 declare var $: any;
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   clave: any;
   usuarioReturn: any;
   show: boolean;
+  respuesta: any;
 
   constructor(private service: LoginService, private router: Router) {
 
@@ -46,7 +48,6 @@ export class LoginComponent implements OnInit {
 
     let email1 = this.email;
     let clave1 = this.clave;
-    let respuesta;
     let respuestaemail = 0;
 
     var user: User;
@@ -55,37 +56,49 @@ export class LoginComponent implements OnInit {
 
 
     this.service.getlogin(email1, clave1).subscribe(data => {
-      respuesta = data;
-
-    user = data[0];
 
 
-    respuesta.forEach(datos => {
-
-        if (email1 == datos.email){
 
 
-          respuestaemail = 1
+    if (email1==='' || clave1==='' || data===0){
 
-        }
- 
-      });
+
+      console.log(data)
+
+     Swal.fire({
+        icon: 'error',
+        title: '¡Error al iniciar sesión!',
+        text: 'verifique usuario y clave.',
+      })  
+
+    }
+    else{
+
+      user = data[0];
+      this.respuesta = user;
+      console.log("datos de variable user",user)
+
+      if(user.carpooler === 1 ){
+        this.router.navigate(['/carpool']);
+      }else{
+        this.router.navigate(['/carpool']);
+      }
+      
+
+    }
   
 
   
 
-      if (respuestaemail == 1) {
+     /* if (respuestaemail == 1) {
 
 
         console.log(email1)
         console.log(this.email)
 
         console.log("verdadero");
+        this.router.navigate(['/carpool'])
 
-
-       if (respuesta) {
-          this.router.navigate(['/carpool'])
-        }
 
       } else {
 
@@ -109,14 +122,14 @@ export class LoginComponent implements OnInit {
 
         });
 
-      }
+      }  */
 
 
 
-    });
+    });  
 
 
-  }
+  }  
 
 
 
