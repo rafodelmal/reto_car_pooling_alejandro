@@ -19,5 +19,13 @@ export class ReservasService {
 
   }
 
+  gatCarpooling<T>(carpooler): Observable<T> {
+
+
+    return this.http.get('http://localhost:3000/infocarpooling?carpooler='+carpooler).pipe(map((response) => response as T));
+
+
+  }
+
 
 }

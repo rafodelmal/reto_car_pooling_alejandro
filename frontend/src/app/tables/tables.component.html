@@ -8,15 +8,32 @@
                         <p class="category">Acá están todas tus reservas, desde la mas resiente hasta la mas antigua.</p>
                     </div>
                     <div class="content table-responsive table-full-width">
+
                           <table class="table table-hover table-striped">
+
                                 <thead>
                                     <tr>
-                                        <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                                        <th scope="col">Numero</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cedula</th>
+                                        <th scope="col">Telefono</th>
+                                        <th scope="col">Total a pagar</th>
+                                        <th scope="col">Cancelar viaje</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
-                                    <tr *ngFor="let User of User">
-                                        <td *ngFor="let cell of User">{{User.nombre}}</td>
+                                    <tr *ngFor="let reserva of reservas">
+                                        <td>{{reserva.idUsuario}}</td>
+                                        <td>{{reserva.nombre}}</td>
+                                        <td>{{reserva.documento}}</td>
+                                        <td>{{reserva.telefono}}</td>
+                                        <td>{{reserva.total}}</td>
+                                        <td>
+                                            <button type="submit" class="btn btn-info btn-fill button fadeIn first" id="botonDireccion"
+                                             name="botonDireccion">Cancelar</button>
+    
+                                        </td>
                                     </tr>
                                 </tbody>
                           </table>

@@ -11,12 +11,21 @@ export class ActualizarUsuarioService {
   constructor(private http: HttpClient) { }
 
 
-  postUsuario<T>(email1, nombre1, apellido1, documento1, telefono1): Observable<T> {
+  postUsuario(email, nombre, apellido, documento, telefono): Observable<any> {
 
 
+    let datosUser = {
+      email,
+      nombre,
+      apellido,
+      documento,
+      telefono
+    }
     
+    const headers =  { 'content-type': 'application/json'};
+    const body = JSON.stringify(datosUser);
 
-    return this.http.get('http://localhost:3000/actualizarUsuario?nombre='+nombre1+'&documento='+documento1+'&email='+email1+'&apellido='+apellido1+'&telefono='+telefono1).pipe(map((response) => response as T));
+    return this.http.put('http://localhost:3000/actualizarUsuario', body, {'headers': headers} )
 
 
   }

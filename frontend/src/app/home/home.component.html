@@ -1,21 +1,3 @@
-<!-- <div class="container mt-12 animated fadeIn ">
-    <div class="row mb-12 ">
-        <div class="col-md-12">
-            <div class="card colortexto sombra" style="background-image: url(assets/img/gradient2.jpg);">
-                <div class="text-white text-center d-flex align-items-center py-5 px-4 my-5">
-                    <div class="justificado">
-                        <h1 class="card-title pt-3 mb-5 font-bold "><strong>CarPool - Digital
-                                School</strong></h1>
-                        <p class="mx-5 mb-5 ">Viaja, conoce personas, diviertete es simple, cómodo y seguro.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
-
 <div class="container ">
 
     <h1 class="callout-title titulo animated zoomIn">Busca, Viaja ¡Diviertete!</h1>
@@ -52,91 +34,41 @@
 
             
 
-            <div class="card justicarcards2">
+            <div class="card justicarcards2"  *ngFor="let carpoolers of carpooler">
 
                 <div class="col-md-3 justificadocards ">
 
 
-                     <div class="card card-user animated zoomIn ">
+                     <div class="card card-user animated zoomIn">
+
                         <div class="image">
                             <img src="assets/img/faces/mapa.jpg" alt="..." />
                         </div>
                         <div class="content">
                             <div class="author">
-                                <a href="#">
                                     <img class="avatar border-gray" src="assets/img/faces/face-1.jpg" alt="..." />
 
-                                    <h4 class="title">Pepito Perez<br />
-                                        <small>Telefono: 316846513</small>
+                                    <h4 class="title">{{carpoolers.nombre}}<br />
+                                        <small>{{carpoolers.telefono}}</small>
                                     </h4>
-                                </a>
                             </div>
-                            <p class="description text-center"> informacion adicional</p>
+                            <br>
+                            <hr>
+                            <p class="description text-center">salida de casa: {{carpoolers.horaSalidaOrigen}}</p>
+                            <p class="description text-center">salida del trabajo: {{carpoolers.horaSalidaDestino}}</p>
+                            <p class="description text-center">salida de casa: {{carpoolers.horaSalidaOrigen}}</p>
                         </div>
                         <hr>
 
                         
                         <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="showNotification('top','center')">Reservar</button>
+                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit">Reservar</button>
                         </div>
                     </div>
 
 
                 </div>
 
-                
-
-                <div class="col-md-3  justificadocards">
-
-                    <div class="card card-user animated zoomIn">
-                        <div class="image">
-                            <img src="assets/img/faces/mapa.jpg" alt="..." />
-                        </div>
-                        <div class="content">
-                            <div class="author">
-                                <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-2.jpg" alt="..." />
-
-                                    <h4 class="title">Pepito Perez<br />
-                                        <small>Telefono: 316846513</small>
-                                    </h4>
-                                </a>
-                            </div>
-                            <p class="description text-center"> informacion adicional</p>
-                        </div>
-                        <hr>
-                        <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="showNotification('top','center')">Reservar</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-3 justificadocards ">
-
-                    <div class="card card-user animated zoomIn">
-                        <div class="image">
-                            <img src="assets/img/faces/mapa.jpg" alt="..." />
-                        </div>
-                        <div class="content">
-                            <div class="author">
-                                <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-6.jpg" alt="..." />
-
-                                    <h4 class="title">Pepito Perez<br />
-                                        <small>Telefono: 316846513</small>
-                                    </h4>
-                                </a>
-                            </div>
-                            <p class="description text-center"> informacion adicional</p>
-                        </div>
-                        <hr>
-                        <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="showNotification('top','center')">Reservar</button>
-                        </div>
-                    </div>
-
-                </div>
 
             </div>
 
@@ -144,76 +76,7 @@
 
         </div>
 
-
-
        
-        <div class="col-md-12">
-
-
-            <div class="card justicarcards2">
-
-                <div class="col-md-3 justificadocards">
-
-
-                    <div class="card card-user animated zoomIn">
-                        <div class="image">
-                            <img src="assets/img/faces/mapa.jpg" alt="..." />
-                        </div>
-                        <div class="content">
-                            <div class="author">
-                                <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-5.jpg" alt="..." />
-
-                                    <h4 class="title">Pepito Perez<br />
-                                        <small>Telefono: 316846513</small>
-                                    </h4>
-                                </a>
-                            </div>
-                            <p class="description text-center"> informacion adicional</p>
-                        </div>
-                        <hr>
-                        <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="showNotification('top','center')">Reservar</button>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="col-md-3 justificadocards">
-
-
-                    <div class="card card-user animated zoomIn">
-                        <div class="image">
-                            <img src="assets/img/faces/mapa.jpg" alt="..." />
-                        </div>
-                        <div class="content">
-                            <div class="author">
-                                <a href="#">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-7.jpg" alt="..." />
-
-                                    <h4 class="title">Pepito Perez<br />
-                                        <small>Telefono: 316846513</small>
-                                    </h4>
-                                </a>
-                            </div>
-                            <p class="description text-center"> informacion adicional</p>
-                        </div>
-                        <hr>
-                        <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="showNotification('top','center')">Reservar</button>
-                        </div>
-                    </div>
-
-
-                </div>
-               
-
-            </div>
-
-        </div>
-
-        
 
     </div>
 

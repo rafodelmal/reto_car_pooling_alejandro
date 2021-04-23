@@ -1,11 +1,11 @@
+import { User } from 'app/login/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'app/shared/services/login.service';
-import { User } from '../login/user';
 import { ActualizarDireccionService } from '../shared/services/actualizar-direccion.service';
-import { CommonModule, DatePipe, formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 
-declare var $: any;
+
 
 @Component({
   selector: 'app-direcciones',
@@ -21,6 +21,7 @@ export class DireccionesComponent implements OnInit {
   horaSalidaDestino: any;
   placa: any;
   tienePlaca: any = 1;
+  emaillogin: any;
 
   resultadoBusqueda: any;
 
@@ -31,10 +32,11 @@ export class DireccionesComponent implements OnInit {
   ngOnInit(): void {
 
 
-    let emailLogin, claveLogin
+   let emailLogin, claveLogin
 
     emailLogin = this.datosLogin.email
     claveLogin = this.datosLogin.clave
+    this.emaillogin = emailLogin
 
     let respuesta;
 
@@ -86,6 +88,8 @@ export class DireccionesComponent implements OnInit {
     let placa1;
     let tienePlaca1 = this.tienePlaca;
 
+    let respuesta;
+
          // condicional para enviar la placa a la Bd si es o no carpooler
          if (this.tienePlaca === 0) {
           placa1 = 'sin registro';
@@ -94,99 +98,38 @@ export class DireccionesComponent implements OnInit {
         }
 
 
-
-   //////////////////////     
-    let emailLogin, claveLogin
-
-    emailLogin = this.datosLogin.email
-    claveLogin = this.datosLogin.clave
-
-    let respuesta;
-
-    var user: User;
-
-    this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
-      respuesta = data;
-
-      user = data[0];
-
-      let email = user.email
-    /////////////////////////
- 
- 
-
-
-
-
-      if ((dirDestino1 == ' ' ) || (dirOrigen1 == ' ') || (horaSalidaDestino1 == ' ') || (horaSalidaOrigen1 == ' ')) {
-
-
-
-        const type = ['info', 'success', 'warning', 'danger'];
-
-        var color = Math.floor(3);
-        $.notify({
-          icon: "pe-7s-close",
-          message: "No fue posible actualizar los datos, ingrese todos los campos."
-        }, {
-          type: type[color],
-          timer: 1000,
-          placement: {
-            from: from,
-            align: align
-          }
-        });
-
-
-      } else {
-
-
       
-        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, email).subscribe(datos=>
-          this.resultadoBusqueda=datos);
+        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, this.emaillogin).subscribe(data=> {
+          respuesta=data;
 
-          console.log(this.resultadoBusqueda);
 
-          console.log("holra del htm", this.horaSalidaOrigen)
+          console.log("respuesta en component", respuesta);
 
-        const type = ['info', 'success', 'warning', 'danger'];
+          if (data===0){
 
-        var color = Math.floor(0);
-        $.notify({
-          icon: "pe-7s-check",
-          message: "Datos actualizados correctamente."
-        }, {
-          type: type[color],
-          timer: 1000,
-          placement: {
-            from: from,
-            align: align
+            Swal.fire({
+              position: 'top',
+              icon: 'error',
+              title: '¡No fue posuble actualiar tus datos!',
+              text: 'por favor verifica todos los campos.',
+              showConfirmButton: false,
+              timer: 1700
+            })
+
+          }else{
+
+            Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: 'Datos actualizacos con exito.',
+              showConfirmButton: false,
+              timer: 1300
+            })
+
+            this.router.navigate(['/carpool'])
+
           }
-        });
-
-
-      //  this.router.navigate(['/carpool'])
-
-
-        console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + email)
-
-
-
-
+            console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + this.emaillogin)
+        })
       }
-
-
-    })
-
-
   }
-
-
-
-
-
-
-
-
-
-}

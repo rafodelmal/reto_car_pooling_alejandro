@@ -72,13 +72,13 @@ routers.get('/login', async (req, res) => {
 
 // actualizar usuario /////
 
-routers.get('/actualizarUsuario', async (req, res) => {
+routers.put('/actualizarUsuario', async (req, res) => {
 
-    const email = req.query.email;
-    const nombre = req.query.nombre;
-    const apellido = req.query.apellido;
-    const telefono = req.query.telefono;
-    const documento = req.query.documento;
+    const email = req.body.email;
+    const nombre = req.body.nombre;
+    const apellido = req.body.apellido;
+    const telefono = req.body.telefono;
+    const documento = req.body.documento;
 
     const datos = [{email,
          nombre,
@@ -87,36 +87,40 @@ routers.get('/actualizarUsuario', async (req, res) => {
          documento}];
 
          let respuesta;
-
-    conexion.query('UPDATE usuario SET email ="'+email+'", nombre="'+nombre+'", apellido="'+apellido+'", telefono="'+telefono+'" , documento="'+documento+'"  WHERE email ="'+email+'"', async (error, results) => {
-
+ 
         if (email===''||nombre===''||apellido===''||telefono===''||documento==='') {
+
             respuesta = "0"
             res.send(respuesta);  
             console.log(respuesta)
+
         } else {
+
+            conexion.query('UPDATE usuario SET email ="'+email+'", nombre="'+nombre+'", apellido="'+apellido+'", telefono="'+telefono+'" , documento="'+documento+'"  WHERE email ="'+email+'"', async (error, results) => {
+           
             console.log('Actualizacion exitosa')
             respuesta = "1"
             res.send(respuesta);  
             console.log(respuesta)
-        }
-    })
+
+        })
+    }
 
    // res.send(respuesta);        
 })
 
 
-// actualizar usuario /////
+// actualizar Direccion /////
 
-routers.get('/actualizarDireccion', async (req, res) => {
+routers.put('/actualizarDireccion', async (req, res) => {
 
-    const email = req.query.email;
-    const dirOrigen = req.query.dirOrigen;
-    const dirDestino = req.query.dirDestino;
-    const horaSalidaOrigen = req.query.horaSalidaOrigen;
-    const horaSalidaDestino = req.query.horaSalidaDestino;
-    const placaCarro = req.query.placaCarro;
-    const carpooler = req.query.carpooler;
+    const email = req.body.email;
+    const dirOrigen = req.body.dirOrigen;
+    const dirDestino = req.body.dirDestino;
+    const horaSalidaOrigen = req.body.horaSalidaOrigen;
+    const horaSalidaDestino = req.body.horaSalidaDestino;
+    const placaCarro = req.body.placaCarro;
+    const carpooler = req.body.carpooler;
 
     const datos = [{dirOrigen,
         email,
@@ -126,42 +130,32 @@ routers.get('/actualizarDireccion', async (req, res) => {
         placaCarro,
         carpooler}];
 
+        let respuesta;
 
-    conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'"  WHERE email= "'+email+'"'   , async (error, results) => {
-        if (error) {
-            throw error
+        if (dirDestino==='' || dirOrigen==='' || horaSalidaDestino==='' || horaSalidaOrigen==='') {
+            respuesta = "0"
+            res.send(respuesta);  
+            console.log(respuesta)
         } else {
+
+            conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", carpooler="'+carpooler+'"   WHERE email="'+email+'"'   , async (error, results) => {
+
             console.log('Actualizacion exitosa')
-            console.log(datos);
-        }
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
         
-    })
-    res.send(datos);
+    }
+ //   res.send(datos);
 
-
-    //, carpooler =" ' +carpooler+ '" 
 })
 
 
-routers.put('/prueba/:email', (req, res) => {
-    collection.findOneAndUpdate(
-        { email: req.params.email },
-        {
-            $set: {
-                dirOrigen: req.body.dirOrigen
-            }
-        },
-        {
-            upsert: true
-        }
-    ).then(result => { res.json('Updated') })
-        .catch(error => console.error(error))
-});
+routers.put('/prueba', async (req, res) => {
 
-/* routers.put('/prueba', async (req, res) => {
-
-    const email = req.query.email;
-    const dirOrigen = req.query.dirOrigen;
+    const email = req.body.email;
+    const dirOrigen = req.body.dirOrigen;
 
     const datos = [{dirOrigen,
         email}];
@@ -181,15 +175,15 @@ routers.put('/prueba/:email', (req, res) => {
 
 
     //, carpooler =" ' +carpooler+ '" 
-}) */
+})
 
 
-///  ver informaciond e usurio ////
+///  ver informacion de reservas ////
 routers.get('/infoReservas', async (req, res) => {
 
-    const carpooler = req.query.carpooler;
+    const reserva = req.query.reserva;
 
-    conexion.query('SELECT nombre,documento, telefono, total FROM `inforeserva` INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 WHERE  usuario.carpooler="'+carpooler+'"' , async (error, results, fields) => {
+    conexion.query('SELECT * FROM inforeserva INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 INNER JOIN inscribir on usuario.idUsuario = inscribir.idUsuario3 WHERE inforeserva.reserva="'+reserva+'"' , async (error, results, fields) => {
         
         if (error)
         throw error;
@@ -203,6 +197,25 @@ routers.get('/infoReservas', async (req, res) => {
     })    
 })
 
+
+///  ver informacion de carpooling ////
+routers.get('/infocarpooling', async (req, res) => {
+
+    const inscribir = req.query.inscribir;
+
+    conexion.query('SELECT * FROM `inscribir` INNER JOIN usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.inscribir="'+inscribir+'"' , async (error, results, fields) => {
+        
+        if (error)
+        throw error;
+
+    results.forEach(results => {
+        console.log(results);
+    });
+
+    res.send(results)
+
+    })    
+})
 
 
 // registrar usuario ///

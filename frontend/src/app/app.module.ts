@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppRoutingModule } from './app.routing';
 import { NavbarModule } from './shared/navbar/navbar.module';
 import { FooterModule } from './shared/footer/footer.module';
@@ -15,9 +14,11 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { UserComponent } from './user/user.component';
 import { DireccionesComponent } from './direcciones/direcciones.component';
+import { BrowserModule } from '@angular/platform-browser'
 
 @NgModule({
   imports: [
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     RouterModule,

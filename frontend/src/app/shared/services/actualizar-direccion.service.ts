@@ -10,14 +10,15 @@ export class ActualizarDireccionService {
 
   constructor(private http: HttpClient) { }
 
-  postDireccion<T>(dirOrigen, dirDestino, horaSalidaDestino, horaSalidaOrigen, placa, carpooler, email): Observable<T> {
+
+  postDireccion(dirOrigen, dirDestino, horaSalidaDestino, horaSalidaOrigen, placaCarro, carpooler, email): Observable<any> {
 
 
     console.log("carppooler en service", carpooler )
     console.log("dirDestino en service", dirDestino )
     console.log("horaSalidaOrigen en service", horaSalidaOrigen )
     console.log("horaSalidaDestino en service", horaSalidaDestino)
-    console.log("placaCarro en service", placa)
+    console.log("placaCarro en service", placaCarro)
 
 /*let x = this.http.get('http://localhost:3000/actualizarDireccion?email='+email+'&dirOrigen='+dirOrigen+'&dirDestino='+dirDestino+'&horaSalidaOrigen='+horaSalidaOrigen+'&horaSalidaDestino='+horaSalidaDestino+'&placaCarro='+placa).pipe(map((response) => response as T));
  
@@ -28,10 +29,22 @@ return x */
 
     //'&carpooler='+carpooler)
 
+    let userDireccion = {
+      dirDestino,
+      dirOrigen,
+      horaSalidaDestino,
+      horaSalidaOrigen,
+      placaCarro,
+      carpooler,
+      email
+    }
 
-  console.log("prueba service", dirOrigen)
+    const headers =  { 'content-type': 'application/json'};
+    const body = JSON.stringify(userDireccion);
 
-  return  this.http.get('http://localhost:3000/prueba?email='+email+'&dirOrigen='+dirOrigen).pipe(map((response) => response as T));
+  console.log("prueba service", userDireccion)
+
+  return  this.http.put('http://localhost:3000/actualizarDireccion', body, {'headers': headers});
 
  
 

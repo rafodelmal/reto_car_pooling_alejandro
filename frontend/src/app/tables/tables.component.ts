@@ -21,6 +21,7 @@ export class TablesComponent implements OnInit {
     documento: any;
     telefono: any;
     total: any;
+    reservas: any;
 
   constructor(private service: ReservasService) { }
 
@@ -31,23 +32,15 @@ export class TablesComponent implements OnInit {
     let carpooler = 0
     let respuesta;
 
-    console.log(carpooler)
-
     this.service.getReservas(carpooler).subscribe(data=>{
         respuesta = data;
 
         console.log(respuesta)
 
+        this.reservas = respuesta
     });
     
 
-   let tabla;
-      this.tableData1 = {
-          headerRow: [ 'Numero', 'Nombre', 'Cedula', 'Telefono', 'Direccion'],
-          dataRows: [
-             
-          ]
-      };
 
   }
 
