@@ -36,7 +36,7 @@
 
             <div class="card justicarcards2"  *ngFor="let carpoolers of carpooler">
 
-                <div class="col-md-3 justificadocards ">
+                <div class="col-md-4 justificadocards ">
 
 
                      <div class="card card-user animated zoomIn">
@@ -48,15 +48,32 @@
                             <div class="author">
                                     <img class="avatar border-gray" src="assets/img/faces/face-1.jpg" alt="..." />
 
-                                    <h4 class="title">{{carpoolers.nombre}}<br />
-                                        <small>{{carpoolers.telefono}}</small>
+                                    <h4 class="title">{{carpoolers.nombre}}{{carpoolers.apellido}}<br />
+                                        <small>Telefono: {{carpoolers.telefono}}</small>
                                     </h4>
                             </div>
                             <br>
                             <hr>
-                            <p class="description text-center">salida de casa: {{carpoolers.horaSalidaOrigen}}</p>
-                            <p class="description text-center">salida del trabajo: {{carpoolers.horaSalidaDestino}}</p>
-                            <p class="description text-center">salida de casa: {{carpoolers.horaSalidaOrigen}}</p>
+                            <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Salida</th>
+                                    <th scope="col">casa</th>
+                                    <th scope="col">Destino</th>
+                                    <th scope="col">trabajo</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td style="font-size: small;">{{carpoolers.dirOrigen}}</td>
+                                    <td style="font-size: small;">{{carpoolers.horaSalidaOrigen}}</td>
+                                    <td style="font-size: small;">{{carpoolers.dirDestino}}</td>
+                                    <td style="font-size: small;">{{carpoolers.horaSalidaDestino}}</td>
+                                    
+                                  </tr>
+                                </tbody>
+                              </table>
                         </div>
                         <hr>
 

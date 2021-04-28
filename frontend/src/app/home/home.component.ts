@@ -4,6 +4,7 @@ import { LegendItem, ChartType } from '../lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
 import { User } from '../login/user';
 import { ReservasService } from 'app/shared/services/reservas.service';
+import { LoginService } from 'app/shared/services/login.service';
 
 declare var $:any;
 
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
 
     carpooler: any;
 
-  constructor(private service: ReservasService) { }
+  constructor(private service: ReservasService, private datosLogin: LoginService) { }
 
   ngOnInit() {
      
@@ -42,8 +43,11 @@ export class HomeComponent implements OnInit {
     var user: User;
     let carpooler = 1
     let respuesta;
+    let emailLogin;
 
-    this.service.gatCarpooling(carpooler).subscribe(data=>{
+    emailLogin = this.datosLogin.email
+
+    this.service.gatCarpooling(carpooler, emailLogin).subscribe(data=>{
         respuesta = data;
 
         console.log(respuesta)

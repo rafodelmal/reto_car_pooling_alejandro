@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ReservasService } from 'app/shared/services/reservas.service';
 import { User } from '../login/user';
 import { data } from 'jquery';
+import { LoginService } from 'app/shared/services/login.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 declare interface TableData {
     headerRow: string[];
@@ -23,23 +26,72 @@ export class TablesComponent implements OnInit {
     total: any;
     reservas: any;
 
-  constructor(private service: ReservasService) { }
+  constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
 
   ngOnInit(): void {
 
     var user: User;
-    let carpooler = 0
+    let reserva = 0;
+    let emailLogin;
     let respuesta;
 
-    this.service.getReservas(carpooler).subscribe(data=>{
+    emailLogin = this.datosLogin.email
+
+    this.service.getReservas(reserva, emailLogin).subscribe(data=>{
         respuesta = data;
 
-        console.log(respuesta)
+        console.log("respuesta de la bd",respuesta)
 
         this.reservas = respuesta
     });
     
+
+  }
+
+
+  putReserva(){
+
+    let reserva2 = 1;
+    let respuesta;
+    let emailLogin;
+    
+
+    emailLogin = this.datosLogin.email
+
+    this.service.putReserva(reserva2, emailLogin).subscribe(data=>{
+      respuesta = data;
+
+      console.log("respuesta de la bd",respuesta)
+
+      this.reservas = respuesta
+
+      if (data===1){
+
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Reserva cancelada con exito.',
+          showConfirmButton: false,
+          timer: 1300
+        })
+
+        this.router.navigate(['/carpool'])
+
+      }else{
+
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          title: '¡No fue posible cancelar la reserva!',
+          showConfirmButton: false,
+          timer: 1700
+        })
+
+      }
+
+      
+  });
 
 
   }

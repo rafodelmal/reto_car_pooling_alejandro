@@ -152,6 +152,35 @@ routers.put('/actualizarDireccion', async (req, res) => {
 })
 
 
+// actualizar reservas /////
+
+routers.put('/actualizarReservas', async (req, res) => {
+
+    const reserva = req.body.reserva;
+    const emailCliente = req.body.emailCliente;
+
+        let respuesta;
+
+        if (reserva===0) {
+            respuesta = "0"
+            res.send(respuesta);  
+            console.log(respuesta)
+        } else {
+
+            conexion.query('UPDATE inforeserva SET reserva="'+reserva+'" WHERE emailCliente="'+emailCliente+'"', async (error, results) => {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+    }
+ //   res.send(datos);
+
+})
+
+
 routers.put('/prueba', async (req, res) => {
 
     const email = req.body.email;
@@ -182,8 +211,10 @@ routers.put('/prueba', async (req, res) => {
 routers.get('/infoReservas', async (req, res) => {
 
     const reserva = req.query.reserva;
+    const email = req.query.email;
+    const idCarpooler = req.query.idCarpooler;
 
-    conexion.query('SELECT * FROM inforeserva INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 INNER JOIN inscribir on usuario.idUsuario = inscribir.idUsuario3 WHERE inforeserva.reserva="'+reserva+'"' , async (error, results, fields) => {
+    conexion.query('SELECT * FROM inforeserva INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 INNER JOIN inscribir on usuario.idUsuario = inscribir.idUsuario3 WHERE inforeserva.reserva="'+reserva+'" and inforeserva.emailCliente="'+email+'"', async (error, results, fields) => {
         
         if (error)
         throw error;
@@ -202,8 +233,9 @@ routers.get('/infoReservas', async (req, res) => {
 routers.get('/infocarpooling', async (req, res) => {
 
     const inscribir = req.query.inscribir;
+    const email = req.query.email;
 
-    conexion.query('SELECT * FROM `inscribir` INNER JOIN usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.inscribir="'+inscribir+'"' , async (error, results, fields) => {
+    conexion.query('SELECT * FROM `inscribir` INNER JOIN usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.inscribir="'+inscribir+'" and usuario.email!="'+email+'"' , async (error, results, fields) => {
         
         if (error)
         throw error;

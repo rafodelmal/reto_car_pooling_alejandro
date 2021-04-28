@@ -67,25 +67,6 @@ export class UserComponent implements OnInit {
 
   }
 
-
- /* showNotification(from, align) {
-    const type = ['', 'info'];
-
-    var color = Math.floor((Math.random() * 4) + 1);
-    $.notify({
-      icon: "pe-7s-gift",
-      message: "Datos actualizados correctamente."
-    }, {
-      type: type[color],
-      timer: 1000,
-      placement: {
-        from: from,
-        align: align
-      }
-    });
-  }*/
-
-
   actualizarUsuario(from, align){
 
     let nombre1 = this.nombre;
@@ -115,7 +96,7 @@ export class UserComponent implements OnInit {
         Swal.fire({
           position: 'top',
           icon: 'error',
-          title: '¡No fue posuble actualiar tus datos!',
+          title: '¡No fue posible actualiar tus datos!',
           text: 'por favor verifica todos los campos.',
           showConfirmButton: false,
           timer: 1700

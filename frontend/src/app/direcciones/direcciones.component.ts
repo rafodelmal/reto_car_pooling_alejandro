@@ -20,6 +20,7 @@ export class DireccionesComponent implements OnInit {
   horaSalidaOrigen: any;
   horaSalidaDestino: any;
   placa: any;
+  total: any;
   tienePlaca: any = 1;
   emaillogin: any;
 

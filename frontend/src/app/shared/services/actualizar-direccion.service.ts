@@ -20,15 +20,6 @@ export class ActualizarDireccionService {
     console.log("horaSalidaDestino en service", horaSalidaDestino)
     console.log("placaCarro en service", placaCarro)
 
-/*let x = this.http.get('http://localhost:3000/actualizarDireccion?email='+email+'&dirOrigen='+dirOrigen+'&dirDestino='+dirDestino+'&horaSalidaOrigen='+horaSalidaOrigen+'&horaSalidaDestino='+horaSalidaDestino+'&placaCarro='+placa).pipe(map((response) => response as T));
- 
-
-console.log("valor de xxxxxxxxxxxxxxxxx",x)
-
-return x */
-
-    //'&carpooler='+carpooler)
-
     let userDireccion = {
       dirDestino,
       dirOrigen,

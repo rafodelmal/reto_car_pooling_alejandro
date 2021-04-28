@@ -65,7 +65,7 @@
                                 <div class="form-check form-check-inline col-md-1" style="margin-left: 42%;">
 
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" [value]="1"
-                                        onclick="document.getElementById('placa').disabled = false"
+                                        onclick="document.getElementById('placa','total').disabled = false"
                                         [(ngModel)]="tienePlaca">
 
                                     <label class="form-check-label" for="inlineRadio1"
@@ -75,7 +75,7 @@
 
                                 <div class="form-check form-check-inline col-md-1">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" [value]="0"
-                                        onclick="document.getElementById('placa').disabled = true"
+                                        onclick="document.getElementById('placa','total').disabled = true"
                                         [(ngModel)]="tienePlaca">
 
                                     <label class="form-check-label" for="inlineRadio2"
@@ -87,14 +87,23 @@
 
                             <div class="row">
 
-                                <div class="col-md-12">
-                                    <div class="form-group" style="margin-left: 30%; width: 40%;">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label>Placa</label>
                                         <input type="text" class="form-control" placeholder="Placa"
-                                            style="margin-bottom: 5%;" id="placa" name="placa" maxlength="6"
-                                            [(ngModel)]="placa">
+                                        id="placa" name="placa" maxlength="6" [(ngModel)]="placa">
                                     </div>
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Valor del viaje</label>
+                                        <input type="number" class="form-control" placeholder="Total"
+                                        id="total" name="total" [(ngModel)]="total" >
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <button type="submit" class="btn btn-info btn-fill pull-right button" id="botonDireccion"
