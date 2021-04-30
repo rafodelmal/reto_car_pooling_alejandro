@@ -5,6 +5,8 @@ import * as Chartist from 'chartist';
 import { User } from '../login/user';
 import { ReservasService } from 'app/shared/services/reservas.service';
 import { LoginService } from 'app/shared/services/login.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 declare var $:any;
 
@@ -35,19 +37,53 @@ export class HomeComponent implements OnInit {
 
     carpooler: any;
 
-  constructor(private service: ReservasService, private datosLogin: LoginService) { }
+    email
+
+  constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
   ngOnInit() {
-     
 
+
+     
+    let respuesta2
+    let emailLogin2 = this.datosLogin.email;
+    let claveLogin = this.datosLogin.clave;
     var user: User;
+
+
+    this.datosLogin.getlogin(emailLogin2, claveLogin).subscribe(data => {
+      respuesta2 = data;
+
+      user = data[0];
+
+
+      if(user.carpooler===1){
+
+        Swal.fire({
+          icon: 'error',
+          title: '¡Debes cambiar de rol!',
+          text: 'No puedes ser carpooler.',
+          showConfirmButton: false,
+          timer: 1800
+        })
+
+        this.router.navigate(['/direcciones']);
+
+      }
+
+
+    });
+
+
+
+
     let carpooler = 1
     let respuesta;
     let emailLogin;
 
     emailLogin = this.datosLogin.email
 
-    this.service.gatCarpooling(carpooler, emailLogin).subscribe(data=>{
+    this.service.getCarpooling(carpooler, emailLogin).subscribe(data=>{
         respuesta = data;
 
         console.log(respuesta)
@@ -55,6 +91,19 @@ export class HomeComponent implements OnInit {
         this.carpooler = respuesta
     });
 
+
 }
+
+
+reservar(){
+
+
+  
+
+
+
+}
+
+
 
 }

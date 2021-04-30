@@ -31,20 +31,69 @@ export class TablesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let respuesta2
+    let emailLogin2 = this.datosLogin.email;
+    let claveLogin2 = this.datosLogin.clave
     var user: User;
-    let reserva = 0;
-    let emailLogin;
-    let respuesta;
 
-    emailLogin = this.datosLogin.email
+    this.datosLogin.getlogin(emailLogin2, claveLogin2).subscribe(data => {
+      respuesta2 = data;
 
-    this.service.getReservas(reserva, emailLogin).subscribe(data=>{
-        respuesta = data;
+      user = data[0];
 
-        console.log("respuesta de la bd",respuesta)
 
-        this.reservas = respuesta
+      if(user.carpooler===1){
+
+        let reserva = 1;
+        let emailLogin;
+        let respuesta;
+    
+        emailLogin = this.datosLogin.email
+    
+        this.service.getCarpoolingReservas(emailLogin).subscribe(data=>{
+            respuesta = data;
+    
+            console.log("respuesta de la bd",respuesta)
+    
+            this.reservas = respuesta
+
+          console.log("getCarpoolingReservas", emailLogin)
+
+        });
+
+
+
+
+      }else{
+
+
+        let reserva = 0;
+        let emailLogin;
+        let respuesta;
+    
+        emailLogin = this.datosLogin.email
+    
+        this.service.getReservas(reserva, emailLogin).subscribe(data=>{
+            respuesta = data;
+    
+            console.log("respuesta de la bd",respuesta)
+    
+            this.reservas = respuesta
+        });
+
+
+      }
+
+
+
     });
+
+
+
+
+
+
+ 
     
 
   }

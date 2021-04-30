@@ -122,13 +122,17 @@ export class DireccionesComponent implements OnInit {
             Swal.fire({
               position: 'top',
               icon: 'success',
-              title: 'Datos actualizacos con exito.',
+              title: 'Datos actualizados con exito.',
               showConfirmButton: false,
               timer: 1300
             })
 
-            this.router.navigate(['/carpool'])
-
+            if(tienePlaca1===1){
+              this.router.navigate(['/reservas'])
+            }else{
+              this.router.navigate(['/carpool'])
+            }
+            
           }
             console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + this.emaillogin)
         })

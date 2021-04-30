@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
       console.log("datos de variable user",user)
 
       if(user.carpooler === 1 ){
-        this.router.navigate(['/carpool']);
+        this.router.navigate(['/reservas']);
       }else{
         this.router.navigate(['/carpool']);
       }

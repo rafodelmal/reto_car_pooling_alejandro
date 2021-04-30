@@ -6,6 +6,7 @@ const mysql = require('mysql');
 const conexion = require('../database');
 const { Error } = require('mongoose');
 const { compare } = require('bcryptjs');
+const e = require('cors');
 
 
 conexion.query('select * from usuario ', function (error, results, fields) {
@@ -21,7 +22,7 @@ conexion.query('select * from usuario ', function (error, results, fields) {
 })
 
 
-routers.get('/listar', async (req, res) => {
+    routers.get('/listar', async (req, res) => {
 
 
 
@@ -39,6 +40,7 @@ routers.get('/listar', async (req, res) => {
 
         })    
 })
+
 
 
 // hacer login ////
@@ -181,6 +183,35 @@ routers.put('/actualizarReservas', async (req, res) => {
 })
 
 
+// reservar servicio /////
+
+routers.put('/reservaSericio', async (req, res) => {
+
+    const reserva = req.body.reserva;
+    const emailCliente = req.body.emailCliente;
+
+        let respuesta;
+
+        if (reserva===0) {
+            respuesta = "0"
+            res.send(respuesta);  
+            console.log(respuesta)
+        } else {
+
+            conexion.query('UPDATE inforeserva SET reserva="'+reserva+'" WHERE emailCliente="'+emailCliente+'"', async (error, results) => {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+    }
+ //   res.send(datos);
+
+})
+
+
 routers.put('/prueba', async (req, res) => {
 
     const email = req.body.email;
@@ -214,7 +245,27 @@ routers.get('/infoReservas', async (req, res) => {
     const email = req.query.email;
     const idCarpooler = req.query.idCarpooler;
 
-    conexion.query('SELECT * FROM inforeserva INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 INNER JOIN inscribir on usuario.idUsuario = inscribir.idUsuario3 WHERE inforeserva.reserva="'+reserva+'" and inforeserva.emailCliente="'+email+'"', async (error, results, fields) => {
+    conexion.query('SELECT * FROM inforeserva INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 WHERE inforeserva.reserva="'+reserva+'" and inforeserva.emailCliente="'+email+'"', async (error, results, fields) => {
+        
+        if (error)
+        throw error;
+
+    results.forEach(results => {
+        console.log(results);
+    });
+
+    res.send(results)
+
+    })    
+})
+
+
+routers.get('/infoReservasCarpooler', async (req, res) => {
+
+    const idusuario = req.query.idusuario;
+    const email = req.query.email;
+
+    conexion.query('SELECT * FROM inscribir inner join usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.emailCarpooler="'+email+'"', async (error, results, fields) => {
         
         if (error)
         throw error;
@@ -232,10 +283,10 @@ routers.get('/infoReservas', async (req, res) => {
 ///  ver informacion de carpooling ////
 routers.get('/infocarpooling', async (req, res) => {
 
-    const inscribir = req.query.inscribir;
+    const carpooler = req.query.carpooler;
     const email = req.query.email;
 
-    conexion.query('SELECT * FROM `inscribir` INNER JOIN usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.inscribir="'+inscribir+'" and usuario.email!="'+email+'"' , async (error, results, fields) => {
+    conexion.query('SELECT * FROM usuario WHERE carpooler="'+carpooler+'" and usuario.email!="'+email+'"' , async (error, results, fields) => {
         
         if (error)
         throw error;

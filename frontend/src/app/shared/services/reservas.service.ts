@@ -17,14 +17,6 @@ export class ReservasService {
 
   }
 
-  gatCarpooling<T>(carpooler, email): Observable<T> {
-
-
-    return this.http.get('http://localhost:3000/infocarpooling?carpooler='+carpooler+'&email='+email).pipe(map((response) => response as T));
-
-  }
-
-
   putReserva(reserva, emailCliente): Observable<any> {
 
     console.log("reserva service",reserva)
@@ -42,8 +34,19 @@ export class ReservasService {
 
   return this.http.put('http://localhost:3000/actualizarReservas', body, {'headers': headers});
 
- 
+  }
 
+
+  getCarpooling<T>(carpooler, email): Observable<T> {
+
+    return this.http.get('http://localhost:3000/infocarpooling?carpooler='+carpooler+'&email='+email).pipe(map((response) => response as T));
+
+  }
+
+
+  getCarpoolingReservas<T>(email): Observable<T> {
+
+    return this.http.get('http://localhost:3000/infoReservasCarpooler?email='+email).pipe(map((response) => response as T));
 
   }
 
