@@ -7,6 +7,7 @@ import { ReservasService } from 'app/shared/services/reservas.service';
 import { LoginService } from 'app/shared/services/login.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { AnyTxtRecord } from 'dns';
 
 declare var $:any;
 
@@ -37,7 +38,11 @@ export class HomeComponent implements OnInit {
 
     carpooler: any;
 
-    email
+    emailCarpooler: any;
+    idUsuario: any;
+
+    idUsuarioCarpooler: any;
+    emailUsuario: any;
 
   constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
@@ -89,13 +94,76 @@ export class HomeComponent implements OnInit {
         console.log(respuesta)
 
         this.carpooler = respuesta
+
+
+          
+
+
+
+
     });
 
 
 }
 
 
-reservar(){
+reservar(idUsuario2, emailCarpooler){
+
+let respuesta3,respuesta2, respuesta
+
+let emailLogin3 = this.datosLogin.email;
+let claveLogin3 = this.datosLogin.clave;
+
+var user: User
+
+
+
+this.datosLogin.getlogin(emailLogin3, claveLogin3).subscribe(data => {
+  respuesta3 = data;
+
+  user = data[0];
+
+// reserva
+  let emailCliente = user.email;
+  let reserva = 0;
+  
+  console.log("Datos de reserva: ", emailCliente, idUsuario2, reserva)
+  
+  
+  
+  // inscripcion
+  let idUsuario3 = user.idUsuario
+  let inscribir = 0;
+  
+  console.log("Datos de inscribir: ", emailCarpooler, idUsuario3, inscribir)
+
+
+  this.service.postReserva(reserva, emailCliente, idUsuario2).subscribe(data=> {
+
+    respuesta = data
+
+    console.log(respuesta)
+
+  })
+
+
+
+  this.service.postInscripcion(inscribir,emailCarpooler, idUsuario3).subscribe(data=> {
+
+    respuesta2 = data
+
+    console.log(respuesta2)
+
+  })
+
+
+
+});
+
+
+
+
+
 
 
   

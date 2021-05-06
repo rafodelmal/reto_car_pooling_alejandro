@@ -3,6 +3,12 @@
         "target": "http://localhost:3000",
         "secure": false,
         "logLevel": "debug"
+    },
+
+    "/foto/*": {
+        "target": "https://github.com/rafodelmal/reto_car_pooling_alejandro/blob/develop/frontend/src/assets/img/faces/",
+        "secure": false,
+        "logLevel": "debug"
     }
 }
 

@@ -52,7 +52,7 @@
                                         <small>Telefono: {{carpoolers.telefono}}</small>
                                     </h4>
                                     <label for="" style="visibility:hidden" >{{carpoolers.email}}</label><br>
-                                    <label for="" style="visibility:hidden" >{{carpoolers.idUsuario}}</label>
+                                    <label for="" >{{carpoolers.idUsuario}}</label>
                             </div>
                             <br>
                             <hr>
@@ -81,7 +81,7 @@
 
                         
                         <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit">Reservar</button>
+                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="reservar(carpoolers.idUsuario,carpoolers.email)" >Reservar</button>
                         </div>
                     </div>
 

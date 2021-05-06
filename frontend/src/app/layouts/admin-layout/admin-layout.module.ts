@@ -24,7 +24,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     LbdModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCUf_AppwrJAMrPBWsZdVc6d5paRu8pWZM'})   
   ],
   declarations: [
     HomeComponent,

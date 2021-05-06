@@ -25,6 +25,7 @@ export class TablesComponent implements OnInit {
     telefono: any;
     total: any;
     reservas: any;
+    carpooler: any;
 
   constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
@@ -41,31 +42,9 @@ export class TablesComponent implements OnInit {
 
       user = data[0];
 
+      this.carpooler = user.carpooler
 
-      if(user.carpooler===1){
-
-        let reserva = 1;
-        let emailLogin;
-        let respuesta;
-    
-        emailLogin = this.datosLogin.email
-    
-        this.service.getCarpoolingReservas(emailLogin).subscribe(data=>{
-            respuesta = data;
-    
-            console.log("respuesta de la bd",respuesta)
-    
-            this.reservas = respuesta
-
-          console.log("getCarpoolingReservas", emailLogin)
-
-        });
-
-
-
-
-      }else{
-
+      if(user.carpooler===0){
 
         let reserva = 0;
         let emailLogin;
@@ -80,6 +59,31 @@ export class TablesComponent implements OnInit {
     
             this.reservas = respuesta
         });
+
+
+
+
+
+
+      }else{
+
+        let inscribir = 0;
+        let emailLogin;
+        let respuesta;
+    
+        emailLogin = this.datosLogin.email
+    
+        this.service.getCarpoolingReservas(emailLogin,inscribir).subscribe(data=>{
+            respuesta = data;
+    
+            console.log("respuesta de la bd",respuesta)
+    
+            this.reservas = respuesta
+
+          console.log("getCarpoolingReservas", emailLogin)
+
+        });
+
 
 
       }
@@ -98,6 +102,8 @@ export class TablesComponent implements OnInit {
 
   }
 
+
+  
 
   putReserva(){
 

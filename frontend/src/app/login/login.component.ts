@@ -11,6 +11,7 @@ import { User } from './user';
 import { runInThisContext } from 'vm';
 import { isEmpty } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+import { AuthService } from 'app/shared/services/auth.service';
 
 
 declare var $: any;
@@ -28,15 +29,13 @@ export class LoginComponent implements OnInit {
   show: boolean;
   respuesta: any;
 
-  constructor(private service: LoginService, private router: Router) {
+  constructor(private service: LoginService, private router: Router, private authService: AuthService) {
 
     this.show = false;
 
-
-
-
   }
 
+  routeRedirect= '';
   ngOnInit(): void {
 
 
@@ -45,6 +44,14 @@ export class LoginComponent implements OnInit {
 
 
   login() {
+
+
+
+       //uso del servicio autorizacion para saber el estado del usuario logeado
+   this.authService.login();
+   this.routeRedirect = this.authService.urlUsuarioIntentAcceder;
+   this.authService.urlUsuarioIntentAcceder = '';
+   this.router.navigate([this.routeRedirect]);
 
     let email1 = this.email;
     let clave1 = this.clave;
@@ -88,42 +95,6 @@ export class LoginComponent implements OnInit {
     }
   
 
-  
-
-     /* if (respuestaemail == 1) {
-
-
-        console.log(email1)
-        console.log(this.email)
-
-        console.log("verdadero");
-        this.router.navigate(['/carpool'])
-
-
-      } else {
-
-        console.log("falso");
-
-        let from = 'top', align = 'center';
-
-        const type = ['primary', 'info', 'success', 'warning', 'danger'];
-
-        var color = Math.floor(4);
-        $.notify({
-          icon: "pe-7s-close",
-          message: "Error al iniciar sesión, verifique usuario y clave."
-        }, {
-          type: type[color],
-          timer: 1000,
-          placement: {
-            from: from,
-            align: align
-          }
-
-        });
-
-      }  */
-
 
 
     });  
@@ -139,13 +110,9 @@ export class LoginComponent implements OnInit {
   }
 
 
-}
 
-
-export class DatosUsuario {
-
-  email: string;
 
 
 }
+
 

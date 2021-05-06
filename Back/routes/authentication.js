@@ -212,6 +212,53 @@ routers.put('/reservaSericio', async (req, res) => {
 })
 
 
+
+
+// crear una nueva inscripcion e informacion en la reserva /////
+
+routers.post('/crearReserva', async (req, res) => {
+
+    // tabla reserva
+    const reserva = req.body.reserva;
+    const emailCliente = req.body.emailCliente;
+    const idUsuario2 = req.body.idUsuario2;
+
+    
+        conexion.query('INSERT INTO inforeserva SET reserva="'+reserva+'", emailCliente="'+emailCliente+'", idUsuario2="'+idUsuario2+'"  ', async (error, results)=> {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "inforeserva 1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+ //   res.send(datos);
+
+})
+
+
+routers.post('/crearInscripcion', async (req, res) => {
+
+
+    // tabla inscripcion
+    const inscribir = req.body.inscribir;
+    const idUsuario3 = req.body.idUsuario3;
+    const emailCarpooler = req.body.emailCarpooler;
+
+
+          conexion.query('INSERT INTO inscribir SET inscribir="'+inscribir+'", idUsuario3="'+idUsuario3+'", emailCarpooler="'+emailCarpooler+'"  ', async (error, results) => {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "inscribir 1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+ //   res.send(datos);
+
+})
+
+
 routers.put('/prueba', async (req, res) => {
 
     const email = req.body.email;
@@ -262,10 +309,10 @@ routers.get('/infoReservas', async (req, res) => {
 
 routers.get('/infoReservasCarpooler', async (req, res) => {
 
-    const idusuario = req.query.idusuario;
+    const inscribir = req.query.inscribir;
     const email = req.query.email;
 
-    conexion.query('SELECT * FROM inscribir inner join usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.emailCarpooler="'+email+'"', async (error, results, fields) => {
+    conexion.query('SELECT * FROM inscribir inner join usuario on usuario.idUsuario = inscribir.idUsuario3 WHERE inscribir.emailCarpooler="'+email+'" and inscribir.inscribir="'+inscribir+'"', async (error, results, fields) => {
         
         if (error)
         throw error;

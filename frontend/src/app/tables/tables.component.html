@@ -13,23 +13,21 @@
 
                                 <thead>
                                     <tr>
-                                        <th scope="col">Numero</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Cedula</th>
                                         <th scope="col">Telefono</th>
                                         <th scope="col">Total a pagar</th>
-                                        <th scope="col">Cancelar viaje</th>
+                                        <th scope="col" *ngIf="carpooler==0">Cancelar viaje</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr *ngFor="let reserva of reservas">
-                                        <td>{{reserva.idUsuario}}</td>
                                         <td>{{reserva.nombre}}</td>
                                         <td>{{reserva.documento}}</td>
                                         <td>{{reserva.telefono}}</td>
                                         <td>{{reserva.total}}</td>
-                                        <td>
+                                        <td *ngIf="carpooler==0">
                                             <button type="submit" class="btn btn-info btn-fill button fadeIn first" id="botonDireccion"
                                              name="botonDireccion" (click)="putReserva()" >Cancelar</button>
     

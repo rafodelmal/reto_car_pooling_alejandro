@@ -51,7 +51,6 @@ export class UserComponent implements OnInit {
       user = data[0];
 
       console.log(user)
-
       this.nombre = user.nombre
       this.apellido = user.apellido;
       this.telefono = user.telefono;
