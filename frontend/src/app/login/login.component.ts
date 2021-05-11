@@ -11,7 +11,7 @@ import { User } from './user';
 import { runInThisContext } from 'vm';
 import { isEmpty } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { AuthService } from 'app/shared/services/auth.service';
+
 
 
 declare var $: any;
@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
   show: boolean;
   respuesta: any;
 
-  constructor(private service: LoginService, private router: Router, private authService: AuthService) {
+  datosGuard: any
+
+  constructor(private service: LoginService, private router: Router) {
 
     this.show = false;
 
@@ -46,12 +48,6 @@ export class LoginComponent implements OnInit {
   login() {
 
 
-
-       //uso del servicio autorizacion para saber el estado del usuario logeado
-   this.authService.login();
-   this.routeRedirect = this.authService.urlUsuarioIntentAcceder;
-   this.authService.urlUsuarioIntentAcceder = '';
-   this.router.navigate([this.routeRedirect]);
 
     let email1 = this.email;
     let clave1 = this.clave;
@@ -83,7 +79,14 @@ export class LoginComponent implements OnInit {
 
       user = data[0];
       this.respuesta = user;
-      console.log("datos de variable user",user)
+
+      let y = user.idUsuario;
+
+      console.log("datos guard", y)
+      
+      this.datosGuard = user.idUsuario;
+
+      console.log("datos de variable datosGuard",user)
 
       if(user.carpooler === 1 ){
         this.router.navigate(['/reservas']);

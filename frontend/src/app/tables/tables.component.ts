@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 declare interface TableData {
-    headerRow: string[];
-    dataRows: string[][];
+  headerRow: string[];
+  dataRows: string[][];
 }
 
 @Component({
@@ -17,15 +17,15 @@ declare interface TableData {
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent implements OnInit {
-    public tableData1: TableData;
-    public tableData2: TableData;
+  public tableData1: TableData;
+  public tableData2: TableData;
 
-    nombre: any;
-    documento: any;
-    telefono: any;
-    total: any;
-    reservas: any;
-    carpooler: any;
+  nombre: any;
+  documento: any;
+  telefono: any;
+  total: any;
+  reservas: any;
+  carpooler: any;
 
   constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
@@ -44,20 +44,20 @@ export class TablesComponent implements OnInit {
 
       this.carpooler = user.carpooler
 
-      if(user.carpooler===0){
+      if (user.carpooler === 0) {
 
         let reserva = 0;
         let emailLogin;
         let respuesta;
-    
+
         emailLogin = this.datosLogin.email
-    
-        this.service.getReservas(reserva, emailLogin).subscribe(data=>{
-            respuesta = data;
-    
-            console.log("respuesta de la bd",respuesta)
-    
-            this.reservas = respuesta
+
+        this.service.getReservas(reserva, emailLogin).subscribe(data => {
+          respuesta = data;
+
+          console.log("respuesta de la bd", respuesta)
+
+          this.reservas = respuesta
         });
 
 
@@ -65,63 +65,57 @@ export class TablesComponent implements OnInit {
 
 
 
-      }else{
+      } else {
 
         let inscribir = 0;
         let emailLogin;
         let respuesta;
-    
+
         emailLogin = this.datosLogin.email
-    
-        this.service.getCarpoolingReservas(emailLogin,inscribir).subscribe(data=>{
-            respuesta = data;
-    
-            console.log("respuesta de la bd",respuesta)
-    
-            this.reservas = respuesta
+
+        this.service.getCarpoolingReservas(emailLogin, inscribir).subscribe(data => {
+          respuesta = data;
+
+          console.log("respuesta de la bd", respuesta)
+
+          this.reservas = respuesta
 
           console.log("getCarpoolingReservas", emailLogin)
 
         });
 
-
-
       }
 
-
-
     });
-
-
-
-
-
-
- 
-    
 
   }
 
 
-  
+  putReserva(email) {
 
-  putReserva(){
+    // tabla inscribir //
+    let emailCarpooler = email
+    let inscribir = 1
 
+
+    // tabla inforeserva //
     let reserva2 = 1;
-    let respuesta;
-    let emailLogin;
-    
+    let emailCliente;
 
-    emailLogin = this.datosLogin.email
 
-    this.service.putReserva(reserva2, emailLogin).subscribe(data=>{
+    let respuesta, respuesta2;
+
+    emailCliente = this.datosLogin.email
+
+
+    this.service.putReserva(reserva2, emailCliente).subscribe(data => {
       respuesta = data;
 
-      console.log("respuesta de la bd",respuesta)
+      console.log("respuesta de la bd", respuesta)
 
       this.reservas = respuesta
 
-      if (data===1){
+      if (data === 1) {
 
         Swal.fire({
           position: 'top',
@@ -133,7 +127,7 @@ export class TablesComponent implements OnInit {
 
         this.router.navigate(['/carpool'])
 
-      }else{
+      } else {
 
         Swal.fire({
           position: 'top',
@@ -145,10 +139,18 @@ export class TablesComponent implements OnInit {
 
       }
 
-      
-  });
+
+    });
 
 
+
+    this.service.putInscribir(inscribir, emailCarpooler).subscribe(data => {
+      respuesta2 = data;
+
+      console.log("respuesta de la bd inscribir", respuesta2)
+
+
+    });
   }
 
 

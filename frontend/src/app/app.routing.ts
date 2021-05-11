@@ -4,21 +4,18 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { CanActiveGuard } from './can-active.guard';
+import { AuthGuard } from './../app/shared/guards/auth.guard';
 
 const routes: Routes =[
-/*  {
-    path: '',
-    redirectTo: 'carpool',
-    pathMatch: 'full',
-  },  */
+
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: '',
-    component: AdminLayoutComponent, canActivate: [CanActiveGuard],
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
         {
       path: '',

@@ -55,6 +55,7 @@ export class DireccionesComponent implements OnInit {
       this.horaSalidaDestino = user.horaSalidaDestino;
 
       this.horaSalidaOrigen = user.horaSalidaOrigen;
+      this.total = user.total;
 
     
       
@@ -88,6 +89,7 @@ export class DireccionesComponent implements OnInit {
     let horaSalidaOrigen1 = this.horaSalidaOrigen;
     let placa1;
     let tienePlaca1 = this.tienePlaca;
+    let total = this.total
 
     let respuesta;
 
@@ -100,7 +102,7 @@ export class DireccionesComponent implements OnInit {
 
 
       
-        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, this.emaillogin).subscribe(data=> {
+        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, this.emaillogin, total).subscribe(data=> {
           respuesta=data;
 
 

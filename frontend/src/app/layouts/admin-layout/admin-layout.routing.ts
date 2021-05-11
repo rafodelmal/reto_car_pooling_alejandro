@@ -35,12 +35,12 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'usuario',           component: UserComponent },
     { path: 'reservas',          component: TablesComponent },
    //{ path: 'tipografia',     component: TypographyComponent },
-    { path: 'iconos',          component: IconsComponent },
+   // { path: 'iconos',          component: IconsComponent },
     { path: 'mapas',           component: MapsComponent },
-    { path: 'notificacion',  component: NotificationsComponent },
+   // { path: 'notificacion',  component: NotificationsComponent },
     { path: 'nosotros',  component: NosotrosComponent },
-    { path: 'github', component: RedirectComponent },
-    { path: 'calculadora', component: CalculadoraComponent },
+  //  { path: 'github', component: RedirectComponent },
+  //  { path: 'calculadora', component: CalculadoraComponent },
     { path: 'direcciones', component: DireccionesComponent },
 
 

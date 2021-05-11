@@ -44,17 +44,16 @@
                         <div class="image">
                             <img src="assets/img/faces/mapa.jpg" alt="..." />
                         </div>
-                        <div class="content">
+                        <div class="content" style="margin-bottom: 0%;">
                             <div class="author">
                                     <img class="avatar border-gray" src="assets/img/faces/face-1.jpg" alt="..." />
-
                                     <h4 class="title">{{carpoolers.nombre}}{{carpoolers.apellido}}<br />
-                                        <small>Telefono: {{carpoolers.telefono}}</small>
+                                        <small>Telefono: {{carpoolers.telefono}}</small><br>
+                                        <label style="margin-top: 4%;">Valor del viaje: {{carpoolers.total}}</label>
                                     </h4>
-                                    <label for="" style="visibility:hidden" >{{carpoolers.email}}</label><br>
-                                    <label for="" >{{carpoolers.idUsuario}}</label>
+                                    <label for="" style="visibility:hidden">{{carpoolers.email}}</label>
+                                    <label for="" style="visibility:hidden">{{carpoolers.idUsuario}}</label>
                             </div>
-                            <br>
                             <hr>
                             <table class="table table-hover">
                                 <thead>
@@ -63,7 +62,6 @@
                                     <th scope="col">casa</th>
                                     <th scope="col">Destino</th>
                                     <th scope="col">trabajo</th>
-                                    
                                   </tr>
                                 </thead>
                                 <tbody>

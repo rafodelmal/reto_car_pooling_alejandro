@@ -15,6 +15,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { UserComponent } from './user/user.component';
 import { DireccionesComponent } from './direcciones/direcciones.component';
 import { BrowserModule } from '@angular/platform-browser'
+import { AuthGuard } from './shared/guards/auth.guard';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { BrowserModule } from '@angular/platform-browser'
     CalculadoraComponent,
     DireccionesComponent
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
  
 })

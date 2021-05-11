@@ -123,6 +123,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
     const horaSalidaDestino = req.body.horaSalidaDestino;
     const placaCarro = req.body.placaCarro;
     const carpooler = req.body.carpooler;
+    const total = req.body.total;
 
     const datos = [{dirOrigen,
         email,
@@ -130,7 +131,8 @@ routers.put('/actualizarDireccion', async (req, res) => {
         horaSalidaOrigen,
         horaSalidaDestino, 
         placaCarro,
-        carpooler}];
+        carpooler,
+        total}];
 
         let respuesta;
 
@@ -140,7 +142,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
             console.log(respuesta)
         } else {
 
-            conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", carpooler="'+carpooler+'"   WHERE email="'+email+'"'   , async (error, results) => {
+            conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", carpooler="'+carpooler+'", total="'+total+'"   WHERE email="'+email+'"'   , async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -154,7 +156,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
 })
 
 
-// actualizar reservas /////
+// elimina la reserva del cliente /////
 
 routers.put('/actualizarReservas', async (req, res) => {
 
@@ -178,8 +180,33 @@ routers.put('/actualizarReservas', async (req, res) => {
         })
         
     }
- //   res.send(datos);
+})
 
+
+// elimina la reserva de la inscripcion  /////
+
+routers.put('/actualizarinscribir', async (req, res) => {
+
+    const inscribir = req.body.inscribir;
+    const emailCarpooler = req.body.emailCarpooler;
+
+        let respuesta;
+
+        if (inscribir===0) {
+            respuesta = "0"
+            res.send(respuesta);  
+            console.log(respuesta)
+        } else {
+
+            conexion.query('UPDATE inscribir SET inscribir="'+inscribir+'" WHERE emailCarpooler="'+emailCarpooler+'"', async (error, results) => {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+    }
 })
 
 

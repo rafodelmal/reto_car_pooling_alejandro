@@ -15,6 +15,7 @@ export interface User {
     "carpooler": number;
     "email": any;
     "clave": any;
+    "total": any;
     "foto": any;
 
 }

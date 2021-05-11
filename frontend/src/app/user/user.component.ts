@@ -3,7 +3,6 @@ import { ActualizarUsuarioService } from '../shared/services/actualizar-usuario.
 import { empty, from } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginService } from 'app/shared/services/login.service';
-import { DatosUsuario } from 'app/login/login.component';
 import { User } from '../login/user';
 import Swal from 'sweetalert2';
 

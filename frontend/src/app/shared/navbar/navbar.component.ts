@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import { AuthService } from '../services/auth.service';
 
 @Component({
     // moduleId: module.id,
@@ -22,7 +21,7 @@ export class NavbarComponent implements OnInit{
     usuarioLogueado = false;
 
 
-    constructor(location: Location,  private element: ElementRef, public authService: AuthService) {
+    constructor(location: Location,  private element: ElementRef) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -32,17 +31,11 @@ export class NavbarComponent implements OnInit{
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
 
-      this.usuarioLogueado = this.authService.isLoggedIn('');
-      this.authService.changeLoginStatus$.subscribe((loggedStatus: boolean)=>{
-        this.usuarioLogueado = loggedStatus;
-      })
+
 
 
     }
 
-    logout(){
-        this.authService.logout();
-      }
 
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -83,4 +76,5 @@ export class NavbarComponent implements OnInit{
       }
       return 'Carpool';
     }
+    
 }
