@@ -15,6 +15,7 @@ export class LoginService {
 
 email: any;
 clave: any;
+respuestaLogin: any;
 
 
   getlogin<T>(email1, clave1): Observable<T> {
@@ -23,8 +24,11 @@ clave: any;
     this.email = email1
     this.clave = clave1
 
+    this.respuestaLogin = this.http.get('http://localhost:3000/login?email='+email1+'&clave='+clave1).pipe(map((response) => response as T));
+    
     return this.http.get('http://localhost:3000/login?email='+email1+'&clave='+clave1).pipe(map((response) => response as T));
 
+    
 
   }
 
