@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css']
 })
+
+
 export class RegistrarComponent implements OnInit {
 
   nombre: any;
@@ -17,10 +19,9 @@ export class RegistrarComponent implements OnInit {
   telefono: any;
   email: any;
   clave: any;
+  
   show: boolean;
 
-  form
-  formBuilder: any;
 
   constructor(private router: Router, private service: RegistrarService) { 
 

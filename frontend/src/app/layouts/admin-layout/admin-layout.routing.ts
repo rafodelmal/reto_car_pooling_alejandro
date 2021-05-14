@@ -45,6 +45,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'registrar', component: RegistrarComponent },
 
 
-
    // { path: 'upgrade',        component: UpgradeComponent },
 ];

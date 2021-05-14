@@ -65,12 +65,16 @@ export class DireccionesComponent implements OnInit {
       if (user.carpooler === 1) {
 
         this.placa = user.placaCarro;
+        this.diasServicio = user.diasServicio;
+        this.total = user.total;
 
       } else {
 
 
         this.tienePlaca = 0;
         this.placa = ' ';
+        this.total = ' ';
+        this.diasServicio = ' ';
 
       }
 
