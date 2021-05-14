@@ -13,6 +13,7 @@ import { LoginComponent } from 'app/login/login.component';
 import { NosotrosComponent } from 'app/nosotros/nosotros.component';
 import { CalculadoraComponent } from 'app/calculadora/calculadora.component';
 import { DireccionesComponent } from '../../direcciones/direcciones.component';
+import { RegistrarComponent } from 'app/registrar/registrar.component';
 
 @Component({
     selector: 'redirect',
@@ -41,6 +42,8 @@ export const AdminLayoutRoutes: Routes = [
   //  { path: 'github', component: RedirectComponent },
   //  { path: 'calculadora', component: CalculadoraComponent },
     { path: 'direcciones', component: DireccionesComponent },
+    { path: 'registrar', component: RegistrarComponent },
+
 
 
    // { path: 'upgrade',        component: UpgradeComponent },

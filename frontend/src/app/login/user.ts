@@ -17,5 +17,6 @@ export interface User {
     "clave": any;
     "total": any;
     "foto": any;
+    "diasServicio": any;
 
 }

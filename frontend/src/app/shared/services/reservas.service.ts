@@ -20,14 +20,15 @@ export class ReservasService {
 
 
   // quita una reserva de la tabla reservainfo //
-  putReserva(reserva, emailCliente): Observable<any> {
+  putReserva(reserva, emailCliente,idUsuario2): Observable<any> {
 
     console.log("reserva service",reserva)
     console.log("correo service",emailCliente)
 
     let userReserva = {
       reserva,
-      emailCliente
+      emailCliente,
+      idUsuario2
     }
 
     const headers =  { 'content-type': 'application/json'};
@@ -88,7 +89,7 @@ export class ReservasService {
     let userInfoReserva = {
       reserva,
       emailCliente,
-      idUsuario2
+      idUsuario2,
     }
 
     const headers =  { 'content-type': 'application/json'};

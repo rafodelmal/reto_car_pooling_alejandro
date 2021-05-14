@@ -154,6 +154,31 @@ this.datosLogin.getlogin(emailLogin3, claveLogin3).subscribe(data => {
 
     console.log(respuesta2)
 
+    
+    if (data===0){
+
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: '¡No fue posible realizar la reserva!',
+        showConfirmButton: false,
+        timer: 1700
+      })
+
+    }else{
+      
+      Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Gracias por tu reserva',
+        showConfirmButton: false,
+        timer: 1300
+      })
+        
+        this.router.navigate(['/reservas'])
+
+    }
+
   })
 
 

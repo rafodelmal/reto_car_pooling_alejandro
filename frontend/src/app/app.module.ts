@@ -16,6 +16,7 @@ import { UserComponent } from './user/user.component';
 import { DireccionesComponent } from './direcciones/direcciones.component';
 import { BrowserModule } from '@angular/platform-browser'
 import { AuthGuard } from './shared/guards/auth.guard';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
     LoginComponent,
     NosotrosComponent,
     CalculadoraComponent,
-    DireccionesComponent
+    DireccionesComponent,
+    RegistrarComponent
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

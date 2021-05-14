@@ -91,7 +91,7 @@ export class TablesComponent implements OnInit {
   }
 
 
-  putReserva(email) {
+  putReserva(email, idUsuario) {
 
     // tabla inscribir //
     let emailCarpooler = email
@@ -101,14 +101,14 @@ export class TablesComponent implements OnInit {
     // tabla inforeserva //
     let reserva2 = 1;
     let emailCliente;
-
+    let idUsuario2 = idUsuario
 
     let respuesta, respuesta2;
 
     emailCliente = this.datosLogin.email
 
 
-    this.service.putReserva(reserva2, emailCliente).subscribe(data => {
+    this.service.putReserva(reserva2, emailCliente,idUsuario2).subscribe(data => {
       respuesta = data;
 
       console.log("respuesta de la bd", respuesta)

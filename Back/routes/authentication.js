@@ -123,6 +123,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
     const horaSalidaDestino = req.body.horaSalidaDestino;
     const placaCarro = req.body.placaCarro;
     const carpooler = req.body.carpooler;
+    const diasServicio = req.body.diasServicio;
     const total = req.body.total;
 
     const datos = [{dirOrigen,
@@ -132,7 +133,8 @@ routers.put('/actualizarDireccion', async (req, res) => {
         horaSalidaDestino, 
         placaCarro,
         carpooler,
-        total}];
+        total,
+        diasServicio}];
 
         let respuesta;
 
@@ -142,7 +144,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
             console.log(respuesta)
         } else {
 
-            conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", carpooler="'+carpooler+'", total="'+total+'"   WHERE email="'+email+'"'   , async (error, results) => {
+            conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", carpooler="'+carpooler+'", total="'+total+'", diasServicio="'+diasServicio+'"   WHERE email="'+email+'"'   , async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -162,6 +164,8 @@ routers.put('/actualizarReservas', async (req, res) => {
 
     const reserva = req.body.reserva;
     const emailCliente = req.body.emailCliente;
+    const idUsuario2 = req.body.idUsuario2;
+    
 
         let respuesta;
 
@@ -171,7 +175,7 @@ routers.put('/actualizarReservas', async (req, res) => {
             console.log(respuesta)
         } else {
 
-            conexion.query('UPDATE inforeserva SET reserva="'+reserva+'" WHERE emailCliente="'+emailCliente+'"', async (error, results) => {
+            conexion.query('UPDATE inforeserva SET reserva="'+reserva+'" WHERE idUsuario2="'+idUsuario2+'"', async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -249,12 +253,12 @@ routers.post('/crearReserva', async (req, res) => {
     const reserva = req.body.reserva;
     const emailCliente = req.body.emailCliente;
     const idUsuario2 = req.body.idUsuario2;
-
+    
     
         conexion.query('INSERT INTO inforeserva SET reserva="'+reserva+'", emailCliente="'+emailCliente+'", idUsuario2="'+idUsuario2+'"  ', async (error, results)=> {
 
             console.log('Actualizacion exitosa')
-            respuesta = "inforeserva 1"
+            respuesta = "1"
             res.send(respuesta);  
             console.log(respuesta)
         })
@@ -276,7 +280,7 @@ routers.post('/crearInscripcion', async (req, res) => {
           conexion.query('INSERT INTO inscribir SET inscribir="'+inscribir+'", idUsuario3="'+idUsuario3+'", emailCarpooler="'+emailCarpooler+'"  ', async (error, results) => {
 
             console.log('Actualizacion exitosa')
-            respuesta = "inscribir 1"
+            respuesta = "1"
             res.send(respuesta);  
             console.log(respuesta)
         })
@@ -406,7 +410,30 @@ routers.get('/eliminar', async (req, res) => {
 })
 
 
+// crea nuevo usuario /////
 
+routers.post('/registrar', async (req, res) => {
+
+    // tabla reserva
+    const nombre = req.body.nombre;
+    const apellido = req.body.apellido;
+    const documento = req.body.documento;
+    const telefono = req.body.telefono;
+    const email = req.body.email;
+    const clave = req.body.clave;
+
+    
+        conexion.query('INSERT INTO usuario SET nombre="'+nombre+'", apellido="'+apellido+'", documento="'+documento+'" , telefono="'+telefono+'", email="'+email+'", clave="'+clave+'" ', async (error, results)=> {
+
+            console.log('Registro exitoso')
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+ //   res.send(datos);
+
+})
 
 
 module.exports = routers;

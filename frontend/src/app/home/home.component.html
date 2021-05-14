@@ -23,8 +23,6 @@
 </div>
 
 
-
-
 <form action="">
 
 <div class="container-fluid animated fadeIn ">
@@ -47,7 +45,7 @@
                         <div class="content" style="margin-bottom: 0%;">
                             <div class="author">
                                     <img class="avatar border-gray" src="assets/img/faces/face-1.jpg" alt="..." />
-                                    <h4 class="title">{{carpoolers.nombre}}{{carpoolers.apellido}}<br />
+                                    <h4 class="title">{{carpoolers.nombre}} {{carpoolers.apellido}}<br/>
                                         <small>Telefono: {{carpoolers.telefono}}</small><br>
                                         <label style="margin-top: 4%;">Valor del viaje: {{carpoolers.total}}</label>
                                     </h4>
@@ -62,6 +60,7 @@
                                     <th scope="col">casa</th>
                                     <th scope="col">Destino</th>
                                     <th scope="col">trabajo</th>
+                                    <th scope="col">Dias de Servicio</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -70,7 +69,7 @@
                                     <td style="font-size: small;">{{carpoolers.horaSalidaOrigen}}</td>
                                     <td style="font-size: small;">{{carpoolers.dirDestino}}</td>
                                     <td style="font-size: small;">{{carpoolers.horaSalidaDestino}}</td>
-                                    
+                                    <td style="font-size: small;">{{carpoolers.diasServicio}}</td>
                                   </tr>
                                 </tbody>
                               </table>

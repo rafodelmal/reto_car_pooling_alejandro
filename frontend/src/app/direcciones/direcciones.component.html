@@ -35,18 +35,18 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Hora de salida de Origen</label>
-                                        <input type="time" ps-input-time format="hh:mm"  class="form-control" placeholder="Hora de salida de Origen"
-                                            id="horaSalidaOrigen" name="horaSalidaOrigen"
-                                            [(ngModel)]="horaSalidaOrigen">
+                                        <input type="time" ps-input-time format="hh:mm" class="form-control"
+                                            placeholder="Hora de salida de Origen" id="horaSalidaOrigen"
+                                            name="horaSalidaOrigen" [(ngModel)]="horaSalidaOrigen">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Hora de salida de Destino</label>
-                                        <input type="time" ps-input-time format="hh:mm"  class="form-control" placeholder="Hora de salida de Destino"
-                                            id="horaSalidaDestino" name="horaSalidaDestino"
-                                            [(ngModel)]="horaSalidaDestino">
+                                        <input type="time" ps-input-time format="hh:mm" class="form-control"
+                                            placeholder="Hora de salida de Destino" id="horaSalidaDestino"
+                                            name="horaSalidaDestino" [(ngModel)]="horaSalidaDestino">
                                     </div>
                                 </div>
 
@@ -87,19 +87,32 @@
 
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Placa</label>
-                                        <input type="text" class="form-control" placeholder="Placa"
-                                        id="placa" name="placa" maxlength="6" [(ngModel)]="placa">
+                                        <input type="text" class="form-control" placeholder="Placa" id="placa"
+                                            name="placa" maxlength="6" [(ngModel)]="placa">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="diasServicio">Dias de Servicio</label>
+                                        <select class="form-control" id="diasServicio" required="true" name="diasServicio" [(ngModel)]="diasServicio">
+                                            <option value="L-M-V">L-M-V</option>
+                                            <option value="M-J">M-J</option>
+                                            <option value="L-M-M">L-M-M</option>
+                                            <option value="M-J-V">M-J-V</option>
+                                            <option value="S-D">S-D</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Valor del viaje</label>
-                                        <input type="number" class="form-control" placeholder="Total"
-                                        id="total" name="total" [(ngModel)]="total" >
+                                        <input type="number" class="form-control" placeholder="Total" id="total"
+                                            name="total" [(ngModel)]="total">
                                     </div>
                                 </div>
 
@@ -110,7 +123,7 @@
                                 name="botonDireccion" (click)="actualizarDireccion('top','center')">Modificar</button>
                             <div class="clearfix"></div>
 
-                                
+
                         </form>
 
                     </div>

@@ -16,6 +16,9 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Cedula</th>
                                         <th scope="col">Telefono</th>
+                                        <th scope="col">Hora de salida casa</th>
+                                        <th scope="col">Hora de salida trabajo</th>
+                                        <th scope="col">Dias reservados</th>
                                         <th scope="col">Total a pagar</th>
                                         <th scope="col" *ngIf="carpooler==0">Cancelar viaje</th>
                                     </tr>
@@ -26,10 +29,13 @@
                                         <td>{{reserva.nombre}}</td>
                                         <td>{{reserva.documento}}</td>
                                         <td>{{reserva.telefono}}</td>
+                                        <td>{{reserva.horaSalidaOrigen}}</td>
+                                        <td>{{reserva.horaSalidaDestino}}</td>
+                                        <td>{{reserva.diasServicio}}</td>
                                         <td>{{reserva.total}}</td>
                                         <td *ngIf="carpooler==0">
                                             <button type="submit" class="btn btn-info btn-fill button fadeIn first" id="botonDireccion"
-                                             name="botonDireccion" (click)="putReserva(reserva.email)" >Cancelar</button>
+                                             name="botonDireccion" (click)="putReserva(reserva.email,reserva.idUsuario)" >Cancelar</button>
     
                                         </td>
                                     </tr>

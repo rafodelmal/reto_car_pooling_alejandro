@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthGuard } from './../app/shared/guards/auth.guard';
+import { RegistrarComponent } from './registrar/registrar.component';
 
 const routes: Routes =[
 
@@ -13,9 +14,13 @@ const routes: Routes =[
     component: LoginComponent,
   },
   {
+    path: 'registrar',
+    component: RegistrarComponent,
+  },
+  {
     path: '',
     component: AdminLayoutComponent,
-    canActivate: [AuthGuard],
+   // canActivate: [AuthGuard],
     children: [
         {
       path: '',
