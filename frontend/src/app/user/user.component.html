@@ -1,3 +1,4 @@
+
 <div class="main-content">
     <div class="container-fluid animated zoomIn">
         <div class="row">
@@ -52,7 +53,7 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Direccion de E-mail</label>
                                         <input type="email" class="form-control" placeholder="E-mail" id="email"
-                                            name="email" [(ngModel)]="email" >
+                                            name="email" [(ngModel)]="email" readonly >
                                     </div>
                                 </div>
 
@@ -71,20 +72,21 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
+                        <img src="assets/img/faces/mapa.jpg"
                             alt="..." />
                     </div>
                     <div class="content">
                         <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray" src="assets/img/faces/face-1.jpg" alt="..." />
+                            <a>
+                                <img class="avatar border-gray" [src]="foto" alt="..." />
 
-                                <h4 class="title">Pepito Perez<br />
-                                    <small>Telefono: 316846513</small>
+                                <h4 class="title">{{nombre}}  {{apellido}}<br/>
+                                    <small>Telefono: {{telefono}}</small>
+                                    
                                 </h4>
+                                <small>E-mail: {{email}}</small>
                             </a>
-                        </div>
-                        <p class="description text-center"> informacion adicional</p>
+                        </div>   
                     </div>
                     <hr>
                     <div class="text-center">

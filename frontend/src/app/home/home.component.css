@@ -64,7 +64,7 @@
 }
 
 .justicarcards2{
-    margin: 3% 0% 0% 20%;
+    margin: 3% 0% 0% 1%;
 }
 
 .titulo{
@@ -82,7 +82,7 @@
     font-size: 14px;
     text-align: center;
     border: 0px solid transparent;
-    background: #1976d2;
+    background: #0091ea;
     color: #ffffff;
     display: inline-block;
     text-transform: capitalize;
@@ -108,12 +108,13 @@
 .button:before {
     content: "";
     position: absolute;
+    border-radius: 8%;
     z-index: -1;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: #323232;
+    background:  #4caf50;
     -ms-transform: scaleY(0);
     -moz-transform: scaleY(0);
     -o-transform: scaleY(0);

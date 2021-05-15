@@ -9,10 +9,17 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 })
 
 export class NavbarComponent implements OnInit{
+
+    
+
+
     private listTitles: any[];
     location: Location;
     private toggleButton: any;
     private sidebarVisible: boolean;
+
+    usuarioLogueado = false;
+
 
     constructor(location: Location,  private element: ElementRef) {
       this.location = location;
@@ -23,7 +30,13 @@ export class NavbarComponent implements OnInit{
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+
+
+
+
     }
+
+
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const body = document.getElementsByTagName('body')[0];
@@ -63,4 +76,5 @@ export class NavbarComponent implements OnInit{
       }
       return 'Carpool';
     }
+    
 }

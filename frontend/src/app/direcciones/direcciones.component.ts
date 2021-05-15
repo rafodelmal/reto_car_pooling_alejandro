@@ -1,4 +1,11 @@
+import { User } from 'app/login/user';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'app/shared/services/login.service';
+import { ActualizarDireccionService } from '../shared/services/actualizar-direccion.service';
+import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-direcciones',
@@ -13,30 +20,73 @@ export class DireccionesComponent implements OnInit {
   horaSalidaOrigen: any;
   horaSalidaDestino: any;
   placa: any;
-  tienePlaca: any;
+  total: any;
+  diasServicio: any;
+  tienePlaca: any = 1;
+  emaillogin: any;
 
-// mapas //
-  title = 'gmaps';
-
-  position = {
-    lat: 6.174057,
-    lng: -75.615511
-
-  };
-
-  label = {
-    color: 'black',
-    Text: 'marcador'
-  };
+  resultadoBusqueda: any;
 
 
-  constructor() { }
+  constructor(private service: ActualizarDireccionService, private router: Router, private datosLogin: LoginService) { }
+
 
   ngOnInit(): void {
+
+
+   let emailLogin, claveLogin
+
+    emailLogin = this.datosLogin.email
+    claveLogin = this.datosLogin.clave
+    this.emaillogin = emailLogin
+
+    let respuesta;
+
+    var user: User;
+
+    this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
+      respuesta = data;
+
+      user = data[0];
+
+      console.log(user)
+
+      this.dirOrigen = user.dirOrigen;
+      this.dirDestino = user.dirDestino;
+      this.horaSalidaDestino = user.horaSalidaDestino;
+
+      this.horaSalidaOrigen = user.horaSalidaOrigen;
+      this.diasServicio = user.diasServicio;
+      this.total = user.total;
+
+    
+      
+
+      if (user.carpooler === 1) {
+
+        this.placa = user.placaCarro;
+        this.diasServicio = user.diasServicio;
+        this.total = user.total;
+
+      } else {
+
+
+        this.tienePlaca = 0;
+        this.placa = ' ';
+        this.total = ' ';
+        this.diasServicio = ' ';
+
+      }
+
+    })
+
+
   }
 
 
-  actualizarDireccion(){
+
+
+  actualizarDireccion(from, align) {
 
 
     let dirOrigen1 = this.dirOrigen;
@@ -44,30 +94,56 @@ export class DireccionesComponent implements OnInit {
     let horaSalidaDestino1 = this.horaSalidaDestino;
     let horaSalidaOrigen1 = this.horaSalidaOrigen;
     let placa1;
-    let tienePlaca1;
-  
-  
-    // condicional apra enviar la placa a la Bd si es o no carpooler
-    if (this.tienePlaca === '1'){
-       placa1 = ' ';
-    }else{
-      placa1 = this.placa;
-    }
-  
-    // condicional para preguntar si sera carpooler
-    if (this.tienePlaca === '0' ){
-  
-      tienePlaca1 = 'si';
-  
-    }else if (this.tienePlaca === '1'){
-  
-      tienePlaca1 = 'no';
-  
-    }
-    
-  
-   console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 )
-  
-  }
+    let tienePlaca1 = this.tienePlaca;
+    let total = this.total
+    let diasServicio = this.diasServicio
 
-}
+    let respuesta;
+
+         // condicional para enviar la placa a la Bd si es o no carpooler
+         if (this.tienePlaca === 0) {
+          placa1 = 'sin registro';
+        } else {
+          placa1 = this.placa;
+        }
+
+
+      
+        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, this.emaillogin, total, diasServicio).subscribe(data=> {
+          respuesta=data;
+
+
+          console.log("respuesta en component", respuesta);
+
+          if (data===0){
+
+            Swal.fire({
+              position: 'top',
+              icon: 'error',
+              title: '¡No fue posuble actualiar tus datos!',
+              text: 'por favor verifica todos los campos.',
+              showConfirmButton: false,
+              timer: 1700
+            })
+
+          }else{
+
+            Swal.fire({
+              position: 'top',
+              icon: 'success',
+              title: 'Datos actualizados con exito.',
+              showConfirmButton: false,
+              timer: 1300
+            })
+
+            if(tienePlaca1===1){
+              this.router.navigate(['/reservas'])
+            }else{
+              this.router.navigate(['/carpool'])
+            }
+            
+          }
+            console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + this.emaillogin)
+        })
+      }
+  }

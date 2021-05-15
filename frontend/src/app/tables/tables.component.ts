@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservasService } from 'app/shared/services/reservas.service';
+import { User } from '../login/user';
+import { data } from 'jquery';
+import { LoginService } from 'app/shared/services/login.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 declare interface TableData {
-    headerRow: string[];
-    dataRows: string[][];
+  headerRow: string[];
+  dataRows: string[][];
 }
 
 @Component({
@@ -11,34 +17,143 @@ declare interface TableData {
   styleUrls: ['./tables.component.css']
 })
 export class TablesComponent implements OnInit {
-    public tableData1: TableData;
-    public tableData2: TableData;
+  public tableData1: TableData;
+  public tableData2: TableData;
 
-  constructor() { }
+  nombre: any;
+  documento: any;
+  telefono: any;
+  total: any;
+  reservas: any;
+  carpooler: any;
 
-  ngOnInit() {
-      this.tableData1 = {
-          headerRow: [ 'Numero', 'Nombre', 'Cedula', 'Telefono', 'Direccion'],
-          dataRows: [
-              ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
-              ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
-              ['3', 'Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142'],
-              ['4', 'Philip Chaney', 'Korea, South', 'Overland Park', '$38,735'],
-              ['5', 'Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
-              ['6', 'Mason Porter', 'Chile', 'Gloucester', '$78,615']
-          ]
-      };
-      this.tableData2 = {
-          headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-          dataRows: [
-              ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-              ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-              ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-              ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-              ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-              ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-          ]
-      };
+  constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
+
+
+  ngOnInit(): void {
+
+    let respuesta2
+    let emailLogin2 = this.datosLogin.email;
+    let claveLogin2 = this.datosLogin.clave
+    var user: User;
+
+    this.datosLogin.getlogin(emailLogin2, claveLogin2).subscribe(data => {
+      respuesta2 = data;
+
+      user = data[0];
+
+      this.carpooler = user.carpooler
+
+      if (user.carpooler === 0) {
+
+        let reserva = 0;
+        let emailLogin;
+        let respuesta;
+
+        emailLogin = this.datosLogin.email
+
+        this.service.getReservas(reserva, emailLogin).subscribe(data => {
+          respuesta = data;
+
+          console.log("respuesta de la bd", respuesta)
+
+          this.reservas = respuesta
+        });
+
+
+
+
+
+
+      } else {
+
+        let inscribir = 0;
+        let emailLogin;
+        let respuesta;
+
+        emailLogin = this.datosLogin.email
+
+        this.service.getCarpoolingReservas(emailLogin, inscribir).subscribe(data => {
+          respuesta = data;
+
+          console.log("respuesta de la bd", respuesta)
+
+          this.reservas = respuesta
+
+          console.log("getCarpoolingReservas", emailLogin)
+
+        });
+
+      }
+
+    });
+
   }
+
+
+  putReserva(email, idUsuario) {
+
+    // tabla inscribir //
+    let emailCarpooler = email
+    let inscribir = 1
+
+
+    // tabla inforeserva //
+    let reserva2 = 1;
+    let emailCliente;
+    let idUsuario2 = idUsuario
+
+    let respuesta, respuesta2;
+
+    emailCliente = this.datosLogin.email
+
+
+    this.service.putReserva(reserva2, emailCliente,idUsuario2).subscribe(data => {
+      respuesta = data;
+
+      console.log("respuesta de la bd", respuesta)
+
+      this.reservas = respuesta
+
+      if (data === 1) {
+
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Reserva cancelada con exito.',
+          showConfirmButton: false,
+          timer: 1300
+        })
+
+        this.router.navigate(['/carpool'])
+
+      } else {
+
+        Swal.fire({
+          position: 'top',
+          icon: 'error',
+          title: '¡No fue posible cancelar la reserva!',
+          showConfirmButton: false,
+          timer: 1700
+        })
+
+      }
+
+
+    });
+
+
+
+    this.service.putInscribir(inscribir, emailCarpooler).subscribe(data => {
+      respuesta2 = data;
+
+      console.log("respuesta de la bd inscribir", respuesta2)
+
+
+    });
+  }
+
+
+
 
 }
