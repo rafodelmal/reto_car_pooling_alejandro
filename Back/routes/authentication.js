@@ -106,9 +106,7 @@ routers.put('/actualizarUsuario', async (req, res) => {
             console.log(respuesta)
 
         })
-    }
-
-   // res.send(respuesta);        
+    }  
 })
 
 
@@ -153,9 +151,8 @@ routers.put('/actualizarDireccion', async (req, res) => {
         })
         
     }
- //   res.send(datos);
-
 })
+
 
 
 // elimina la reserva del cliente /////
@@ -187,7 +184,7 @@ routers.put('/actualizarReservas', async (req, res) => {
 })
 
 
-// elimina la reserva de la inscripcion  /////
+// elimina la reserva de la inscripcion  ///// //////////////////////////   este hay que modificarlo para que lea el id
 
 routers.put('/actualizarinscribir', async (req, res) => {
 
@@ -212,6 +209,7 @@ routers.put('/actualizarinscribir', async (req, res) => {
         
     }
 })
+
 
 
 // reservar servicio /////
@@ -262,9 +260,6 @@ routers.post('/crearReserva', async (req, res) => {
             res.send(respuesta);  
             console.log(respuesta)
         })
-        
- //   res.send(datos);
-
 })
 
 
@@ -284,12 +279,9 @@ routers.post('/crearInscripcion', async (req, res) => {
             res.send(respuesta);  
             console.log(respuesta)
         })
-        
- //   res.send(datos);
-
 })
 
-
+////// link de prueba ///////
 routers.put('/prueba', async (req, res) => {
 
     const email = req.body.email;
@@ -310,9 +302,6 @@ routers.put('/prueba', async (req, res) => {
         
     })
     res.send(datos);
-
-
-    //, carpooler =" ' +carpooler+ '" 
 })
 
 
@@ -358,6 +347,7 @@ routers.get('/infoReservasCarpooler', async (req, res) => {
 })
 
 
+
 ///  ver informacion de carpooling ////
 routers.get('/infocarpooling', async (req, res) => {
 
@@ -376,25 +366,6 @@ routers.get('/infocarpooling', async (req, res) => {
     res.send(results)
 
     })    
-})
-
-
-// registrar usuario ///
-routers.get('/registrar', async (req, res) => {
-
-    const email = req.query.email;
-    const clave = req.query.clave;
-
-    conexion.query('INSERT INTO usuario SET ?', { email: email, clave: clave }, async (error, results) => {
-        if (error) {
-            throw error
-        } else {
-            console.log('exitoso')
-        }
-    })
-
-    res.send(email + ' ' + clave);
-
 })
 
 
@@ -430,9 +401,6 @@ routers.post('/registrar', async (req, res) => {
             res.send(respuesta);  
             console.log(respuesta)
         })
-        
- //   res.send(datos);
-
 })
 
 
