@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   show: boolean;
   respuesta: any;
 
+
   datosGuard: any
 
   constructor(private service: LoginService, private router: Router) {

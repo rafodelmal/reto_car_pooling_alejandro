@@ -26,6 +26,19 @@ export const ROUTES: RouteInfo[] = [
    // { path: '/notificacion', title: 'Notificaciones',  icon:'pe-7s-bell', class: '' },
 ];
 
+export const ROUTESCarpooler: RouteInfo[] = [
+ // { path: '/carpool', title: 'Carpool', icon: 'pe-7s-car', class: '' },
+  { path: '/direcciones', title: 'Servicios', icon: 'pe-7s-id', class: '' },
+  { path: '/reservas', title: 'Reservas', icon: 'pe-7s-note2', class: '' },
+  { path: '/mapas', title: 'Mapas', icon: 'pe-7s-map-2', class: '' },
+ // { path: '/github', title: 'Github', icon: 'pe-7s-share', class: '' },
+ // { path: '/iconos', title: 'iconos', icon: 'pe-7s-map-2', class: '' },
+  //{ path: '/calculadora', title: 'Calculadora', icon: 'pe-7s-share', class: '' },
+  // { path: '/upgrade', title: 'Upgrade to PRO',  icon:'pe-7s-rocket', class: 'active-pro' },
+   // { path: '/notificacion', title: 'Notificaciones',  icon:'pe-7s-bell', class: '' },
+];
+
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
@@ -38,7 +51,8 @@ export class SidebarComponent implements OnInit {
   constructor(private datosLogin: LoginService) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+   
 
     let emailLogin, claveLogin
 
@@ -56,6 +70,16 @@ export class SidebarComponent implements OnInit {
 
       this.nombre = user.nombre;
       this.apellido = user.apellido;
+
+      if (user.carpooler === 1 ){
+
+        this.menuItems = ROUTESCarpooler.filter(menuItem => menuItem);
+
+      }else{
+
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        
+      }
 
     })
 
