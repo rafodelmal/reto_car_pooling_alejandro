@@ -24,7 +24,8 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     LbdModule,
-    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCUf_AppwrJAMrPBWsZdVc6d5paRu8pWZM'})   
+   // NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCUf_AppwrJAMrPBWsZdVc6d5paRu8pWZM'})   
+   NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyApF3pPYLpb-U_QARmy0Vh-B4tULSJM4TI'})   
   ],
   declarations: [
     HomeComponent,
