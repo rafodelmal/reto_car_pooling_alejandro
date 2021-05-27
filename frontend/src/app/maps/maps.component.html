@@ -15,36 +15,57 @@
 
 -->
 
-<div class="main-content">
-  <ngui-map
-    [options]="mapOptions"
-    style="
-      margin-top: 60px;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      background-color: rgb(229, 227, 223);
-    "
-    (mapReady$)="onMapReady($event)"
-    (mapClick)="onMapClick($event)"
-    (idle)="onIdle($event)"
-  >
+<div class="row" style="margin-left: 10%;">
 
+  <input type="text" id="origen" placeholder="origen">
+
+  <input type="text" id="destino" placeholder="destino">
+
+  <div id="mode-selector" class="controls">
+
+ 
+
+    <button type="button" name="type" id="changemode-driving">Calcular</button>
+
+  </div>
+
+
+  <div class="main-content">
+    <ngui-map id="map"
+      
+      style="
+        margin-top: 200px;
+        height: 80%;
+        width: 80%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: rgb(229, 227, 223);
+      "
+      (mapReady$)="onMapReady($event)"
+      (mapClick)="onMapClick($event)"
+      (idle)="onIdle($event)"
+    >
   
-    <marker [position]="[latitudInicial ,longitudInicial]"
-    title="Casa"
-    optimized="true"
-    ></marker>
+    
+      <marker [position]="[latitudInicial ,longitudInicial]"
+      title="Casa"
+      optimized="true"
+      ></marker>
+  
+      <marker 
+        *ngFor="let pos of positions"
+        [position]="pos"
+        (initialized$)="onMarkerInit($event)"
+        title="Trabajo"
+  
+      ></marker>
+  
+    </ngui-map>
+  </div>
 
-    <marker 
-      *ngFor="let pos of positions"
-      [position]="pos"
-      (initialized$)="onMarkerInit($event)"
-      title="Trabajo"
 
-    ></marker>
 
-  </ngui-map>
 </div>
+
+

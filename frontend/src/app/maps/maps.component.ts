@@ -12,7 +12,7 @@ import { timingSafeEqual } from 'crypto';
 
 export class MapsComponent implements OnInit {
 
-   @ViewChild('mapaP') mapaP: ElementRef;
+   
 
   tieneGeo: any;
 
@@ -26,18 +26,35 @@ export class MapsComponent implements OnInit {
 
   marcadortotal: any
 
-  mapOptions: any[];
+//  mapOptions: any[];
 
   marcadores: any [] = [];
 
   positions: any[] = [];
   
+  originPlaceId: string;
+  originInput: any;
 
+  destinationPlaceId: string;
+  destinationInput: any;
 
-  constructor() { }
+  travelMode: google.maps.TravelMode;
+  directionsService: google.maps.DirectionsService;
+  directionsRenderer: google.maps.DirectionsRenderer;
+
+  map: google.maps.Map;
+  modeSelector:any;
+
+  constructor() { 
+
+  }
+
+  
 
   ngOnInit() { 
 
+    //esto iria en el html en el ngui-map [options]="mapOptions"
+    //aca se manda las opciones al ngui-map this.mapOptions = [latitud1, longitud1, zoom]
 
     navigator.geolocation.getCurrentPosition((posicion) => {
 
@@ -51,33 +68,129 @@ export class MapsComponent implements OnInit {
      this.latitudInicial = latitud1
      this.longitudInicial = longitud1
 
-      this.mapOptions = [latitud1, longitud1, zoom]
+     
 
+
+     const map = new google.maps.Map(
+      document.getElementById("map") as HTMLElement,
+      {
+        mapTypeControl: false,
+        center: { lat: latitud1, lng: longitud1 },
+        zoom: 13,
+      }
+    );
 
     });
 
-
   }
 
-
-
-  findme(){
-
-    if (navigator.geolocation)
-    {
-      this.tieneGeo = 1
-    }
-    else
-    {
-      this.tieneGeo = 0
-    }  
-
-
-  }
 
   onMapReady(map) {
     console.log('map', map);
-    console.log('markers', map.markers);  // to get all markers as an array 
+    console.log('markers', map.markers); 
+
+    
+    this.originPlaceId = ''
+    this.destinationPlaceId = "";
+    this.travelMode = google.maps.TravelMode.DRIVING;
+    this.directionsService = new google.maps.DirectionsService();
+    this.directionsRenderer = new google.maps.DirectionsRenderer();
+    this.directionsRenderer.setMap(map);
+
+    this.originInput = document.getElementById(
+      "origen"
+    ) as HTMLInputElement;
+    this.destinationInput = document.getElementById(
+      "destino"
+    ) as HTMLInputElement;
+
+    this.modeSelector = document.getElementById(
+      "calcular"
+    ) as HTMLSelectElement;
+
+
+    const originAutocomplete = new google.maps.places.Autocomplete(this.originInput);
+    originAutocomplete.setFields(["place_id"]);
+
+    const destinationAutocomplete = new google.maps.places.Autocomplete(this.destinationInput);
+    destinationAutocomplete.setFields(["place_id"]);
+
+
+    this.setupClickListener(
+      "changemode-driving",
+      google.maps.TravelMode.DRIVING
+    );
+
+    this.setupPlaceChangedListener(originAutocomplete, "ORIG", map);
+    this.setupPlaceChangedListener(destinationAutocomplete, "DEST", map);
+
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.originInput);
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.destinationInput
+    );
+    this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.modeSelector);
+
+  }
+
+  setupClickListener(id: string, mode: google.maps.TravelMode) {
+    const radioButton = document.getElementById(id) as HTMLInputElement;
+
+    radioButton.addEventListener("click", () => {
+      this.travelMode = mode;
+      this.route();
+    });
+  }
+
+  route() {
+    if (!this.originPlaceId || !this.destinationPlaceId) {
+      return;
+    }
+    const me = this;
+
+    this.directionsService.route(
+      {
+        origin: { placeId: this.originPlaceId },
+        destination: { placeId: this.destinationPlaceId },
+        travelMode: this.travelMode,
+      },
+      (response, status) => {
+        if (status === "OK") {
+          me.directionsRenderer.setDirections(response);
+        } else {
+          window.alert("Directions request failed due to " + status);
+        }
+      }
+    );
+  }
+
+  setupPlaceChangedListener(
+
+    autocomplete: google.maps.places.Autocomplete,
+    mode: string,
+    map: google.maps.Map
+  ) {
+    autocomplete.bindTo("bounds", map);
+
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+
+      if (!place.place_id) {
+        window.alert("Please select an option from the dropdown list.");
+        return;
+      }
+
+      if (mode === "ORIG") {
+        this.originPlaceId = place.place_id;
+
+        console.log(this.originPlaceId)
+       
+      }else {
+        this.destinationPlaceId = place.place_id;
+
+        console.log(this.destinationPlaceId)
+
+      }
+
+    });
   }
 
   onIdle(event) {
