@@ -23,6 +23,8 @@ export class MapsComponent implements OnInit {
   marcador: any[];
   zoom: number = 10;
 
+  dirFinal: any;
+  dirInicio: any;
 
   marcadortotal: any
 
@@ -76,16 +78,35 @@ export class MapsComponent implements OnInit {
       {
         mapTypeControl: false,
         center: { lat: latitud1, lng: longitud1 },
-        zoom: 13,
+        zoom: 14,
       }
     );
 
     });
 
+    const map = new google.maps.Map(
+      document.getElementById("map") as HTMLElement,
+      {
+        zoom: 8,
+        center: { lat: 40.72, lng: -73.96 },
+      }
+    );
+    const geocoder = new google.maps.Geocoder();
+    const infowindow = new google.maps.InfoWindow();
+  
+    
+        this.geocodePlaceId(geocoder, map, infowindow);
+
   }
 
 
   onMapReady(map) {
+
+
+
+
+
+
     console.log('map', map);
     console.log('markers', map.markers); 
 
@@ -129,16 +150,50 @@ export class MapsComponent implements OnInit {
     );
     this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.modeSelector);
 
+
+
   }
+
+ 
 
   setupClickListener(id: string, mode: google.maps.TravelMode) {
     const radioButton = document.getElementById(id) as HTMLInputElement;
 
     radioButton.addEventListener("click", () => {
+      
       this.travelMode = mode;
       this.route();
     });
   }
+
+
+  geocodePlaceId(
+    geocoder: google.maps.Geocoder,
+    map: google.maps.Map,
+    infowindow: google.maps.InfoWindow
+  ) {
+    const placeId = this.originPlaceId
+
+    geocoder.geocode({ placeId: placeId }, (results, status) => {
+      if (status === "OK") {
+        if (results[0]) {
+          map.setZoom(11);
+          map.setCenter(results[0].geometry.location);
+          const marker = new google.maps.Marker({
+            map,
+            position: results[0].geometry.location,
+          });
+          infowindow.setContent(results[0].formatted_address);
+          infowindow.open(map, marker);
+        } else {
+          window.alert("No results found");
+        }
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
 
   route() {
     if (!this.originPlaceId || !this.destinationPlaceId) {
@@ -147,19 +202,30 @@ export class MapsComponent implements OnInit {
     const me = this;
 
     this.directionsService.route(
+
       {
         origin: { placeId: this.originPlaceId },
         destination: { placeId: this.destinationPlaceId },
         travelMode: this.travelMode,
+       
       },
       (response, status) => {
         if (status === "OK") {
           me.directionsRenderer.setDirections(response);
+
+          this.dirFinal = response.routes[0].legs[0].end_address;
+          this.dirInicio = response.routes[0].legs[0].start_address
+
+          console.log("Destino: ", this.dirFinal)
+          console.log("Final: ", this.dirInicio)
+
         } else {
           window.alert("Directions request failed due to " + status);
         }
       }
     );
+
+
   }
 
   setupPlaceChangedListener(
@@ -168,6 +234,7 @@ export class MapsComponent implements OnInit {
     mode: string,
     map: google.maps.Map
   ) {
+
     autocomplete.bindTo("bounds", map);
 
     autocomplete.addListener("place_changed", () => {
@@ -179,6 +246,7 @@ export class MapsComponent implements OnInit {
       }
 
       if (mode === "ORIG") {
+
         this.originPlaceId = place.place_id;
 
         console.log(this.originPlaceId)
@@ -194,7 +262,9 @@ export class MapsComponent implements OnInit {
   }
 
   onIdle(event) {
-    console.log('map ubicacion', event.target);
+    //console.log('map ubicacion', event.target);
+
+    //console.log(event.geometry.location.lat());
   }
 
 
@@ -210,18 +280,6 @@ export class MapsComponent implements OnInit {
     console.log("longitud marcador ruta", marcadorLong)
 
     this.marcadores.push({marcadorLat,marcadorLong})
-
-    console.log("Arreglo de marcadores", this.marcadores)
-
-
-    if (this.marcadores.length == 1){
-
-      marker = false
-
-      alert('ya tiene 2 marcadores')
-
-
-    }
 
   }
 
