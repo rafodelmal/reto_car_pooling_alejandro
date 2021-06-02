@@ -36,7 +36,7 @@ import { RegistrarComponent } from './registrar/registrar.component';
     LoginComponent,
     NosotrosComponent,
     CalculadoraComponent,
-    DireccionesComponent,
+   // DireccionesComponent,
     RegistrarComponent
   ],
   providers: [AuthGuard],

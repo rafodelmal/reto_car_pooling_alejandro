@@ -15,6 +15,7 @@ import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { DireccionesComponent } from '../../direcciones/direcciones.component';
 
 
 
@@ -35,6 +36,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    DireccionesComponent
   ]
 })
 

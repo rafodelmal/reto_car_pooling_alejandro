@@ -49,6 +49,7 @@
                 >
                   Agregar direcciones
                 </button>
+
                 <div class="clearfix"></div>
 
                 <!-- line modal -->
@@ -56,11 +57,20 @@
                   class="modal fade"
                   id="squarespaceModal"
                   tabindex="-1"
-                  role="dialog"
+                  role="document"
                   aria-labelledby="modalLabel"
                   aria-hidden="true"
+                  data-dismiss="modal"
+                  data-backdrop="false"
                 >
-                  <div class="modal-dialog">
+                  <div
+                    class="
+                      modal-dialog
+                      animated
+                      zoomIn
+                      modal-dialog-centered modal-lg
+                    "
+                  >
                     <div class="modal-content">
                       <div class="modal-header">
                         <button
@@ -69,91 +79,104 @@
                           data-dismiss="modal"
                         >
                           <span aria-hidden="true">×</span
-                          ><span class="sr-only">Close</span>
+                          ><span class="sr-only">Cerrar</span>
                         </button>
+
                         <h3 class="modal-title" id="lineModalLabel">
-                          My Modal
+                          <img
+                            src="../../assets/img/animat-camp/29 - Map.gif"
+                            alt=""
+                            width="80"
+                            height="75"
+                            class="d-inline-block align-top"
+                          />
+                          Agrega tu Ruta
                         </h3>
                       </div>
+
                       <div class="modal-body">
                         <!-- content goes here -->
                         <form>
                           <div class="form-group">
-                            <label for="exampleInputEmail1"
-                              >Email address</label
+                            <label for="origen">¿Donde estas?</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="origen"
+                              placeholder="¿Donde estas?"
+                            />
+                          </div>
+                          <div class="form-group">
+                            <label for="destino">¿Donde irás?</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="destino"
+                              placeholder="¿Donde irás?"
+                            />
+                          </div>
+
+                          <div id="mode-selector" class="controls">
+                            <button
+                              type="button"
+                              class="btn btn-info btn-fill button2"
+                              name="type"
+                              id="changemode-driving"
                             >
-                            <input
-                              type="email"
-                              class="form-control"
-                              id="exampleInputEmail1"
-                              placeholder="Enter email"
-                            />
+                              Calcular
+                            </button>
+
                           </div>
-                          <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="exampleInputPassword1"
-                              placeholder="Password"
-                            />
+
+                          <div class="form-group" style="margin-top: 0.938em;">
+
+                            <div>
+
+                              <ngui-map
+                                id="map"
+                                style="
+                                  height: 14.5em;
+                                  background-color: rgb(229, 227, 223);
+                                "
+                                (mapReady$)="onMapReady($event)"
+                                (mapClick)="onMapClick($event)"
+                                (idle)="onIdle($event)"
+                              >
+                                <marker
+                                  [position]="[latitudInicial, longitudInicial]"
+                                  title="Casa"
+                                  optimized="true"
+                                ></marker>
+                              </ngui-map>
+
+                            </div>
+                            
                           </div>
-                          <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <input type="file" id="exampleInputFile" />
-                            <p class="help-block">
-                              Example block-level help text here.
-                            </p>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" /> Check me out
-                            </label>
-                          </div>
-                          <button type="submit" class="btn btn-default">
-                            Submit
-                          </button>
                         </form>
                       </div>
+
                       <div class="modal-footer">
-                        <div
-                          class="btn-group btn-group-justified"
-                          role="group"
-                          aria-label="group button"
+                        <button
+                          class="btn button3 cancelarModal btn-lg"
+                          id="cerrarModal"
+                          name="cerrarModal"
+                          type="button"
+                          data-dismiss="modal"
                         >
-                          <div class="btn-group" role="group">
-                            <button
-                              type="button"
-                              class="btn btn-default"
-                              data-dismiss="modal"
-                              role="button"
-                            >
-                              Close
-                            </button>
-                          </div>
-                          <div class="btn-group btn-delete hidden" role="group">
-                            <button
-                              type="button"
-                              id="delImage"
-                              class="btn btn-default btn-hover-red"
-                              data-dismiss="modal"
-                              role="button"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                          <div class="btn-group" role="group">
-                            <button
-                              type="button"
-                              id="saveImage"
-                              class="btn btn-default btn-hover-green"
-                              data-action="save"
-                              role="button"
-                            >
-                              Save
-                            </button>
-                          </div>
-                        </div>
+                          Cerrar
+                        </button>
+
+                        <button
+                          type="button"
+                          id="guardarDatos"
+                          class="btn button4 cancelarModal btn-lg"
+                          data-action="save"
+                          role="button"
+                          data-dismiss="modal"
+                          (click)="guardarDirecciones()"
+                        >
+                          guardar
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -300,6 +323,7 @@
               >
                 Modificar
               </button>
+
               <div class="clearfix"></div>
             </form>
           </div>
