@@ -17,6 +17,14 @@ import { NguiMapModule} from '@ngui/map';
 
 export class DireccionesComponent implements OnInit {
 
+  lunes: any;
+  martes: any;
+  miercoles: any;
+  jueves: any;
+  viernes: any;
+  sabado: any;
+  domingo: any;
+
   flexRadioDefault: any;
 
 
@@ -74,11 +82,13 @@ export class DireccionesComponent implements OnInit {
 
   ngOnInit() {
 
+    let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
+
    let emailLogin, claveLogin
 
     emailLogin = this.datosLogin.email
     claveLogin = this.datosLogin.clave
-    this.emaillogin = emailLogin
+    this.emaillogin = recuperarStorage.email
 
     let respuesta;
 
@@ -110,13 +120,24 @@ export class DireccionesComponent implements OnInit {
 
       } else {
 
-
         this.tienePlaca = 0;
         this.placa = ' ';
         this.total = ' ';
         this.diasServicio = ' ';
 
       }
+
+      if (recuperarStorage.carpooler === 0) {
+
+      let placaDesa = document.getElementById('placa') as HTMLInputElement
+      placaDesa .disabled = true
+      let diasServicioDesa = document.getElementById('diasServicio') as HTMLInputElement
+      diasServicioDesa.disabled = true
+      let totalDesa = document.getElementById('total') as HTMLInputElement
+      totalDesa.disabled = true
+
+      }
+
 
     })
 
@@ -171,6 +192,57 @@ export class DireccionesComponent implements OnInit {
 
   }
 
+  guardarDias(){
+
+    let lunes, martes, miercoles, jueves, viernes, sabado, domingo;
+
+    if (this.lunes == true){
+      lunes = "lunes-"
+    }else{
+      lunes = ""
+    }
+
+    if (this.martes == true){
+      martes = "martes-"
+    }else{
+      martes = ""
+    }
+
+    if (this.miercoles == true){
+      miercoles = "miercoles-"
+    }else{
+      miercoles = ""
+    }
+
+    if (this.jueves == true){
+      jueves = "jueves-"
+    }else{
+      jueves = ""
+    }
+
+    if (this.viernes == true){
+      viernes = "viernes-"
+    }else{
+      viernes = ""
+    }
+
+    if (this.sabado == true){
+      sabado = "sabado-"
+    }else{
+      sabado = ""
+    }
+
+    if (this.domingo == true){
+      domingo = "domingo"
+    }else{
+      domingo = ""
+    }
+
+    let totalDias = lunes+martes+miercoles+jueves+viernes+sabado+domingo
+
+    this.diasServicio = totalDias
+
+  }
 
   guardarDirecciones(){
 
@@ -197,14 +269,15 @@ export class DireccionesComponent implements OnInit {
          // condicional para enviar la placa a la Bd si es o no carpooler
          if (this.tienePlaca === 0) {
           placa1 = 'sin registro';
-          diasServicio = ' ';
-          total = ' ';
+          diasServicio = '';
+          total = '0';
         } else {
           placa1 = this.placa;
           diasServicio = this.diasServicio
           total = this.total
         }
 
+       
 
       
         this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, this.emaillogin, total, diasServicio).subscribe(data=> {

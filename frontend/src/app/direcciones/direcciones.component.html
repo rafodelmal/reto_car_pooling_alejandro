@@ -72,7 +72,8 @@
                     "
                   >
                     <div class="modal-content">
-                      <div class="modal-header">
+
+                      <div class="modal-header fadeIn first">
                         <button
                           type="button"
                           class="close"
@@ -97,7 +98,8 @@
                       <div class="modal-body">
                         <!-- content goes here -->
                         <form>
-                          <div class="form-group">
+
+                          <div class="form-group fadeIn second">
                             <label for="origen">¿Donde estas?</label>
                             <input
                               type="text"
@@ -106,7 +108,8 @@
                               placeholder="¿Donde estas?"
                             />
                           </div>
-                          <div class="form-group">
+
+                          <div class="form-group fadeIn third">
                             <label for="destino">¿Donde irás?</label>
                             <input
                               type="text"
@@ -116,7 +119,7 @@
                             />
                           </div>
 
-                          <div id="mode-selector" class="controls">
+                          <div id="mode-selector" class="controls fadeIn fourth">
                             <button
                               type="button"
                               class="btn btn-info btn-fill button2"
@@ -125,13 +128,10 @@
                             >
                               Calcular
                             </button>
-
                           </div>
 
-                          <div class="form-group" style="margin-top: 0.938em;">
-
+                          <div class="form-group fadeIn fourth" style="margin-top: 0.938em">
                             <div>
-
                               <ngui-map
                                 id="map"
                                 style="
@@ -148,14 +148,12 @@
                                   optimized="true"
                                 ></marker>
                               </ngui-map>
-
                             </div>
-                            
                           </div>
                         </form>
                       </div>
 
-                      <div class="modal-footer">
+                      <div class="modal-footer fadeIn five">
                         <button
                           class="btn button3 cancelarModal btn-lg"
                           id="cerrarModal"
@@ -178,15 +176,12 @@
                           guardar
                         </button>
                       </div>
-
-
                     </div>
                   </div>
                 </div>
               </div>
 
               <div class="row">
-
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Hora de salida de Origen</label>
@@ -218,7 +213,6 @@
                     />
                   </div>
                 </div>
-                
               </div>
 
               <div class="row">
@@ -286,20 +280,17 @@
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="diasServicio">Dias de Servicio</label>
-                    <select
+                    <label>Dias de servicio</label>
+                    <input
+                      type="button"
                       class="form-control"
+                      placeholder="Dias de servicio"
                       id="diasServicio"
-                      required="true"
                       name="diasServicio"
                       [(ngModel)]="diasServicio"
-                    >
-                      <option value="L-M-V">L-M-V</option>
-                      <option value="M-J">M-J</option>
-                      <option value="L-M-M">L-M-M</option>
-                      <option value="M-J-V">M-J-V</option>
-                      <option value="S-D">S-D</option>
-                    </select>
+                      data-toggle="modal"
+                      data-target="#dias"
+                    />
                   </div>
                 </div>
 
@@ -317,6 +308,123 @@
                   </div>
                 </div>
               </div>
+
+                <div class="clearfix"></div>
+
+                <!-- line modal -->
+                <div
+                  class="modal fade"
+                  id="dias"
+                  tabindex="-1"
+                  role="document"
+                  aria-labelledby="modalLabel"
+                  aria-hidden="true"
+                  data-dismiss="modal"
+                  data-backdrop="false"
+                >
+                  <div
+                    class="
+                      modal-dialog
+                      animated
+                      zoomIn
+                      modal-dialog-centered modal-md
+                    "
+                  >
+                    <div class="modal-content">
+
+                      <div class="modal-header fadeIn first">
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                        >
+                          <span aria-hidden="true">×</span
+                          ><span class="sr-only">Cerrar</span>
+                        </button>
+
+                        <h3 class="modal-title" id="lineModalLabel">
+                          <img
+                            src="../../assets/img/animat-camp/07 - Calendar.gif"
+                            alt=""
+                            width="80"
+                            height="75"
+                            class="d-inline-block align-top"
+                          />
+                          ¿Que dias prestas servicio?
+                        </h3>
+                      </div>
+
+                      <div class="modal-body">
+                        <!-- content goes here -->
+
+                        <div class="container">
+
+                          <div class="row">
+
+                            
+                            
+                            <div class="checkbox fadeIn second"  style="margin-left: 7.813em;">
+                              <input class="checkbox" id="lunes" type="checkbox" [(ngModel)]="lunes" [ngModelOptions]="{standalone: true}" />
+                              <label class="checkbox" for="lunes"> Lunes </label>
+
+                              <input class="checkbox" id="martes" type="checkbox" [(ngModel)]="martes" [ngModelOptions]="{standalone: true}" />
+                              <label style="margin-left: 3.125em;" class="checkbox" for="martes" > Martes </label>
+
+                              <input class="checkbox" id="miercoles" type="checkbox" [(ngModel)]="miercoles" [ngModelOptions]="{standalone: true}" />
+                              <label style="margin-left: 3.125em;" class="checkbox" for="miercoles"> Miercoles </label>
+
+                              <input class="checkbox" id="jueves" type="checkbox" [(ngModel)]="jueves" [ngModelOptions]="{standalone: true}" />
+                              <label style="margin-left: 3.125em;" class="checkbox" for="jueves"> Jueves </label>
+
+                            </div>
+
+                            <div class="checkbox fadeIn third" style="margin-left: 10.625em; margin-top: 0.625em;">
+                              <input class="checkbox" id="viernes" type="checkbox" [(ngModel)]="viernes" [ngModelOptions]="{standalone: true}" />
+                              <label class="checkbox" for="viernes"> Viernes </label>
+
+                              <input class="checkbox" id="sabado" type="checkbox" [(ngModel)]="sabado" [ngModelOptions]="{standalone: true}" />
+                              <label style="margin-left: 3.125em;" class="checkbox" for="sabado"> Sabado </label>
+
+                              <input class="checkbox" id="domingo" type="checkbox" [(ngModel)]="domingo" [ngModelOptions]="{standalone: true}" />
+                              <label style="margin-left: 3.125em;" class="checkbox" for="domingo"> Domingo </label>
+
+                            </div>
+
+                          </div>
+                          
+                        </div>
+                        
+
+                      </div>
+
+                      <div class="modal-footer fadeIn fourth">
+                        <button
+                          class="btn button3 cancelarModal btn-lg"
+                          id="cerrarModal"
+                          name="cerrarModal"
+                          type="button"
+                          data-dismiss="modal"
+                        >
+                          Cerrar
+                        </button>
+
+                        <button
+                          type="button"
+                          id="guardarDatos"
+                          class="btn button4 cancelarModal btn-lg"
+                          data-action="save"
+                          role="button"
+                          data-dismiss="modal"
+                          (click)="guardarDias()"
+                        >
+                          guardar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+               
 
               <button
                 type="submit"
