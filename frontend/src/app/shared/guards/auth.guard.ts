@@ -3,6 +3,9 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LoginService } from '../services/login.service';
+import { User } from 'app/login/user';
+import { LoginComponent } from 'app/login/login.component';
+
 
 
 
@@ -14,7 +17,20 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router, private datoslogin: LoginService){
 
+ //   this.grabarLocalStorage();
+
+
   }
+
+ /* grabarLocalStorage(){
+
+    let datosSesion = this.datoslogin.respuestaLogin;
+
+    console.log("grabarLocalStorage",datosSesion)
+
+    localStorage.setItem("datosSesion", JSON.stringify(datosSesion));
+  } */
+
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -22,11 +38,33 @@ export class AuthGuard implements CanActivate {
 
     let datosGuard = this.datoslogin.respuestaLogin
 
-    if (!datosGuard){
+  
+    let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
+
+    console.log("recuperarStorage", recuperarStorage)
+
+    if(recuperarStorage.email){
+      console.log("FFFFFF")
+     
+     return true;
+    }else {
+      console.log("¡FUNCIONA!!!!!")
+      this.router.navigate(['/login']);
+      return false;
+       
+    }
+
+   /* if (!datosGuard){
       this.router.navigate(['/login']);
       return false;
     }
-        return true;
+        return true; */
+
   } 
+
+
+
+
+  
   
 }

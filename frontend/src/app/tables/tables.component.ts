@@ -37,7 +37,51 @@ export class TablesComponent implements OnInit {
     let claveLogin2 = this.datosLogin.clave
     var user: User;
 
-    this.datosLogin.getlogin(emailLogin2, claveLogin2).subscribe(data => {
+    let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
+
+    this.carpooler = recuperarStorage.carpooler
+
+    if (recuperarStorage.carpooler === 0) {
+
+      let reserva = 0;
+      let emailLogin;
+      let respuesta;
+
+      emailLogin = recuperarStorage.email
+
+      this.service.getReservas(reserva, emailLogin).subscribe(data => {
+        respuesta = data;
+
+        console.log("respuesta de la bd", respuesta)
+
+        this.reservas = respuesta
+      });
+
+
+    } else {
+
+      let inscribir = 0;
+      let emailLogin;
+      let respuesta;
+
+      emailLogin = recuperarStorage.email
+
+      this.service.getCarpoolingReservas(emailLogin, inscribir).subscribe(data => {
+        respuesta = data;
+
+        console.log("respuesta de la bd", respuesta)
+
+        this.reservas = respuesta
+
+        console.log("getCarpoolingReservas", emailLogin)
+
+      });
+
+    }
+
+    ///////
+
+   /* this.datosLogin.getlogin(emailLogin2, claveLogin2).subscribe(data => {
       respuesta2 = data;
 
       user = data[0];
@@ -86,12 +130,14 @@ export class TablesComponent implements OnInit {
 
       }
 
-    });
+    });*/
 
   }
 
 
   putReserva(email, idUsuario) {
+
+    let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
     // tabla inscribir //
     let emailCarpooler = email
@@ -105,7 +151,7 @@ export class TablesComponent implements OnInit {
 
     let respuesta, respuesta2;
 
-    emailCliente = this.datosLogin.email
+    emailCliente = recuperarStorage.email
 
 
     this.service.putReserva(reserva2, emailCliente,idUsuario2).subscribe(data => {

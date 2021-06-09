@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   clave: any;
   usuarioReturn: any;
   show: boolean;
+
   respuesta: any;
 
 
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-
+   
 
     let email1 = this.email;
     let clave1 = this.clave;
@@ -79,17 +80,26 @@ export class LoginComponent implements OnInit {
     else{
 
       user = data[0];
-      this.respuesta = user;
 
-      let y = user.idUsuario;
+      let datosSesion = data[0];
+
+      localStorage.setItem("datosSesion", JSON.stringify(datosSesion));
+
+      let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
+
+      console.log("recuperarStorage loginnnn", recuperarStorage)
+      
+      this.respuesta = recuperarStorage;
+
+      let y = recuperarStorage.idUsuario;
 
       console.log("datos guard", y)
       
-      this.datosGuard = user.idUsuario;
+      this.datosGuard = recuperarStorage;
 
-      console.log("datos de variable datosGuard",user)
+      this.service.respuestaLogin = recuperarStorage;
 
-      if(user.carpooler === 1 ){
+      if(recuperarStorage.carpooler === 1 ){
         this.router.navigate(['/reservas']);
       }else{
         this.router.navigate(['/carpool']);
@@ -97,9 +107,6 @@ export class LoginComponent implements OnInit {
       
 
     }
-  
-
-
 
     });  
 

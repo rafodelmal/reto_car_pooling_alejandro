@@ -17,6 +17,8 @@ import { NguiMapModule} from '@ngui/map';
 
 export class DireccionesComponent implements OnInit {
 
+  flexRadioDefault: any;
+
 
   dirOrigen: any;
   dirDestino: any;
@@ -72,7 +74,6 @@ export class DireccionesComponent implements OnInit {
 
   ngOnInit() {
 
-
    let emailLogin, claveLogin
 
     emailLogin = this.datosLogin.email
@@ -86,26 +87,26 @@ export class DireccionesComponent implements OnInit {
     this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
       respuesta = data;
 
-      user = data[0];
+      let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
       console.log(user)
 
-      this.dirOrigen = user.dirOrigen;
-      this.dirDestino = user.dirDestino;
-      this.horaSalidaDestino = user.horaSalidaDestino;
+      this.dirOrigen = recuperarStorage.dirOrigen;
+      this.dirDestino = recuperarStorage.dirDestino;
+      this.horaSalidaDestino = recuperarStorage.horaSalidaDestino;
 
-      this.horaSalidaOrigen = user.horaSalidaOrigen;
-      this.diasServicio = user.diasServicio;
-      this.total = user.total;
+      this.horaSalidaOrigen = recuperarStorage.horaSalidaOrigen;
+      this.diasServicio = recuperarStorage.diasServicio;
+      this.total = recuperarStorage.total;
 
     
       
 
-      if (user.carpooler === 1) {
+      if (recuperarStorage.carpooler === 1) {
 
-        this.placa = user.placaCarro;
-        this.diasServicio = user.diasServicio;
-        this.total = user.total;
+        this.placa = recuperarStorage.placaCarro;
+        this.diasServicio = recuperarStorage.diasServicio;
+        this.total = recuperarStorage.total;
 
       } else {
 
@@ -146,9 +147,27 @@ export class DireccionesComponent implements OnInit {
     });
 
 
-    
+  }
 
+  noCarpooling(){
 
+    let placaDesa = document.getElementById('placa') as HTMLInputElement
+    placaDesa .disabled = true
+    let diasServicioDesa = document.getElementById('diasServicio') as HTMLInputElement
+    diasServicioDesa.disabled = true
+    let totalDesa = document.getElementById('total') as HTMLInputElement
+    totalDesa.disabled = true
+
+  }
+
+  siCarpooling(){
+
+    let placaDesa = document.getElementById('placa') as HTMLInputElement
+    placaDesa.disabled = false
+    let diasServicioDesa = document.getElementById('diasServicio') as HTMLInputElement
+    diasServicioDesa.disabled = false
+    let totalDesa = document.getElementById('total') as HTMLInputElement
+    totalDesa.disabled = false
 
   }
 
@@ -170,16 +189,20 @@ export class DireccionesComponent implements OnInit {
     let horaSalidaOrigen1 = this.horaSalidaOrigen;
     let placa1;
     let tienePlaca1 = this.tienePlaca;
-    let total = this.total
-    let diasServicio = this.diasServicio
+    let total;
+    let diasServicio;
 
     let respuesta;
 
          // condicional para enviar la placa a la Bd si es o no carpooler
          if (this.tienePlaca === 0) {
           placa1 = 'sin registro';
+          diasServicio = ' ';
+          total = ' ';
         } else {
           placa1 = this.placa;
+          diasServicio = this.diasServicio
+          total = this.total
         }
 
 

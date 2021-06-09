@@ -55,38 +55,30 @@ export class HomeComponent implements OnInit {
     let claveLogin = this.datosLogin.clave;
     var user: User;
 
+    let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
-    this.datosLogin.getlogin(emailLogin2, claveLogin).subscribe(data => {
-      respuesta2 = data;
+    if(recuperarStorage.carpooler===1){
 
-      user = data[0];
+      Swal.fire({
+        icon: 'error',
+        title: '¡Debes cambiar de rol!',
+        text: 'No puedes ser carpooler.',
+        showConfirmButton: false,
+        timer: 1800
+      })
 
+      this.router.navigate(['/direcciones']);
 
-      if(user.carpooler===1){
+    }
 
-        Swal.fire({
-          icon: 'error',
-          title: '¡Debes cambiar de rol!',
-          text: 'No puedes ser carpooler.',
-          showConfirmButton: false,
-          timer: 1800
-        })
-
-        this.router.navigate(['/direcciones']);
-
-      }
-
-
-    });
-
-
+  
 
 
     let carpooler = 1
     let respuesta;
     let emailLogin;
 
-    emailLogin = this.datosLogin.email
+    emailLogin = recuperarStorage.email
 
     this.service.getCarpooling(carpooler, emailLogin).subscribe(data=>{
         respuesta = data;
@@ -94,12 +86,6 @@ export class HomeComponent implements OnInit {
         console.log(respuesta)
 
         this.carpooler = respuesta
-
-
-          
-
-
-
 
     });
 
@@ -109,10 +95,12 @@ export class HomeComponent implements OnInit {
 
 reservar(idUsuario2, emailCarpooler){
 
+  let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
+
 let respuesta3,respuesta2, respuesta
 
-let emailLogin3 = this.datosLogin.email;
-let claveLogin3 = this.datosLogin.clave;
+let emailLogin3 = recuperarStorage.email;
+let claveLogin3 = recuperarStorage.clave;
 
 var user: User
 
@@ -124,7 +112,7 @@ this.datosLogin.getlogin(emailLogin3, claveLogin3).subscribe(data => {
   user = data[0];
 
 // reserva
-  let emailCliente = user.email;
+  let emailCliente = recuperarStorage.email;
   let reserva = 0;
   
   console.log("Datos de reserva: ", emailCliente, idUsuario2, reserva)
@@ -132,7 +120,7 @@ this.datosLogin.getlogin(emailLogin3, claveLogin3).subscribe(data => {
   
   
   // inscripcion
-  let idUsuario3 = user.idUsuario
+  let idUsuario3 = recuperarStorage.idUsuario
   let inscribir = 0;
   
   console.log("Datos de inscribir: ", emailCarpooler, idUsuario3, inscribir)

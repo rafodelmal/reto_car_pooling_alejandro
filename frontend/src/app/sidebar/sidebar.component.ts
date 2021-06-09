@@ -66,12 +66,17 @@ export class SidebarComponent implements OnInit {
     this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
       respuesta=data;
 
-      user = data[0];
+      // user = data[0];
+      let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
-      this.nombre = user.nombre;
-      this.apellido = user.apellido;
+      user = recuperarStorage
 
-      if (user.carpooler === 1 ){
+      console.log("userrrrrrrrrrrrr",recuperarStorage)
+
+      this.nombre = recuperarStorage.nombre;
+      this.apellido = recuperarStorage.apellido;
+
+      if (recuperarStorage.carpooler === 1 ){
 
         this.menuItems = ROUTESCarpooler.filter(menuItem => menuItem);
 

@@ -42,31 +42,25 @@ export class UserComponent implements OnInit {
 
     let respuesta;
 
-    var user: User;
+    let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
-    this.datosLogin.getlogin(emailLogin, claveLogin).subscribe(data => {
-      respuesta=data;
-
-      user = data[0];
-
-      console.log(user)
-      this.nombre = user.nombre
-      this.apellido = user.apellido;
-      this.telefono = user.telefono;
-      this.documento = user.documento;
-      this.email = user.email;
-      this.foto = user.foto;
+      this.nombre = recuperarStorage.nombre
+      this.apellido = recuperarStorage.apellido;
+      this.telefono = recuperarStorage.telefono;
+      this.documento = recuperarStorage.documento;
+      this.email = recuperarStorage.email;
+      this.foto = recuperarStorage.foto;
 
 
-      console.log(user.foto)
+      console.log(recuperarStorage.foto)
 
-    })
+   
 
 
   }
 
-  actualizarUsuario(from, align){
-
+  actualizarUsuario(){
+    
     let nombre1 = this.nombre;
     let apellido1 = this.apellido;
     let documento1 = this.documento;
@@ -82,6 +76,8 @@ export class UserComponent implements OnInit {
     
     
     let respuesta;
+
+    localStorage.setItem("datosSesion.telefono", this.telefono );
 
     this.service.postUsuario(email1, nombre1, apellido1, documento1, telefono1).subscribe(data=> {
 
