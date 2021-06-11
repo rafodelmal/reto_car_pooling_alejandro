@@ -11,7 +11,7 @@ export class ActualizarDireccionService {
   constructor(private http: HttpClient) { }
 
 
-  postDireccion(dirOrigen, dirDestino, horaSalidaDestino, horaSalidaOrigen, placaCarro, carpooler, email, total, diasServicio): Observable<any> {
+  postDireccion(dirOrigen, dirDestino, horaSalidaDestino, horaSalidaOrigen, placaCarro, cupos, carpooler, email, total, diasServicio): Observable<any> {
 
 
     console.log("carppooler en service", carpooler )
@@ -26,6 +26,7 @@ export class ActualizarDireccionService {
       horaSalidaDestino,
       horaSalidaOrigen,
       placaCarro,
+      cupos,
       carpooler,
       email,
       total,

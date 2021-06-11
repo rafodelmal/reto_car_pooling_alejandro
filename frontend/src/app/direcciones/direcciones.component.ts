@@ -25,6 +25,8 @@ export class DireccionesComponent implements OnInit {
   sabado: any;
   domingo: any;
 
+  cupos: any
+
   flexRadioDefault: any;
 
 
@@ -117,6 +119,7 @@ export class DireccionesComponent implements OnInit {
         this.placa = recuperarStorage.placaCarro;
         this.diasServicio = recuperarStorage.diasServicio;
         this.total = recuperarStorage.total;
+        this.cupos = recuperarStorage.cupos;
 
       } else {
 
@@ -124,6 +127,7 @@ export class DireccionesComponent implements OnInit {
         this.placa = ' ';
         this.total = ' ';
         this.diasServicio = ' ';
+        this.cupos = ' ';
 
       }
 
@@ -131,6 +135,8 @@ export class DireccionesComponent implements OnInit {
 
       let placaDesa = document.getElementById('placa') as HTMLInputElement
       placaDesa .disabled = true
+      let cuposDesa = document.getElementById('cupos') as HTMLInputElement
+      cuposDesa .disabled = true
       let diasServicioDesa = document.getElementById('diasServicio') as HTMLInputElement
       diasServicioDesa.disabled = true
       let totalDesa = document.getElementById('total') as HTMLInputElement
@@ -174,6 +180,8 @@ export class DireccionesComponent implements OnInit {
 
     let placaDesa = document.getElementById('placa') as HTMLInputElement
     placaDesa .disabled = true
+    let cuposDesa = document.getElementById('cupos') as HTMLInputElement
+    cuposDesa .disabled = true
     let diasServicioDesa = document.getElementById('diasServicio') as HTMLInputElement
     diasServicioDesa.disabled = true
     let totalDesa = document.getElementById('total') as HTMLInputElement
@@ -185,6 +193,8 @@ export class DireccionesComponent implements OnInit {
 
     let placaDesa = document.getElementById('placa') as HTMLInputElement
     placaDesa.disabled = false
+    let cuposDesa = document.getElementById('cupos') as HTMLInputElement
+    cuposDesa.disabled = false
     let diasServicioDesa = document.getElementById('diasServicio') as HTMLInputElement
     diasServicioDesa.disabled = false
     let totalDesa = document.getElementById('total') as HTMLInputElement
@@ -259,6 +269,7 @@ export class DireccionesComponent implements OnInit {
     let dirDestino1 = this.dirDestino;
     let horaSalidaDestino1 = this.horaSalidaDestino;
     let horaSalidaOrigen1 = this.horaSalidaOrigen;
+    let cupos;
     let placa1;
     let tienePlaca1 = this.tienePlaca;
     let total;
@@ -271,16 +282,18 @@ export class DireccionesComponent implements OnInit {
           placa1 = 'sin registro';
           diasServicio = '';
           total = '0';
+          cupos = '0';
         } else {
           placa1 = this.placa;
-          diasServicio = this.diasServicio
-          total = this.total
+          diasServicio = this.diasServicio;
+          total = this.total;
+          cupos = this.cupos;
         }
 
        
 
       
-        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, tienePlaca1, this.emaillogin, total, diasServicio).subscribe(data=> {
+        this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, cupos, tienePlaca1, this.emaillogin, total, diasServicio).subscribe(data=> {
           respuesta=data;
 
 

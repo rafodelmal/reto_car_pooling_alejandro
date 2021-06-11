@@ -1,102 +1,281 @@
-<div class="container ">
+<div class="container">
+  <h1 class="callout-title titulo animated zoomIn">
+    Busca, Viaja ¡Diviertete!
+  </h1>
 
-    <h1 class="callout-title titulo animated zoomIn">Busca, Viaja ¡Diviertete!</h1>
-    
-    <div class=" row col-12 col-md-10 col-lg-8 animated zoomIn" style="width: 70%; height: 80%; margin-left: 15%; margin-top: 4%;">
-        <form class="card card-sm" style="width: 100%; height: 100%;">
+  <div
+    class="row col-12 col-md-10 col-lg-8 animated zoomIn"
+    style="width: 70%; height: 80%; margin-left: 15%; margin-top: 4%"
+  >
+    <form class="card card-sm" style="width: 100%; height: 100%">
+      <div class="card-body row no-gutters align-items-center">
+        <div class="col">
+          <input
+            class="
+              alinearbuscartexto
+              form-control form-control-lg form-control-borderless
+            "
+            type="search"
+            placeholder="Busca un transporte cerca"
+          />
+        </div>
 
-            <div class="card-body row no-gutters align-items-center">
-                
-
-                <div class="col">
-                    <input class="alinearbuscartexto form-control form-control-lg form-control-borderless" type="search"
-                        placeholder="Busca un transporte cerca">
-                </div>
-
-                <div class="col-auto ">
-                    <button class="btn btn-lg btn-primary alinearbuscarboton button"  type="submit">Buscar</button>
-                </div>
-
-            </div>
-        </form>
-    </div>
+        <div class="col-auto">
+          <button
+            class="btn btn-lg btn-primary alinearbuscarboton button"
+            type="submit"
+          >
+            Buscar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 
-
 <form action="">
-
-<div class="container-fluid animated fadeIn ">
+  <div class="container-fluid animated fadeIn">
     <div class="row">
+      <div class="col-md-12">
+        <div class="card justicarcards2" *ngFor="let carpoolers of carpooler">
+          <div class="col-md-4 justificadocards">
+            <div class="card card-user animated zoomIn">
+              <div class="image">
+                <img src="assets/img/faces/mapa.jpg" alt="..." />
+              </div>
+              <div class="content" style="margin-bottom: 0%">
+                <div class="author">
+                  <img
+                    class="avatar border-gray"
+                    src="assets/img/faces/face-1.jpg"
+                    alt="..."
+                  />
+                  <h4 class="title">
+                    {{ carpoolers.nombre }} {{ carpoolers.apellido }}<br />
+                    <small>Telefono: {{ carpoolers.telefono }}</small
+                    ><br />
+                  </h4>
+                  <label for="" style="visibility: hidden">{{
+                    carpoolers.email
+                  }}</label>
+                  <label for="" style="visibility: hidden">{{
+                    carpoolers.idUsuario
+                  }}</label>
+                </div>
+                <hr />
+                <h5 style="color: #1565c0">
+                  Salida :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.dirOrigen
+                  }}</a>
+                </h5>
+                <h5 style="color: #1565c0">
+                  Hora de salida :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.horaSalidaOrigen
+                  }}</a>
+                </h5>
+                <hr />
+                <h5 style="color: #1565c0">
+                  Destino :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.dirDestino
+                  }}</a>
+                </h5>
+                <h5 style="color: #1565c0">
+                  Hora de salida :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.horaSalidaDestino
+                  }}</a>
+                </h5>
+                <hr />
+                <h5 style="color: #1565c0">
+                  Dias de ruta :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.diasServicio
+                  }}</a>
+                </h5>
+                <h5 style="color: #1565c0">
+                  Cupos Disponibles :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.cupos
+                  }}</a>
+                </h5>
+                <h5 style="color: #1565c0">
+                  total por dia :
+                  <a style="font-size: small; color: #424242">{{
+                    carpoolers.total
+                  }}</a>
+                </h5>
+                <hr />
+              </div>
 
-        <div class="col-md-12">
+              <div class="text-center">
+                <button
+                  class="btn btn-primary alinearbotoncard button"
+                  type="submit"
+                  data-toggle="modal"
+                  data-target="#dias2"
+                >
+                  Reservar 2
+                </button>
 
-            
+                <button
+                  href="#"
+                  class="btn btn-primary alinearbotoncard button"
+                  type="submit"
+                  (click)="reservar(carpoolers.idUsuario, carpoolers.email)"
+                >
+                  Reservar
+                </button>
+              </div>
+            </div>
+          </div>
 
-            <div class="card justicarcards2"  *ngFor="let carpoolers of carpooler">
+           <!-- line modal -->
+   <div
+   class="modal fade"
+   id="dias2"
+   tabindex="-1"
+   role="document"
+   aria-labelledby="modalLabel"
+   aria-hidden="true"
+   data-dismiss="modal"
+   data-backdrop="false"
+ >
+   <div
+     class="
+       modal-dialog
+       animated
+       zoomIn
+       modal-dialog-centered modal-lg
+     "
+   >
+     <div class="modal-content">
 
-                <div class="col-md-4 justificadocards ">
+       <div class="modal-header fadeIn first">
+         <button
+           type="button"
+           class="close"
+           data-dismiss="modal"
+         >
+           <span aria-hidden="true">×</span
+           ><span class="sr-only">Cerrar</span>
+         </button>
 
+         <h3 class="modal-title" id="lineModalLabel">
+           <img
+             src="../../assets/img/animat-camp/39 - Order Tracking.gif"
+             alt=""
+             width="80"
+             height="75"
+             class="d-inline-block align-top"
+           />
+           Realiza tu reserva
+         </h3>
+       </div>
 
-                     <div class="card card-user animated zoomIn">
+       <div class="modal-body">
+         <!-- content goes here -->
+         <form>
 
-                        <div class="image">
-                            <img src="assets/img/faces/mapa.jpg" alt="..." />
-                        </div>
-                        <div class="content" style="margin-bottom: 0%;">
-                            <div class="author">
-                                    <img class="avatar border-gray" src="assets/img/faces/face-1.jpg" alt="..." />
-                                    <h4 class="title">{{carpoolers.nombre}} {{carpoolers.apellido}}<br/>
-                                        <small>Telefono: {{carpoolers.telefono}}</small><br>
-                                        <label style="margin-top: 4%;">Valor del viaje: {{carpoolers.total}}</label>
-                                    </h4>
-                                    <label for="" style="visibility:hidden">{{carpoolers.email}}</label>
-                                    <label for="" style="visibility:hidden">{{carpoolers.idUsuario}}</label>
-                            </div>
-                            <hr>
-                            <table class="table table-hover">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">Salida</th>
-                                    <th scope="col">casa</th>
-                                    <th scope="col">Destino</th>
-                                    <th scope="col">trabajo</th>
-                                    <th scope="col">Dias de Servicio</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td style="font-size: small;">{{carpoolers.dirOrigen}}</td>
-                                    <td style="font-size: small;">{{carpoolers.horaSalidaOrigen}}</td>
-                                    <td style="font-size: small;">{{carpoolers.dirDestino}}</td>
-                                    <td style="font-size: small;">{{carpoolers.horaSalidaDestino}}</td>
-                                    <td style="font-size: small;">{{carpoolers.diasServicio}}</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </div>
-                        <hr>
+            <div class="content">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group fadeIn second" style="margin-left: 0.938em;">
+                        <label>¿cuantos puestos necesitas?</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          placeholder="¿cuantos puestos necesitas?"
+                          id="dirOrigen"
+                          name="dirOrigen"
+                          [(ngModel)]="cupos" 
+                        />
+                      </div>
+                    </div>
+    
+                    <div class="col-md-8">
+                      <div class="form-group">
 
                         
-                        <div class="text-center">
-                            <button href="#" class="btn btn-primary alinearbotoncard button" type="submit" (click)="reservar(carpoolers.idUsuario,carpoolers.email)" >Reservar</button>
+                        <div class="checkbox fadeIn second" style="margin-left: 6.875em;" >
+                            <input class="checkbox" id="lunes" type="checkbox" [(ngModel)]="lunes" [ngModelOptions]="{standalone: true}" />
+                            <label class="checkbox" for="lunes"> Lunes </label>
+
+                            <input class="checkbox" id="martes" type="checkbox" [(ngModel)]="martes" [ngModelOptions]="{standalone: true}" />
+                            <label style="margin-left: 3.125em;" class="checkbox" for="martes" > Martes </label>
+
+                            <input class="checkbox" id="miercoles" type="checkbox" [(ngModel)]="miercoles" [ngModelOptions]="{standalone: true}" />
+                            <label style="margin-left: 3.125em;" class="checkbox" for="miercoles"> Miercoles </label>
+
+                            <input class="checkbox" id="jueves" type="checkbox" [(ngModel)]="jueves" [ngModelOptions]="{standalone: true}" />
+                            <label style="margin-left: 3.125em;" class="checkbox" for="jueves"> Jueves </label>
+
                         </div>
+
+                        <div class="checkbox fadeIn third" style="margin-left: 9.688em; margin-top: 0.938em;">
+                            <input class="checkbox" id="viernes" type="checkbox" [(ngModel)]="viernes" [ngModelOptions]="{standalone: true}" />
+                            <label class="checkbox" for="viernes"> Viernes </label>
+
+                            <input class="checkbox" id="sabado" type="checkbox" [(ngModel)]="sabado" [ngModelOptions]="{standalone: true}" />
+                            <label style="margin-left: 3.125em;" class="checkbox" for="sabado"> Sabado </label>
+
+                            <input class="checkbox" id="domingo" type="checkbox" [(ngModel)]="domingo" [ngModelOptions]="{standalone: true}" />
+                            <label style="margin-left: 3.125em;" class="checkbox" for="domingo"> Domingo </label>
+
+                        </div>
+
+
+                      </div>
                     </div>
-
-
                 </div>
-
-
             </div>
+    
+          
+
 
             
+         </form>
+       </div>
+
+       <div class="modal-footer fadeIn five">
+         <button
+           class="btn button3 cancelarModal btn-lg"
+           id="cerrarModal"
+           name="cerrarModal"
+           type="button"
+           data-dismiss="modal"
+         >
+           Cerrar
+         </button>
+
+         <button
+           type="button"
+           id="guardarDatos"
+           style="margin-bottom: 0.438em;"
+           class="btn button4 cancelarModal btn-lg"
+           data-action="save"
+           role="button"
+           data-dismiss="modal"
+           (click)="prueba(carpoolers.idUsuario, carpoolers.email, carpoolers.cupos)"
+         >
+           guardar
+         </button>
+       </div>
+     </div>
+   </div>
+ </div>
+   <!-- termina modal -->
+
 
         </div>
 
-       
-
+        
+      </div>
     </div>
+  </div>
 
-</div>
+  
 
-</form>
 

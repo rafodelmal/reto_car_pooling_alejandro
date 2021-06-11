@@ -263,7 +263,8 @@
               </div>
 
               <div class="row">
-                <div class="col-md-4">
+
+                <div class="col-md-3">
                   <div class="form-group">
                     <label>Placa</label>
                     <input
@@ -278,7 +279,22 @@
                   </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Cupos</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Cupos"
+                      id="cupos"
+                      name="cupos"
+                      maxlength="6"
+                      [(ngModel)]="cupos"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-3">
                   <div class="form-group">
                     <label>Dias de servicio</label>
                     <input
@@ -294,7 +310,8 @@
                   </div>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
+
                   <div class="form-group">
                     <label>Valor del viaje</label>
                     <input
@@ -306,6 +323,7 @@
                       [(ngModel)]="total"
                     />
                   </div>
+                  
                 </div>
               </div>
 

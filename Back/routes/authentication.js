@@ -123,6 +123,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
     const carpooler = req.body.carpooler;
     const diasServicio = req.body.diasServicio;
     const total = req.body.total;
+    const cupos = req.body.cupos;
 
     const datos = [{dirOrigen,
         email,
@@ -130,6 +131,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
         horaSalidaOrigen,
         horaSalidaDestino, 
         placaCarro,
+        cupos,
         carpooler,
         total,
         diasServicio}];
@@ -151,7 +153,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
         }) */
 
 
-        conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", carpooler="'+carpooler+'", total="'+total+'", diasServicio="'+diasServicio+'" WHERE email="'+email+'"', async (error, results) => {
+        conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", cupos="'+cupos+'", cuposTotales="'+cupos+'", carpooler="'+carpooler+'", total="'+total+'", diasServicio="'+diasServicio+'" WHERE email="'+email+'"', async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -161,6 +163,35 @@ routers.put('/actualizarDireccion', async (req, res) => {
         
     }
 })
+
+
+// actualizar cupos del carpooler 
+
+routers.put('/actualizarCupos', async (req, res) => {
+
+    const cupos = req.body.cupos;
+    const email = req.body.email;
+
+
+    const datos = [{
+        cupos,
+        email
+    }];
+
+        let respuesta;
+
+
+        conexion.query('UPDATE usuario SET cupos="'+cupos+'" WHERE email="'+email+'"', async (error, results) => {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "1"
+            res.send("actualizarCupos", datos);  
+            console.log("actualizarCupos", datos)
+        })
+        
+    
+})
+
 
 
 

@@ -121,6 +121,25 @@ export class ReservasService {
 
   }
 
+  putCupos(cupos,email){
+
+    console.log("cupos service",cupos)
+    console.log("email service",email)
+
+    let totalCuposCarpooler = {
+      cupos,
+      email
+    }
+
+    const headers =  { 'content-type': 'application/json'};
+    const body = JSON.stringify(totalCuposCarpooler);
+
+  return this.http.put('http://localhost:3000/actualizarCupos', body, {'headers': headers});
+
+
+
+  }
+
 
 
 }
