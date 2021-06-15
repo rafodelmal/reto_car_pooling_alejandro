@@ -296,6 +296,7 @@ export class DireccionesComponent implements OnInit {
         this.service.postDireccion(dirOrigen1, dirDestino1, horaSalidaDestino1, horaSalidaOrigen1, placa1, cupos, tienePlaca1, this.emaillogin, total, diasServicio).subscribe(data=> {
           respuesta=data;
 
+          let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
           console.log("respuesta en component", respuesta);
 
@@ -328,6 +329,20 @@ export class DireccionesComponent implements OnInit {
             
           }
             console.log(dirOrigen1 + ' ' + dirDestino1 + ' ' + horaSalidaDestino1 + ' ' + horaSalidaOrigen1 + ' ' + placa1 + ' ' + tienePlaca1 + ' ' + this.emaillogin)
+
+            recuperarStorage.dirOrigen = this.dirOrigen;
+            recuperarStorage.dirDestino = this.dirDestino;
+            recuperarStorage.horaSalidaOrigen = this.horaSalidaOrigen;
+            recuperarStorage.horaSalidaDestino = this.horaSalidaDestino;
+            recuperarStorage.carpooler = this.tienePlaca;
+            recuperarStorage.placaCarro = this.placa;
+            recuperarStorage.cupos = this.cupos;
+            recuperarStorage.diasServicio = this.diasServicio;
+
+            
+            localStorage.setItem("datosSesion", JSON.stringify(recuperarStorage));
+
+
         })
       }
 

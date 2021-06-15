@@ -81,6 +81,8 @@ export class UserComponent implements OnInit {
 
     this.service.postUsuario(email1, nombre1, apellido1, documento1, telefono1).subscribe(data=> {
 
+      let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
+
       respuesta=data;
 
       console.log("respuesta",respuesta);
@@ -110,7 +112,14 @@ export class UserComponent implements OnInit {
   
       }
 
+     
 
+      recuperarStorage.nombre = this.nombre;
+      recuperarStorage.apellido = this.apellido;
+      recuperarStorage.telefono = this.telefono;
+      recuperarStorage.documento = this.documento;
+
+      localStorage.setItem("datosSesion", JSON.stringify(recuperarStorage));
 
       
 

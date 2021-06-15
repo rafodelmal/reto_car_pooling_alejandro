@@ -10,6 +10,13 @@ export class ReservasService {
 
   constructor(private http: HttpClient) { }
 
+  getBuscReserva<T>(idUsuario3, emailCarpooler,inscribir2): Observable<T> {
+
+    return this.http.get('http://localhost:3000/buscarReserva?idUsuario3='+idUsuario3+'&emailCarpooler='+emailCarpooler+'&inscribir='+inscribir2).pipe(map((response) => response as T));
+
+  }
+
+
 
   getReservas<T>(reserva, email): Observable<T> {
 
@@ -17,6 +24,41 @@ export class ReservasService {
 
   }
 
+  // Actualiza los cupos del usuario //
+  putCuposUsuarioCancelar(emailCliente, cuposReserva): Observable<any> {
+
+    console.log("correo service",emailCliente)
+
+    let userCupos = {
+      emailCliente,
+      cuposReserva
+    }
+
+    const headers =  { 'content-type': 'application/json'};
+    const body = JSON.stringify(userCupos);
+
+  console.log("userCupos service", userCupos)
+
+  return this.http.put('http://localhost:3000/cuposUsuario', body, {'headers': headers});
+
+  }
+
+    // Actualiza los cupos del carpooler //
+    putCuposUsuarioCarpooler(emailCarpooler, cuposCancelar): Observable<any> {
+  
+      let cuposCarpooler = {
+        emailCarpooler,
+        cuposCancelar
+      }
+  
+      const headers =  { 'content-type': 'application/json'};
+      const body = JSON.stringify(cuposCarpooler);
+  
+    console.log("cuposCarpooler service", cuposCarpooler)
+  
+    return this.http.put('http://localhost:3000/cuposCarpooler', body, {'headers': headers});
+  
+    }
 
 
   // quita una reserva de la tabla reservainfo //
@@ -107,11 +149,11 @@ export class ReservasService {
     console.log("correo inscribir",emailCarpooler)
     console.log("idUsuario3 inscribir",idUsuario3)
 
+
     let userInscripcion = {
       inscribir,
       idUsuario3,
       emailCarpooler
-     
     }
 
     const headers =  { 'content-type': 'application/json'};
@@ -135,6 +177,25 @@ export class ReservasService {
     const body = JSON.stringify(totalCuposCarpooler);
 
   return this.http.put('http://localhost:3000/actualizarCupos', body, {'headers': headers});
+
+
+
+  }
+
+  putCuposUsuario(email, cuposReserva){
+
+    console.log("cuposReserva service",cuposReserva)
+    console.log("email service",email)
+
+    let totalCuposCarpooler = {
+      email,
+      cuposReserva
+    }
+
+    const headers =  { 'content-type': 'application/json'};
+    const body = JSON.stringify(totalCuposCarpooler);
+
+  return this.http.put('http://localhost:3000/actualizarCuposUsuario', body, {'headers': headers});
 
 
 

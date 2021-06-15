@@ -117,17 +117,17 @@
                   data-toggle="modal"
                   data-target="#dias2"
                 >
-                  Reservar 2
+                  Reservar
                 </button>
 
-                <button
+               <!-- <button
                   href="#"
                   class="btn btn-primary alinearbotoncard button"
                   type="submit"
                   (click)="reservar(carpoolers.idUsuario, carpoolers.email)"
                 >
                   Reservar
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
@@ -148,7 +148,7 @@
        modal-dialog
        animated
        zoomIn
-       modal-dialog-centered modal-lg
+       modal-dialog-centered modal-sm
      "
    >
      <div class="modal-content">
@@ -163,7 +163,7 @@
            ><span class="sr-only">Cerrar</span>
          </button>
 
-         <h3 class="modal-title" id="lineModalLabel">
+         <h4 class="modal-title" id="lineModalLabel">
            <img
              src="../../assets/img/animat-camp/39 - Order Tracking.gif"
              alt=""
@@ -172,7 +172,7 @@
              class="d-inline-block align-top"
            />
            Realiza tu reserva
-         </h3>
+         </h4>
        </div>
 
        <div class="modal-body">
@@ -181,7 +181,7 @@
 
             <div class="content">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                       <div class="form-group fadeIn second" style="margin-left: 0.938em;">
                         <label>¿cuantos puestos necesitas?</label>
                         <input
@@ -195,6 +195,7 @@
                       </div>
                     </div>
     
+                    <!--
                     <div class="col-md-8">
                       <div class="form-group">
 
@@ -228,7 +229,9 @@
 
 
                       </div>
-                    </div>
+                    </div>  -->
+
+
                 </div>
             </div>
     
@@ -258,7 +261,7 @@
            data-action="save"
            role="button"
            data-dismiss="modal"
-           (click)="prueba(carpoolers.idUsuario, carpoolers.email, carpoolers.cupos)"
+           (click)="reservar(carpoolers.idUsuario, carpoolers.email, carpoolers.cupos)"
          >
            guardar
          </button>

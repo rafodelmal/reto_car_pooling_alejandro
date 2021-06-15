@@ -153,7 +153,7 @@ routers.put('/actualizarDireccion', async (req, res) => {
         }) */
 
 
-        conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", cupos="'+cupos+'", cuposTotales="'+cupos+'", carpooler="'+carpooler+'", total="'+total+'", diasServicio="'+diasServicio+'" WHERE email="'+email+'"', async (error, results) => {
+        conexion.query('UPDATE usuario SET dirOrigen="'+dirOrigen+'", dirDestino="'+dirDestino+'", horaSalidaOrigen="'+horaSalidaOrigen+'", horaSalidaDestino="'+horaSalidaDestino+'" , placaCarro="'+placaCarro+'", cupos="'+cupos+'", carpooler="'+carpooler+'", total="'+total+'", diasServicio="'+diasServicio+'" WHERE email="'+email+'"', async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -192,7 +192,70 @@ routers.put('/actualizarCupos', async (req, res) => {
     
 })
 
+// actualizar cupos de reserva de usuario
+routers.put('/actualizarCuposUsuario', async (req, res) => {
 
+    const email = req.body.email;
+    const cuposReserva = req.body.cuposReserva;
+
+
+    const datos = [{
+        email,
+        cuposReserva
+    }];
+
+        let respuesta;
+
+
+        conexion.query('UPDATE usuario SET cuposReserva="'+cuposReserva+'" WHERE email="'+email+'"', async (error, results) => {
+
+            console.log('Actualizacion exitosa')
+            respuesta = "1"
+            res.send("actualizarCupos", datos);  
+            console.log("actualizarCupos", datos)
+        })
+        
+    
+})
+
+
+// actualiza cupos del usuario /////
+
+routers.put('/cuposUsuario', async (req, res) => {
+
+    const emailCliente = req.body.emailCliente;
+    const cuposReserva = req.body.cuposReserva;
+    
+        let respuesta;
+
+            conexion.query('UPDATE usuario SET cuposReserva="'+cuposReserva+'" WHERE email="'+emailCliente+'"', async (error, results) => {
+
+            console.log('Actualizacion cuposUsuario exitosa')
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+        
+})
+
+
+// actualiza cupos del carpooler /////
+
+routers.put('/cuposCarpooler', async (req, res) => {
+
+    const emailCarpooler = req.body.emailCarpooler;
+    const cuposCancelar = req.body.cuposCancelar;
+
+        let respuesta;
+
+            conexion.query('UPDATE usuario SET cupos="'+cuposCancelar+'" WHERE email="'+emailCarpooler+'"', async (error, results) => {
+
+            console.log('Actualizacion cuposCarpooler exitosa')
+            respuesta = "1"
+            res.send(respuesta);  
+            console.log(respuesta)
+        })
+})
 
 
 // elimina la reserva del cliente /////
@@ -345,6 +408,37 @@ routers.put('/prueba', async (req, res) => {
 })
 
 
+// buscar reservas hechas
+///  ver informacion de reservas ////
+routers.get('/buscarReserva', async (req, res) => {
+
+    const idUsuario3 = req.query.idUsuario3;
+    const emailCarpooler = req.query.emailCarpooler;
+    const inscribir = req.query.inscribir;
+
+    conexion.query('SELECT * FROM inscribir WHERE inscribir="'+inscribir+'" and idUsuario3="'+idUsuario3+'" and emailCarpooler="'+emailCarpooler+'"', async (error, results, fields) => {
+        
+        if (error)
+        throw error;
+
+
+    results.forEach(results => {
+        console.log(results);
+    });
+
+    if (results == '') {
+        res.send("2")
+        
+    }else{
+        res.send("3")
+    }
+
+        
+
+    })    
+})
+
+
 ///  ver informacion de reservas ////
 routers.get('/infoReservas', async (req, res) => {
 
@@ -365,6 +459,28 @@ routers.get('/infoReservas', async (req, res) => {
 
     })    
 })
+
+ 
+///  Dias de reserva que hace el usuario ////
+routers.get('/diasReservas', async (req, res) => {
+
+    const inscribir = req.query.inscribir;
+    const idUsuario3 = req.query.idUsuario3;
+
+
+    conexion.query('SELECT * FROM inscribir WHERE idUsuario3="'+idUsuario3+'" and inscribir="'+inscribir+'"  ', async (error, results, fields) => {
+        
+        if (error)
+        throw error;
+
+    results.forEach(results => {
+        console.log(results);
+    });
+
+    res.send(results)
+
+    })    
+})  
 
 
 routers.get('/infoReservasCarpooler', async (req, res) => {

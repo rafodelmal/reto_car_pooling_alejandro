@@ -2,8 +2,8 @@
     <div class="container-fluid animated zoomIn">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="header">
+                <div class="card fadeIn first">
+                    <div class="header fadeIn first">
                         <h4 class="title">Informacion de Reservas</h4>
                         <p class="category">Acá están todas tus reservas activas actualmente.</p>
                     </div>
@@ -11,33 +11,42 @@
 
                           <table class="table table-hover table-striped">
 
-                                <thead>
+                                <thead class="fadeIn second">
                                     <tr>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Cedula</th>
                                         <th scope="col">Telefono</th>
                                         <th scope="col">Hora de salida casa</th>
                                         <th scope="col">Hora de salida trabajo</th>
-                                        <th scope="col">Dias reservados</th>
-                                        <th scope="col">Total a pagar</th>
+                                        <th scope="col" *ngIf="carpooler==0">Dias reservados</th>
+                                        <th scope="col" *ngIf="carpooler==1">Cupos reservados</th>
+                                        <th scope="col" *ngIf="carpooler==1">Total a pagar</th>
+                                        <th scope="col" *ngIf="carpooler==0">Total a pagar</th>
                                         <th scope="col" *ngIf="carpooler==0">Cancelar viaje</th>
                                     </tr>
                                 </thead>
 
-                                <tbody>
-                                    <tr *ngFor="let reserva of reservas">
+                                <tbody class="fadeIn third">
+                                    <tr *ngFor="let reserva of reservas" >
                                         <td>{{reserva.nombre}}</td>
                                         <td>{{reserva.documento}}</td>
                                         <td>{{reserva.telefono}}</td>
                                         <td>{{reserva.horaSalidaOrigen}}</td>
                                         <td>{{reserva.horaSalidaDestino}}</td>
-                                        <td>{{reserva.diasServicio}}</td>
-                                        <td>{{reserva.total}}</td>
+                                        <td *ngIf="carpooler==0">{{reserva.diasServicio}}</td>
+                                        <td *ngIf="carpooler==1">{{reserva.cuposReserva}}</td>
+                                        <td *ngIf="carpooler==1">{{toalCarpooler}}</td>
+                                        <td *ngIf="carpooler==0">{{reserva.total}}</td>
                                         <td *ngIf="carpooler==0">
-                                            <button type="submit" class="btn btn-info btn-fill button fadeIn first" id="botonDireccion"
-                                             name="botonDireccion" (click)="putReserva(reserva.email,reserva.idUsuario)" >Cancelar</button>
+                                            <button type="submit" class="btn btn-info btn-fill button fadeIn fourth" id="botonDireccion"
+                                             name="botonDireccion" (click)="putReserva(reserva.email,reserva.idUsuario,reserva.cupos)" >Cancelar</button>
     
                                         </td>
+                                  <!--     <td >
+                                            <button type="submit" class="btn btn-info btn-fill button fadeIn fourth" id="botonDireccion"
+                                             name="botonDireccion" (click)="prueba(reserva.email,reserva.idUsuario,reserva.cupos)" >Prueba</button>
+    
+                                        </td> --> 
                                     </tr>
                                 </tbody>
                           </table>
