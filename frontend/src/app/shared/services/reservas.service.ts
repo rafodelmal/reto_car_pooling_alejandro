@@ -105,9 +105,9 @@ export class ReservasService {
 
   // se carga informacion de reservas en tablas
 
-  getCarpooling<T>(carpooler, email): Observable<T> {
+  getCarpooling<T>(carpooler, email, cupos): Observable<T> {
 
-    return this.http.get('http://localhost:3000/infocarpooling?carpooler='+carpooler+'&email='+email).pipe(map((response) => response as T));
+    return this.http.get('http://localhost:3000/infocarpooling?carpooler='+carpooler+'&email='+email+'&cupos='+cupos).pipe(map((response) => response as T));
 
   }
 

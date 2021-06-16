@@ -17,6 +17,7 @@ import { DireccionesComponent } from './direcciones/direcciones.component';
 import { BrowserModule } from '@angular/platform-browser'
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { NgxWhastappButtonModule } from "ngx-whatsapp-button";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { RegistrarComponent } from './registrar/registrar.component';
     NavbarModule,
     FooterModule,
     SidebarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxWhastappButtonModule
   ],
   declarations: [
     AppComponent,

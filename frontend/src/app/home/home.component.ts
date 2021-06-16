@@ -51,6 +51,10 @@ export class HomeComponent implements OnInit {
   idUsuarioCarpooler: any;
   emailUsuario: any;
 
+  emailModal: any;
+  idModal: any;
+  cuposModal: any;
+
   constructor(
     private service: ReservasService,
     private datosLogin: LoginService,
@@ -58,6 +62,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     let respuesta2;
     let emailLogin2 = this.datosLogin.email;
     let claveLogin = this.datosLogin.clave;
@@ -78,12 +83,13 @@ export class HomeComponent implements OnInit {
     }
 
     let carpooler = 1;
+    let cupos = 0
     let respuesta;
     let emailLogin;
 
     emailLogin = recuperarStorage.email;
 
-    this.service.getCarpooling(carpooler, emailLogin).subscribe((data) => {
+    this.service.getCarpooling(carpooler, emailLogin, cupos).subscribe((data) => {
       respuesta = data;
 
       console.log(respuesta);
@@ -92,7 +98,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  datosModal(idModal, emailModal, cuposModal){
+ 
+    this.emailModal = emailModal
+    this.idModal = idModal
+    this.cuposModal = cuposModal
+
+  }
+
   reservar(idUsuario2, emailCarpooler, cuposCarpooler) {
+
+    console.log("idUsuario2, emailCarpooler, cuposCarpooler",idUsuario2, emailCarpooler, cuposCarpooler)
 
     let recuperarStorage = JSON.parse(localStorage.getItem("datosSesion"));
 

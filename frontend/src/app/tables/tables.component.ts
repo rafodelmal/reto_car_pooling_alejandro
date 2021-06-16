@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ReservasService } from 'app/shared/services/reservas.service';
 import { User } from '../login/user';
 import { data } from 'jquery';
 import { LoginService } from 'app/shared/services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 
 declare interface TableData {
   headerRow: string[];
@@ -30,10 +31,12 @@ export class TablesComponent implements OnInit {
   toalCarpooler: any;
   diasReservas: any;
 
+
   constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
 
   ngOnInit(): void {
+
 
     let respuesta2
     let emailLogin2 = this.datosLogin.email;

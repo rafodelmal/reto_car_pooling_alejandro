@@ -7,9 +7,10 @@
                         <h4 class="title">Informacion de Reservas</h4>
                         <p class="category">Acá están todas tus reservas activas actualmente.</p>
                     </div>
+
                     <div class="content table-responsive table-full-width">
 
-                          <table class="table table-hover table-striped">
+                          <table class="table table-hover table-hover">
 
                                 <thead class="fadeIn second">
                                     <tr>
@@ -22,6 +23,7 @@
                                         <th scope="col" *ngIf="carpooler==1">Cupos reservados</th>
                                         <th scope="col" *ngIf="carpooler==1">Total a pagar</th>
                                         <th scope="col" *ngIf="carpooler==0">Total a pagar</th>
+                                        <th scope="col">Contactalo</th>
                                         <th scope="col" *ngIf="carpooler==0">Cancelar viaje</th>
                                     </tr>
                                 </thead>
@@ -37,11 +39,21 @@
                                         <td *ngIf="carpooler==1">{{reserva.cuposReserva}}</td>
                                         <td *ngIf="carpooler==1">{{toalCarpooler}}</td>
                                         <td *ngIf="carpooler==0">{{reserva.total}}</td>
+                                        <td>
+
+                                            
+
+                                            <a class="fadeIn fourth" type="button" target="_blank" [href]="'https://api.whatsapp.com/send?phone='+reserva.telefono" ><img src="../../assets/img/animat-camp/whatsapp.gif"
+                                                alt="" width="40" height="40" class="d-inline-block align-top " ></a>
+ 
+                                             <jjva-ngx-whatsapp-button [ngx_whatsapp_phone]="phone" [ngx_whatsapp_text]="title"></jjva-ngx-whatsapp-button>
+                                         </td>
                                         <td *ngIf="carpooler==0">
                                             <button type="submit" class="btn btn-info btn-fill button fadeIn fourth" id="botonDireccion"
                                              name="botonDireccion" (click)="putReserva(reserva.email,reserva.idUsuario,reserva.cupos)" >Cancelar</button>
     
                                         </td>
+
                                   <!--     <td >
                                             <button type="submit" class="btn btn-info btn-fill button fadeIn fourth" id="botonDireccion"
                                              name="botonDireccion" (click)="prueba(reserva.email,reserva.idUsuario,reserva.cupos)" >Prueba</button>

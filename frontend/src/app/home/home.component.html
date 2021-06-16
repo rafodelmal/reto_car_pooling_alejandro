@@ -116,6 +116,7 @@
                   type="submit"
                   data-toggle="modal"
                   data-target="#dias2"
+                  (click)="datosModal(carpoolers.idUsuario, carpoolers.email, carpoolers.cupos)"
                 >
                   Reservar
                 </button>
@@ -183,6 +184,9 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group fadeIn second" style="margin-left: 0.938em;">
+                        <label>{{emailprueba}}</label>
+                        <label>{{idprueba}}</label>
+                        <label>{{cuposprueba}}</label>
                         <label>¿cuantos puestos necesitas?</label>
                         <input
                           type="number"
@@ -261,7 +265,7 @@
            data-action="save"
            role="button"
            data-dismiss="modal"
-           (click)="reservar(carpoolers.idUsuario, carpoolers.email, carpoolers.cupos)"
+           (click)="reservar(idModal, emailModal, cuposModal)"
          >
            guardar
          </button>
