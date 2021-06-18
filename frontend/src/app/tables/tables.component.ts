@@ -31,11 +31,17 @@ export class TablesComponent implements OnInit {
   toalCarpooler: any;
   diasReservas: any;
 
+  cuposReservaInscribir: any;
+  
+  cuposReservados: any;
+
 
   constructor(private service: ReservasService, private datosLogin: LoginService, private router: Router) { }
 
 
   ngOnInit(): void {
+
+
 
 
     let respuesta2
@@ -67,9 +73,14 @@ export class TablesComponent implements OnInit {
 
         this.reservas = respuesta
 
-        console.log("emailCarpooleremailCarpooleremailCarpooler", respuesta)
+        this.cuposReservaInscribir = respuesta.cuposReserva
+
+        console.log("cuposReservaInscribir cuposReservaInscribir", this.cuposReservaInscribir)
+
 
       });
+
+   
 
       
     } else {
@@ -102,8 +113,6 @@ export class TablesComponent implements OnInit {
 
 
     let cuposCancelar = cuposcarpooler + recuperarStorage.cuposReserva
-
-    recuperarStorage.cuposReserva = 55555
 
     console.log("recuperarStorage", recuperarStorage)
     
@@ -153,12 +162,15 @@ export class TablesComponent implements OnInit {
   }
 
 
-  putReserva(email, idUsuario ,cuposcarpooler) {
+  putReserva(email, idUsuario ,cuposcarpooler2) {
 
     let recuperarStorage = JSON.parse( localStorage.getItem("datosSesion"));
 
+
     //tabla usuario
-    let cuposCancelar = cuposcarpooler + recuperarStorage.cuposReserva
+    let cuposcarpooler = cuposcarpooler2
+    let cuposCancelar;
+    let cuposCancelar2;
     let cuposReserva = 0
 
     console.log("cuposcarpooler", cuposcarpooler)
@@ -167,6 +179,7 @@ export class TablesComponent implements OnInit {
     // tabla inscribir //
     let emailCarpooler = email
     let inscribir = 1
+    let inscribir2 = 0
 
 
     // tabla inforeserva //
@@ -176,75 +189,110 @@ export class TablesComponent implements OnInit {
 
     let respuesta, respuesta2, respuesta3;
 
+    let idUsuario3 = recuperarStorage.idUsuario
+
 
     emailCliente = recuperarStorage.email
 
 
-    this.service.putReserva(reserva2, emailCliente,idUsuario2).subscribe(data => {
+
+    this.service.getInfoCuposReservados(inscribir2, idUsuario3).subscribe(data => {
       respuesta = data;
 
       console.log("respuesta de la bd", respuesta)
 
-      this.reservas = respuesta
+      for (let elemento of respuesta) {
+        
 
-      if (data === 1) {
+        if( idUsuario3 = elemento.idUsuario ){
 
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'Reserva cancelada con exito.',
-          showConfirmButton: false,
-          timer: 1300
-        })
+          cuposCancelar = cuposcarpooler + elemento.cuposReserva
+          
 
-        this.router.navigate(['/carpool'])
+          console.log("eeeeeeee", elemento.cuposReserva)
+          
+        }
 
-      } else {
 
-        Swal.fire({
-          position: 'top',
-          icon: 'error',
-          title: '¡No fue posible cancelar la reserva!',
-          showConfirmButton: false,
-          timer: 1700
-        })
+       }
 
-      }
+       
+       this.service.putReserva(reserva2, emailCliente,idUsuario2).subscribe(data => {
+        respuesta = data;
+  
+        console.log("respuesta de la bd", respuesta)
+  
+        this.reservas = respuesta
+  
+        if (data === 1) {
+  
+          Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Reserva cancelada con exito.',
+            showConfirmButton: false,
+            timer: 1300
+          })
+  
+          this.router.navigate(['/carpool'])
+  
+        } else {
+  
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: '¡No fue posible cancelar la reserva!',
+            showConfirmButton: false,
+            timer: 1700
+          })
+  
+        }
+  
+  
+      });
+  
+  
+  
+      this.service.putInscribir(inscribir, emailCarpooler).subscribe(data => {
+        respuesta2 = data;
+  
+        console.log("respuesta de la bd inscribir", respuesta2)
+  
+  
+      });
+  
+  
+  
+      this.service.putCuposUsuarioCancelar(idUsuario3, cuposReserva, emailCarpooler ).subscribe(data => {
+        respuesta2 = data;
+  
+        console.log("emailCliente", idUsuario3)
+        console.log("cuposReserva", cuposReserva)
+        console.log("emailCarpooler", emailCarpooler)
+  
+  
+      });
+  
+  
+      this.service.putCuposUsuarioCarpooler(emailCarpooler, cuposCancelar).subscribe(data => {
+        respuesta3 = data;
+  
+        console.log("emailCarpooler", emailCarpooler)
+        console.log("cuposCancelar cuposCancelarcuposCancelarcuposCancelar", cuposCancelar)
+  
+  
+  
+      });
+   
+      this.cuposReservados = respuesta
+
+      console.log("cuposCancelar cuposCancelar", cuposCancelar)
 
 
     });
 
 
-
-    this.service.putInscribir(inscribir, emailCarpooler).subscribe(data => {
-      respuesta2 = data;
-
-      console.log("respuesta de la bd inscribir", respuesta2)
-
-
-    });
-
-
-    this.service.putCuposUsuarioCancelar(emailCliente, cuposReserva ).subscribe(data => {
-      respuesta2 = data;
-
-      console.log("emailCliente", emailCliente)
-      console.log("cuposReserva", cuposReserva)
-
-
-    });
-
-
-
-    this.service.putCuposUsuarioCarpooler(emailCarpooler, cuposCancelar).subscribe(data => {
-      respuesta3 = data;
-
-      console.log("emailCarpooler", emailCarpooler)
-      console.log("cuposCancelar", cuposCancelar)
-
-
-
-    });
+    
 
     recuperarStorage.cuposReserva = 0;
 

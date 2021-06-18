@@ -24,14 +24,21 @@ export class ReservasService {
 
   }
 
-  // Actualiza los cupos del usuario //
-  putCuposUsuarioCancelar(emailCliente, cuposReserva): Observable<any> {
+  getInfoCuposReservados<T>(inscribir2, idUsuario3): Observable<T> {
 
-    console.log("correo service",emailCliente)
+    return this.http.get('http://localhost:3000/infoCuposReservados?idUsuario3='+idUsuario3+'&inscribir='+inscribir2).pipe(map((response) => response as T));
+
+  }
+
+  // Actualiza los cupos del usuario //
+  putCuposUsuarioCancelar(idUsuario3, cuposReserva, emailCarpooler): Observable<any> {
+
+    console.log("correo service",idUsuario3)
 
     let userCupos = {
-      emailCliente,
-      cuposReserva
+      idUsuario3,
+      cuposReserva,
+      emailCarpooler
     }
 
     const headers =  { 'content-type': 'application/json'};
@@ -43,8 +50,12 @@ export class ReservasService {
 
   }
 
+
+
     // Actualiza los cupos del carpooler //
     putCuposUsuarioCarpooler(emailCarpooler, cuposCancelar): Observable<any> {
+
+      console.log("cuposCancelar service", cuposCancelar)
   
       let cuposCarpooler = {
         emailCarpooler,
@@ -54,7 +65,7 @@ export class ReservasService {
       const headers =  { 'content-type': 'application/json'};
       const body = JSON.stringify(cuposCarpooler);
   
-    console.log("cuposCarpooler service", cuposCarpooler)
+    console.log("cuposCarpooler cuposCarpooler service", cuposCarpooler)
   
     return this.http.put('http://localhost:3000/cuposCarpooler', body, {'headers': headers});
   
@@ -143,7 +154,7 @@ export class ReservasService {
 
 
 
-  postInscripcion(inscribir,emailCarpooler, idUsuario3): Observable<any> {
+  postInscripcion(inscribir,emailCarpooler, idUsuario3, cuposReserva): Observable<any> {
 
     console.log("inscribir service",inscribir)
     console.log("correo inscribir",emailCarpooler)
@@ -153,7 +164,8 @@ export class ReservasService {
     let userInscripcion = {
       inscribir,
       idUsuario3,
-      emailCarpooler
+      emailCarpooler,
+      cuposReserva
     }
 
     const headers =  { 'content-type': 'application/json'};
@@ -181,14 +193,14 @@ export class ReservasService {
 
 
   }
-
-  putCuposUsuario(email, cuposReserva){
+/*
+  putCuposUsuario(idUsuario3, cuposReserva){
 
     console.log("cuposReserva service",cuposReserva)
-    console.log("email service",email)
+    console.log("email service",idUsuario3)
 
     let totalCuposCarpooler = {
-      email,
+      idUsuario3,
       cuposReserva
     }
 
@@ -200,7 +212,7 @@ export class ReservasService {
 
 
   }
-
+ */
 
 
 }

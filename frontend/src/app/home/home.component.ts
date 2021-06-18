@@ -268,16 +268,16 @@ export class HomeComponent implements OnInit {
                     console.log(respuesta);
                   });
 
-                  this.service
-                  .putCuposUsuario(emailCliente, cuposReserva)
+                 /* this.service
+                  .putCuposUsuario(idUsuario3, cuposReserva)
                   .subscribe((data) => {
                     respuesta = data;
 
                     console.log(respuesta);
-                  });
+                  }); */
 
                 this.service
-                  .postInscripcion(inscribir, emailCarpooler, idUsuario3)
+                  .postInscripcion(inscribir, emailCarpooler, idUsuario3, cuposReserva)
                   .subscribe((data) => {
                     respuesta2 = data;
 

@@ -192,22 +192,23 @@ routers.put('/actualizarCupos', async (req, res) => {
     
 })
 
-// actualizar cupos de reserva de usuario
+// actualizar cupos de reserva de usuario  
+ /*
 routers.put('/actualizarCuposUsuario', async (req, res) => {
 
-    const email = req.body.email;
+    const idUsuario3 = req.body.idUsuario3;
     const cuposReserva = req.body.cuposReserva;
 
 
     const datos = [{
-        email,
+        idUsuario3,
         cuposReserva
     }];
 
         let respuesta;
 
 
-        conexion.query('UPDATE usuario SET cuposReserva="'+cuposReserva+'" WHERE email="'+email+'"', async (error, results) => {
+        conexion.query('UPDATE inscribir SET cuposReserva="'+cuposReserva+'" WHERE idUsuario3="'+idUsuario3+'" ', async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -216,19 +217,20 @@ routers.put('/actualizarCuposUsuario', async (req, res) => {
         })
         
     
-})
+})*/
 
 
 // actualiza cupos del usuario /////
 
 routers.put('/cuposUsuario', async (req, res) => {
 
-    const emailCliente = req.body.emailCliente;
+    const idUsuario3 = req.body.idUsuario3;
     const cuposReserva = req.body.cuposReserva;
+    const emailCarpooler = req.body.emailCarpooler;
     
         let respuesta;
 
-            conexion.query('UPDATE usuario SET cuposReserva="'+cuposReserva+'" WHERE email="'+emailCliente+'"', async (error, results) => {
+            conexion.query('UPDATE inscribir SET cuposReserva="'+cuposReserva+'" WHERE idUsuario3="'+idUsuario3+'" and emailCarpooler="'+emailCarpooler+'"  ', async (error, results) => {
 
             console.log('Actualizacion cuposUsuario exitosa')
             respuesta = "1"
@@ -373,9 +375,10 @@ routers.post('/crearInscripcion', async (req, res) => {
     const inscribir = req.body.inscribir;
     const idUsuario3 = req.body.idUsuario3;
     const emailCarpooler = req.body.emailCarpooler;
+    const cuposReserva = req.body.cuposReserva;
 
 
-          conexion.query('INSERT INTO inscribir SET inscribir="'+inscribir+'", idUsuario3="'+idUsuario3+'", emailCarpooler="'+emailCarpooler+'"  ', async (error, results) => {
+          conexion.query('INSERT INTO inscribir SET inscribir="'+inscribir+'", idUsuario3="'+idUsuario3+'", emailCarpooler="'+emailCarpooler+'", cuposReserva="'+cuposReserva+'"  ', async (error, results) => {
 
             console.log('Actualizacion exitosa')
             respuesta = "1"
@@ -447,6 +450,27 @@ routers.get('/infoReservas', async (req, res) => {
     const idCarpooler = req.query.idCarpooler;
 
     conexion.query('SELECT * FROM inforeserva INNER JOIN usuario on usuario.idUsuario = inforeserva.idUsuario2 WHERE inforeserva.reserva="'+reserva+'" and inforeserva.emailCliente="'+email+'"', async (error, results, fields) => {
+        
+        if (error)
+        throw error;
+
+    results.forEach(results => {
+        console.log(results);
+    });
+
+    res.send(results)
+
+    })    
+})
+
+
+// informacion de los cupos resvados ////
+routers.get('/infoCuposReservados', async (req, res) => {
+
+    const idUsuario3 = req.query.idUsuario3;
+    const inscribir = req.query.inscribir;
+
+    conexion.query('SELECT * FROM inscribir INNER JOIN usuario on usuario.idUsuario = inscribir.idUsuario3  WHERE inscribir.idUsuario3 ="'+idUsuario3+'" and inscribir ="'+inscribir+'"  ', async (error, results, fields) => {
         
         if (error)
         throw error;
